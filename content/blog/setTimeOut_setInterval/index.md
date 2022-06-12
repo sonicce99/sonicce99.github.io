@@ -81,9 +81,9 @@ setTimeout을 중첩하여 사용한다면 확실하게 일정기간만큼 시�
 ❗️ **Javascript에서 Event Loop와 Call Stack, Callback Queue가 동작하는 방식을 살펴보자.**
 Javascript는 Single thread 언어이기 때문에 엔진은 하나의 task만 작업이 가능합니다. 그렇기 때문에 실행이 긴 함수를 만나면 화면이 멈추게 되죠. 이런 문제점을 해결하기 위해 Web Api를 사용하고, Call Stack에서 비동기 함수가 호출되면 Callback Queue에 쌓이게 되고, 이 Queue는 Call Stack이 비면 실행됩니다.
 
-setTimeout이나 setInterval도 Web Api 중에 하나이기 때문에 호출되면 Callback Queue에 쌓입니다. 그리고 Call Stack이 비면 실행되게 되죠. 그리고 ❗️ _실행된 setTimeout, setInterval은 한번만 호출 후에 바로 종료됩니다. 하지만 callback 함수는 그대로 메모리에 남아있게 되고 주기적으로 실행된니다._
+setTimeout이나 setInterval도 Web Api 중에 하나이기 때문에 호출되면 Callback Queue에 쌓입니다. 그리고 Call Stack이 비면 실행되게 되죠. 그리고 ❗️ _실행된 setTimeout, setInterval은 한번만 호출 후에 바로 종료됩니다. 하지만 callback 함수는 그대로 메모리에 남아있게 되고 주기적으로 실행됩니다._
 
-따라서 setTimeout 외부에서 선언한 변수를 가지고 setTimeout 안에서 실행시킨다면 setTimeout은 종료되었지만 그떄 과거의 값을 그대로 참조하고 있게 된다.
+따라서 setTimeout 외부에서 선언한 변수를 가지고 setTimeout 안에서 실행시킨다면 setTimeout은 종료되었지만 과거의 값을 그대로 참조하게 됩니다.
 
 ```javascript
 // 클로져 실행 예시. useEffect 안에서 number를 console로 찍어보면 항상 0이다.
@@ -104,7 +104,7 @@ export default function App() {
 }
 ```
 
-### Solution.
+### 어떻게 해결하지..?
 
 아래는 Dan 형님께서 만든 custom Hook 이다.
 
@@ -183,7 +183,7 @@ const longPolling = async (delay: number) => {
 }
 ```
 
-❌ 자 위에 처럼 코드를 작성하면 과연 제대로 동작할까요? 아닙니다. 응답이 왔을 경우 serverResponse는 최신의 값을 가지고 있지만, **longPolling 함수 안에서의 serverResponse는 최신화된 값을 참조하지 않기 때문에 응답이 왔음에도 불구하고 탈출하지 못하고 dispatch를 계속하게 되고 재귀함수를 탈출하기 위해 useRef를 사용해야합니다.**
+❌ 자 위에 처럼 코드를 작성하면 과연 제대로 동작할까요? 아닙니다. 응답이 왔을 경우 serverResponse는 최신의 값을 가지고 있지만, **longPolling 함수 안에서의 serverResponse는 최신화된 값을 참조하지 않기 때문에 응답이 왔음에도 불구하고 탈출하지 못하고 dispatch를 계속하게 됩니다. 따라서 함수를 탈출하기 위해 useRef를 사용해야합니다.**
 
 #### useRef 사용.
 
