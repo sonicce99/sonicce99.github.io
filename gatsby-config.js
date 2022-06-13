@@ -1,15 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: `안녕하세요. 👋🏻 동수입니다.`,
+    title: `동수의 logBook.`,
     author: {
       name: `이동수 (Dong Su Lee)`,
       summary: `인천에 살고 있고 송파구에서 일하는 개발자입니다.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
-    // social: {
-    //   twitter: `kylemathews`,
-    // },
+    social: {
+      github: `sonicce99`,
+    },
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -121,7 +121,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/profile-pic.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-react-helmet`,
