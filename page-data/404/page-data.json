@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---src-pages-404-js",
     "path": "/404/",
-    "result": {"data":{"site":{"siteMetadata":{"title":"안녕하세요. 👋🏻 동수입니다."}}},"pageContext":{}},
-    "staticQueryHashes": ["2841359383"]}
+    "result": {"data":{"site":{"siteMetadata":{"title":"동수의 logBook."}}},"pageContext":{}},
+    "staticQueryHashes": ["3589320610"]}
