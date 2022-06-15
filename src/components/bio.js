@@ -56,13 +56,16 @@ const Bio = () => {
             주어진 상황에서 최고의 퍼포먼스를 내기위해 최선을 다하고 있습니다.
           </p>
           <p>기억보단 기록을, 기록보단 공유하는 것을 좋아합니다.</p>
-          <p style={{ marginBottom: "3vh" }}>
-            현재는 풀필먼트 서비스의 웹 프론트 개발을 하고 있습니다. 🎃
+          <p style={{ marginBottom: "1vh" }}>
+            현재는 풀필먼트 서비스 회사에서 웹 프론트 개발을 하고 있습니다. 🎃
           </p>
+          <div style={{ display: "flex" }}>
+            <p style={{ marginRight: "2vw" }}>📬 : sonicce99@naver.com</p>
 
-          <a href="https://github.com/sonicce99">
-            <img src={github} width="25vw" alt="github 이미지" />
-          </a>
+            <a href="https://github.com/sonicce99">
+              <img src={github} width="25vw" alt="github 이미지" />
+            </a>
+          </div>
         </div>
       )}
     </div>
