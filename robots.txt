@@ -1,2 +1,4 @@
 User-agent: *
-Disallow:
+Allow: /
+Sitemap: https://sonicce99.github.io/sitemap.xml
+Host: https://sonicce99.github.io
