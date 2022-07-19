@@ -1,17 +1,18 @@
 module.exports = {
   siteMetadata: {
-    title: `동수의 logBook.`,
+    title: `동수의 로그북.`,
     author: {
-      name: `이동수 (Dong Su Lee)`,
-      summary: `인천에 살고 있고 송파구에서 일하는 개발자입니다.`,
+      name: `이동수`,
+      summary: `동수의 로그북을 운영하는 이동수입니다.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `기억보단 기록을, 기록보단 공유를.`,
     siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
     social: {
       github: `sonicce99`,
     },
   },
   plugins: [
+    "gatsby-plugin-sitemap",
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -25,6 +26,14 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://sonicce99.github.io/",
+        sitemap: "https://sonicce99.github.io/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
       },
     },
     {
