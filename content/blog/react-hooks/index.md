@@ -1,7 +1,7 @@
 ---
 title: "Vanila Javascript로 useState 구현하기"  
 date: "2022-08-02"
-description: "황준일 개발자님의 블로그를 보고 공부해본 포스팅입니다."  
+description: "황준일 개발자님의 블로그를 보고 공부한 포스팅입니다."  
 ---
 
 # 마법과 같았던 React-hooks. 🧚‍♀️
@@ -13,7 +13,7 @@ description: "황준일 개발자님의 블로그를 보고 공부해본 포스�
 
 ![hook-error](https://user-images.githubusercontent.com/87749134/182306514-75065fbf-0bb5-49a8-98d2-aad8d51b6e3e.png)
 
-오잉? 이게 무슨 말이야😭
+오잉? 이게 무슨 말이야 😭
 
 React 공식문서에서 해당 error를 찾아보니 다음과 같은 이유가 나왔다.
 
@@ -74,7 +74,7 @@ hooks 마법의 최대 핵심은 ```컴포넌트가 다시 실행되어도 state
 ```javascript
 // Counter.js
 
-import useState from "./useState.js";
+import { useState } from "./useState.js";
 
 const Counter = () => {
   const [count, setCount] = useState(1);
@@ -94,9 +94,11 @@ export default Counter;
 ```javascript
 // useState.js
 
+import Counter from "./Counter.js";
+
 // 처음엔 아무값도 할당하지 않음.
 let state = null;
-function useState(initState) {
+export const useState = (initState) => {
   // state에 값이 없을 때만 초기화.
   if (state === null) {
     state = initState;
@@ -104,24 +106,21 @@ function useState(initState) {
 
   const setState = (newState) => {
     state = newState;
-    // setState가 진행되면 렌더링을 다시 진행한다. (중요.)  
+    // setState가 진행되면 렌더링을 다시 진행한다. (중요.)
     render();
-  }
-  return [ state, setState ];
-}
+  };
+  return [state, setState];
+};
 
 const render = () => {
   const $root = document.getElementById("root");
-  $root.innerHTML = `
-    <div>
-      ${Counter()}
-      ${Cat()}
-    </div>
-  `;
+  $root.innerHTML = Counter();
 };
 
 render();
 ```
+
+<iframe class="example-frame" width="100%" src="https://sonicce99.github.io/make-react-hooks/single-state/index.html"></iframe>  
 
 자 하나의 state는 외부에 state를 저장해둠으로서 컴포넌트가 재 실행되어도 유지 할 수 있게 만들었다. but 컴포넌트가 여러개 라면??
 
@@ -133,4 +132,6 @@ render();
 
 이 2가지의 방법을 생각하면서 다음의 과정을 진행해보자.
 
-## Step2. 여러개의 state를 유지하기      
+## Step2. 여러개의 state를 유지하기    
+
+<iframe class="example-frame" width="100%" src="https://sonicce99.github.io/make-react-hooks/multi-state/index.html"></iframe>  
