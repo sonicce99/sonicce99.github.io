@@ -403,3 +403,9 @@ a:focus {
     --color-accent: #d1dce5;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  a > span:hover {
+    color: #ffffff;
+  }
+}
