@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `동수의 logBook.`,
+    title: `동수의 로그북`,
     author: {
       name: `이동수`,
       summary: `동수의 로그북을 운영하는 이동수입니다.`,
