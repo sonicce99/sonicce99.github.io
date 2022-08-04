@@ -44,9 +44,8 @@ const Bio = () => {
         className="bio-avatar"
         formats={["auto", "webp", "avif"]}
         src="../images/profile-pic.png"
-        width={70}
-        height={70}
-        quality={95}
+        width={90}
+        height={90}
         alt="Profile picture"
       />
       {author?.name && (
@@ -63,7 +62,15 @@ const Bio = () => {
             <p style={{ marginRight: "2vw" }}>📬 : sonicce99@naver.com</p>
 
             <a href="https://github.com/sonicce99">
-              <img src={github} width="25vw" alt="github 이미지" />
+              <img
+                src={github}
+                style={{
+                  background: "white",
+                  borderRadius: "15px",
+                }}
+                width="25px"
+                alt="github 이미지"
+              />
             </a>
           </div>
         </div>
