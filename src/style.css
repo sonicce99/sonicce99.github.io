@@ -160,6 +160,10 @@ h6 > a {
 
 /* Prose */
 
+blockquote > p {
+  font-size: 16px;
+}
+
 p {
   line-height: var(--lineHeight-relaxed);
   --baseline-multiplier: 0.179;
