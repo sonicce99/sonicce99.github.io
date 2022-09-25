@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "dongsu-blog",
   "private": true,
   "description": "A starter for a blog powered by Gatsby and Markdown",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "author": "이동수 <sonicce99@naver.com>",
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
