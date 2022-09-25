@@ -1,4 +1,241 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[기억보단 기록을, 기록보단 공유를.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 09 Aug 2022 06:12:43 GMT</lastBuildDate><item><title><![CDATA[Vanila Javascript로 useState 구현하기]]></title><description><![CDATA[마법 같았던 React-hooks. 🧚‍♀️ 필자가 React를 처음 배울 때 가장 먼저 배웠던게 useState였다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[기억보단 기록을, 기록보단 공유를.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 25 Sep 2022 02:55:32 GMT</lastBuildDate><item><title><![CDATA[실행 컨텍스트와 javascript 동작원리에 대한 이해. (feat.호이스팅)]]></title><description><![CDATA[실행 컨텍스트 들어가며 지금은 에서 근무중이신 황규현 프론트엔드 개발자님께 한권의 책을 추천받았다. 바로 코어 자바스크립트 라는 책이였다. 자바스크립트에 대한 입문용 책이였는데 this나 메모리 할당과 구조, 클로저 및 Class…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/execution-context/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/execution-context/</guid><pubDate>Sun, 25 Sep 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;실행 컨텍스트&lt;/h1&gt;
+&lt;h2&gt;들어가며&lt;/h2&gt;
+&lt;p&gt;지금은 &lt;code class=&quot;language-text&quot;&gt;두나무(업비트 거래소)&lt;/code&gt;에서 근무중이신 &lt;a href=&quot;https://github.com/JungKyuHyun&quot;&gt;황규현 프론트엔드 개발자님&lt;/a&gt;께 한권의 책을 추천받았다.&lt;/p&gt;
+&lt;p&gt;바로 &lt;a href=&quot;https://search.naver.com/search.naver?where=nexearch&amp;#x26;sm=top_hty&amp;#x26;fbm=1&amp;#x26;ie=utf8&amp;#x26;query=%EC%BD%94%EC%96%B4+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8&quot;&gt;코어 자바스크립트&lt;/a&gt; 라는 책이였다. 자바스크립트에 대한 입문용 책이였는데 this나 메모리 할당과 구조, 클로저 및 Class 등등 초심자가 이해하기에 어려운 내용을 정말 쉽게 표현되어 있어 좋았다. 이 중에 실행컨텍스트라는 목차가 있는데 그 일부를 정리하고자 한다.&lt;/p&gt;
+&lt;h2&gt;실행 컨텍스트란 무엇인가요?&lt;/h2&gt;
+&lt;p&gt;실행컨텍스트 영어로는 execution context라고 하며 &lt;strong&gt;실행하고자 하는 코드에 제공할 환경정보&lt;/strong&gt;를 모아놓은 객체이다.&lt;/p&gt;
+&lt;p&gt;javascript는 어떤 실행컨텍스트가 실행되는 시점에 호이스팅(hoisting), 외부 환경정보를 구성하고 this값을 설정하는 등의 동작을 수행합니다.&lt;/p&gt;
+&lt;p&gt;이때 이런 환경정보들을 모아 컨텍스트를 구성하고 이를 &lt;code class=&quot;language-text&quot;&gt;콜 스택&lt;/code&gt;에 쌓아 올렸다가, 가장 위에 쌓여있는 컨텍스트와 관련된 코드를 실행하는 식으로 전체코드의 환경과 순서를 보장합니다. 자세히 알아보겠습니다. 🕵🏻‍♂️&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// (1)&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; 입 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;입&quot;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;밥먹자&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; 식도 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;식도&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;소화&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; 위장 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;위장&quot;&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;입 &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; 식도 &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; 위장&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// (3)&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;소화&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// 입식도위장&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// (2)&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;밥먹자&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;처음 자바스크립트 코드를 실행하면 &lt;code class=&quot;language-text&quot;&gt;전역 컨텍스트&lt;/code&gt;가 콜 스택에 담깁니다.&lt;/p&gt;
+&lt;p&gt;(1)에서 전역 컨텍스트를 실행하다가 (2)에서 밥먹자 라는 명령이 떨어집니다. 그러면 javascript 엔진은 밥먹자에 대한 환경정보를 수집해서 실행컨텍스트를 생성한 후 콜 스택에 담습니다.&lt;/p&gt;
+&lt;p&gt;그러면 콜 스택에는 전역 컨텍스트 위에 밥먹자 컨텍스트가 놓였으므로 전역컨텍스트와 관련된 코드를 실행 중단하고 밥먹자에 대한 코드를 순차 실행합니다.&lt;/p&gt;
+&lt;p&gt;밥먹자에 대한 코드를 실행하던 중 소화 라는 함수를 만나게 되고 다시 밥먹자에 대한 코드 실행을 일시 중단하고 소화에 대한 정보들을 수집해서 컨텍스트를 생성 후 콜 스택에 담아 실행합니다.&lt;/p&gt;
+&lt;p&gt;console.log()를 실행하면 소화에 대한 컨텍스트가 종료되고 콜 스택에서 제거 됩니다. 그러면 다시 밥먹자에 대한 나머지 컨텍스트가 실행되고, 마지막에 전역 컨텍스트에 대한 실행까지 완료 후 콜 스택이 완전히 비워지게 됩니다.&lt;/p&gt;
+&lt;p&gt;이때 javascript 엔진이 수집하는 실행컨텍스트 생성을 위한 환경정보 구성은 다음과 같습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;VariableEnvironment : 현재 컨텍스트 내의 식별자들에 대한 정보 + 외부 환경 정보.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;선언 시점의 LexicalEnvironment의 스냅샷으로, (❗️ 변경 사항은 반영되지 않음).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;LexicalEnvironment : 처음에는 VariableEnvironment와 같지만 변경 사항이 실시간으로 반영됨.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ThisBinding : this 식별자가 바라봐야 할 대상 객체.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ThisBinding까지 한 블로그에 작성하면 너무 길어질거 같아서 아래에서는 위의 2가지 구성 항목을 개별적으로 알아보겠습니다! 😆&lt;/p&gt;
+&lt;h2&gt;VariableEnvironment&lt;/h2&gt;
+&lt;p&gt;VariableEnvironment는 최초 실행시의 스냅샷을 유지합니다.&lt;/p&gt;
+&lt;p&gt;실행컨텍스트를 생성 할 때 VariableEnvironment에 정보를 먼저 담은 다음, 이걸 그대로 복사해서 LexicalEnvironment를 만듭니다.&lt;/p&gt;
+&lt;p&gt;이후에는 LexicalEnvironment를 주로 활용하게 됩니다.&lt;/p&gt;
+&lt;p&gt;VariableEnvironment와 LexicalEnvironment에는 아래와 같은 객체로 구성되어 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;🔥 environmentRecord&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;🔥 outerEnvironmentReference&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;LexicalEnvironment에도 동일한 구성을 가지고 있으므로 이에 대한 자세한 내용은 아래 LexicalEnvironment를 살펴보며 공부해보겠습니다.&lt;/p&gt;
+&lt;h2&gt;LexicalEnvironment&lt;/h2&gt;
+&lt;p&gt;아까 위해서 javascript 엔진은 실행컨텍스트 생성을 위한 &lt;code class=&quot;language-text&quot;&gt;환경정보&lt;/code&gt;를 구성한다고 했었습니다.&lt;/p&gt;
+&lt;p&gt;예를 들면 이런 느낌입니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;현재 밥먹자라는 실행컨텍스트 내부에는 a,b,c 와 같은 식별자들이 있고 그 외부 정보는 D를 참조하도록 구성되어 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;environmentRecord (호이스팅)&lt;/h3&gt;
+&lt;p&gt;environmentRecord에는 현재 컨텍스트와 관련된 코드의 &lt;code class=&quot;language-text&quot;&gt;식별자 정보&lt;/code&gt;들이 저장됩니다. (매개변수, 함수 자체)&lt;/p&gt;
+&lt;p&gt;컨텍스트 내부 전체를 처음부터 끝까지 쭉 훑어나가며 순서대로 수집합니다.&lt;/p&gt;
+&lt;p&gt;🌟 변수 정보를 수집하는 과정을 모두 마쳤더라도 아직 실행 컨텍스트가 관여할 코드들은 실행되기 전의 상태입니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;코드가 실행되기 전임에도 불구하고 javascript 엔진은 이미 코드의 변수명, 함수명 들을 모두 알고 있게 됩니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;📍 즉, 실제로 식별자들을 코드 최상단으로 끌어올려놓는 것은 아니지만 마치 식별자들을 모두 코드 최상단에 끌어올려놓은 다음 실제 코드를 실행한다고 생각하더라도 문제가 없는 것처럼 보이게 됩니다. 이것이 호이스팅의 개념입니다.&lt;/p&gt;
+&lt;p&gt;예제를 통해 살펴보죠&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;치킨이나피자냐그것이문제로다&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;food&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;food&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; food
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;food&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; food &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;피자&quot;&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;food&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;치킨이나피자냐그것이문제로다&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;치킨&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;여러분들은 어떤 결과가 나올거 같나요? var은 재선언 재할당이 가능하므로 ES6에서는 var 대신 let과 const를 주로 쓰지만 hosting을 이해하기 위해서 var을 쓰겠습니다.&lt;/p&gt;
+&lt;p&gt;과연 치킨, undefined, 피자 순서로 출력될까요?&lt;/p&gt;
+&lt;p&gt;그렇지 않습니다. 그대로 복사해서 &lt;a href=&quot;https://codesandbox.io/s/vanilla&quot;&gt;CodeSandBox&lt;/a&gt;에 붙여넣어서 실행시켜 보세요. 결과가 어떻게 나오나요?&lt;/p&gt;
+&lt;p&gt;치킨, 치킨, 피자 순서로 출력됩니다🥲&lt;/p&gt;
+&lt;p&gt;왜 이렇게 될까요? 호이스팅의 개념을 이해하면 이해할 수 있습니다. 아래의 코드를 보세요. 실제로 javascript 엔진이 이렇게 함수를 변환하는 것은 아니지만 이해를 위해 변환시켜 보겠습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;치킨이나피자냐그것이문제로다&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;food&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; food
+  &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; food
+
+  food &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;치킨&quot;&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;food&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;food&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+  food &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;피자&quot;&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;food&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;치킨이나피자냐그것이문제로다&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;치킨&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;📍 선언이 제일 위로 올라가고 할당, 결과 출력 순서대로 동작한다고 이해할 수 있습니다. (이해를 돕기 위해 작성한 것일뿐 실제 저렇게 변환되는 것은 아닙니다.)&lt;/p&gt;
+&lt;h4&gt;함수 선언문과 함수 표현식&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;함수 선언문 : function 정의부만 존재하고 별도의 할당 명령이 없는 것.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;함수 표현식 : 정의한 function을 별도의 변수애 할당하는 것.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;치킨&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 함수 선언문.&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;치킨의 정석은 BBQ!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;치킨&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// 실행 가능&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;pizza&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 익명 함수 표현식.&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;피자의 정석은 파파존스!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;pizza&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// 실행 가능&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;hamburger&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;버거킹&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 기명 함수 표현식.&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;버거킹의 정석은 와퍼!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;hamburger&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// 실행 가능&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;버거킹&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// ReferenceError: 버거킹 is not defined&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;자 그럼 선언문과 표현식에 대해서 구체적으로 알게 되었으니, 호이스팅이 어떻게 되는지 한번 알아볼까요? 😆&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token function&quot;&gt;스시오마카세&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;스위스여행&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;스시오마카세&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;장인의 손길!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;스위스여행&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;양때목장!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;과연 위에 코드가 정상동작 할까요? 이걸 호이스팅된 결과로 한번 바꾸어 보겠습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;스시오마카세&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;스시오마카세&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 함수 선언문은 전체를 끌어올립니다.&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;장인의 손길!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; 스위스여행 &lt;span class=&quot;token comment&quot;&gt;// 변수는 선언문만 끌어올립니다.&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;스시오마카세&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;스위스여행&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token function-variable function&quot;&gt;스위스여행&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 변수의 할당문은 원래 자리에 둡니다.&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;양때목장!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;❗️ 함수 선언문은 개발자가 의도한 위치에서 정상동작하지 않을 가능성이 있습니다. 되도록 &lt;del&gt;(아니 꼭)&lt;/del&gt; 함수 표현식을 사용하도록 합시다!&lt;/p&gt;
+&lt;h3&gt;outerEnvironmentReference&lt;/h3&gt;
+&lt;p&gt;아까 LexicalEnvironment에는 2가지의 수집자료가 있다고 공부했습니다. 하나는 지금까지 공부했던 environmentRecord (호이스팅) 이였고 지금 배울 또 다른 하나는 &lt;code class=&quot;language-text&quot;&gt;outerEnvironmentReference&lt;/code&gt; 입니다.&lt;/p&gt;
+&lt;h4&gt;스코프, 스코프체인&lt;/h4&gt;
+&lt;p&gt;변수에는 지역변수와 전역변수가 있습니다. 특정 함수 내에서 쓰이는 변수를 지역변수라 하고 함수밖에서도 사용가능한 변수를 전역변수라 합니다. 이것은 스코프가 생성되었기 때문에 가능한 것인데, 이러한 &lt;code class=&quot;language-text&quot;&gt;식별자의 유효범위&lt;/code&gt;를 안에서부터 바깥으로 차례로 검색해 나가는 것을 &lt;code class=&quot;language-text&quot;&gt;스코프체인&lt;/code&gt; 이라고 합니다. outerEnvironmentReference는 이를 가능하게 합니다!!&lt;/p&gt;
+&lt;p&gt;📍 outerEnvironmentReference는 현재 호출된 함수가 선언될 당시의 LexicalEnvironment를 참조합니다. 이걸 꼭 기억해주세요.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; 파파존스 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;존스페이보릿&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;outer&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;inner&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;파파존스&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; 파파존스 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;수퍼 파파스&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;token function&quot;&gt;inner&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;파파존스&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;outer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;파파존스&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;결과가 어떻게 나올까요? 답은 undefined, 존스페이보릿, 존스페이보릿이 나옵니다. 수퍼파파스는 왜 찍히지 않을까요? undefined는 왜 찍힐까요? 구체적인 동작이 어떻게 되는지 한번 알아보죠.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;시작~ : 전역컨텍스트가 활성화됩니다. 전역컨텍스트의 LexicalEnvironment의 environmentRecord에는 { 파파존스, outer } 식별자가 저장됩니다. 전역컨텍스트는 선언된 시점이 없으므로 outerEnvironmentReference에는 아무것도 담기지 않습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;1, 2번째 줄 : 전역 스코프에 있는 파파존스와 outer에 존스페이보릿과 함수를 할당합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;10번째 줄 : outer함수를 실행합니다. 이제 콜스택에는 전역컨텍스트가 일시 중단되고 outer함수의 실행컨텍스트가 쌓이고 활성화됩니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2번째 줄 : outer함수에 대한 LexicalEnvironment를 구성합니다. environmentRecord에 { inner } 식별자를 저장합니다. outerEnvironmentReference에는 outer 함수가 선언될 시점의 LexicalEnvironment가 저장됩니다. [ GLOBAL, { 파파존스, outer } ]. (첫번째는 실행컨텍스트의 이름입니다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3번째 줄 : outer 스코프에 있는 inner에 함수를 할당합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;7번째 줄 : inner함수를 실행합니다. 이에 outer 실행컨텍스트가 일시 중단되고 콜스택에 inner 실행컨텍스트가 실행됩니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3번째 줄 : inner함수에 대한 LexicalEnvironment를 구성합니다. environmentRecord에 { 파파존스 } 식별자를 저장합니다. outerEnvironmentReference에는 inner 함수가 선언될 시점의 LexicalEnvironment가 저장됩니다. inner 함수는 outer함수 내부에서 선언되었음으로 outer함수의 LexicalEnvironment를 참조합니다. [ outer, { inner }].&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4번째 줄 : 파파존스를 콘솔에 찍어야합니다. inner의 LexicalEnvironment부터 파파존스가 존재하는지 검색합니다. inner 함수의 environmentRecord에는 파파존스 식별자가 존재하지만 값이 할당되지 않았습니다. undefined를 출력합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5번째 줄 : 선언된 파파존스 식별자에 수퍼파파스를 할당합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;6번째 줄 : inner 함수의 실행컨텍스트가 종료됩니다. 이에 inner의 실행컨텍스트가 콜스택에서 제거되고 일시 중단됬던 outer 실행컨텍스트가 다시 활성화되면서 8번째 줄로 이동합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;8번째 줄 : 파파존스를 콘솔에 찍어야합니다. outer의 LexicalEnvironment 부터 파파존스가 존재하는지 검색합니다. outer함수의 environmentRecord에는 inner 식별자 밖에 없습니다. 그럼 outerEnvironmentReference에 저장된 다음 LexicalEnvironment (즉 전역 컨텍스트 environmentRecord) 를 뒤집니다. 전역컨텍스트의 environmentRecord ({ 파파존스, outer })에는 파파존스가 존재합니다. 이는 존스페이보릿이라고 할당되어 있습니다. 따라서 존스페이보릿을 출력합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;9번째 줄 : outer 함수의 실행컨텍스트가 종료됩니다. 이에 outer의 실행컨텍스트가 콜스택에서 제거되고 일시 중단됬던 전역컨텍스트가 다시 활성화 되면서 11번째 줄로 이동합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;11번째 줄 : 파파존스를 콘솔에 찍어야합니다. 전역컨텍스트의 LexicalEnvironment부터 파파존스가 존재하는지 검색합니다. 전역컨텍스트의 environmentRecord ({ 파파존스, outer })에는 파파존스가 존재합니다. 이는 존스페이보릿이라고 할당되어 있습니다. 따라서 존스페이보릿을 출력합니다. 모든 코드가 실행되었습니다. 전역컨텍스트가 콜스택에서 제거되고 종료합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5&gt;변수은닉화 (variable shadowing)&lt;/h5&gt;
+&lt;p&gt;위에서 알아봤던 코드 (아래와 같음)를 다시 살펴보겠습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; 파파존스 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;존스페이보릿&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;outer&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;inner&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;파파존스&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; 파파존스 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;수퍼 파파스&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;token function&quot;&gt;inner&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;파파존스&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;outer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;파파존스&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;4번째 줄에서 파파존스라는 변수를 콘솔에 찍으라 했을 때 이미 5번째 줄에도 파파존스라는 변수가 할당되어 있고 심지어 전역변수에도 파파존스라는 변수가 존재합니다. 하지만 콘솔 결과는 undefined가 나옵니다.&lt;/p&gt;
+&lt;p&gt;이는 해당 함수의 LexicalEnvironment에서 부터 변수가 선언되었는지 찾아보기 때문입니다. 전역변수에 파파존스가 존재하지만 inner함수 내부에 이미 파파존스가 선언이 되어있습니다. 하지만 할당은 되어 있지 않기 때문에 전역스코프의 파파존스까지 값을 찾아보지 않고 inner에 있는 파파존스까지만 찾아보기 때문에 전역 공간에서 선언한 동일한 파파존스 변수에는 접근할 수 없는 셈입니다. 이를 &lt;strong&gt;변수 은닉화&lt;/strong&gt; 라고 합니다.&lt;/p&gt;
+&lt;h2&gt;마무리 하며&lt;/h2&gt;
+&lt;p&gt;사실 실무에서 React와 javascript를 사용하면서 동작원리까지 구체적으로 알기는 어려웠는데 이번 기회에 확실히 정리할 수 있어서 참 좋았다. 굉장히 도움이 되는 책이라고 생각했고 다른 분들에게도 꼭 추천하고 싶은 책이다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Vanila Javascript로 useState 구현하기]]></title><description><![CDATA[마법 같았던 React-hooks. 🧚‍♀️ 필자가 React를 처음 배울 때 가장 먼저 배웠던게 useState였다.
 몇 번 써보았던 나는 곧 useState의 편리함에 빠져버렸고 useState…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/react-hooks/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/react-hooks/</guid><pubDate>Tue, 02 Aug 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;마법 같았던 React-hooks. 🧚‍♀️&lt;/h2&gt;
 &lt;p&gt;필자가 React를 처음 배울 때 가장 먼저 배웠던게 useState였다.
 몇 번 써보았던 나는 곧 useState의 편리함에 빠져버렸고 useState를 마구마구 쓰기 시작했다.&lt;/p&gt;
