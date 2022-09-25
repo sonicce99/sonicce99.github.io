@@ -1,6 +1,6 @@
 ---
 title: "실행 컨텍스트와 javascript 동작원리에 대한 이해. (feat.호이스팅)"
-date: "2022-08-21"
+date: "2022-09-25"
 description: "코어 자바스크립트 책을 읽고 공부한 실행컨텍스트에 대한 내용입니다."
 ---
 
@@ -33,7 +33,7 @@ function 밥먹자() {
   }
 
   // (3)
-  소화()
+  소화() // 입식도위장
 }
 
 // (2)
@@ -60,7 +60,7 @@ console.log()를 실행하면 소화에 대한 컨텍스트가 종료되고 콜 
 
 - ThisBinding : this 식별자가 바라봐야 할 대상 객체.
 
-아래에서는 위의 3가지 구성 항목을 개별적으로 알아보겠습니다! 😆
+ThisBinding까지 한 블로그에 작성하면 너무 길어질거 같아서 아래에서는 위의 2가지 구성 항목을 개별적으로 알아보겠습니다! 😆
 
 ## VariableEnvironment
 
@@ -72,9 +72,9 @@ VariableEnvironment는 최초 실행시의 스냅샷을 유지합니다.
 
 VariableEnvironment와 LexicalEnvironment에는 아래와 같은 객체로 구성되어 있습니다.
 
-- environmentRecord
+- 🔥 environmentRecord
 
-- outerEnvironmentReference
+- 🔥 outerEnvironmentReference
 
 LexicalEnvironment에도 동일한 구성을 가지고 있으므로 이에 대한 자세한 내용은 아래 LexicalEnvironment를 살펴보며 공부해보겠습니다.
 
@@ -88,7 +88,7 @@ LexicalEnvironment에도 동일한 구성을 가지고 있으므로 이에 대�
 
 ### environmentRecord (호이스팅)
 
-environmentRecord에는 현재 컨텍스트와 관련된 코드의 식별자 정보들이 저장됩니다. (매개변수, 함수 자체)
+environmentRecord에는 현재 컨텍스트와 관련된 코드의 `식별자 정보`들이 저장됩니다. (매개변수, 함수 자체)
 
 컨텍스트 내부 전체를 처음부터 끝까지 쭉 훑어나가며 순서대로 수집합니다.
 
@@ -139,3 +139,150 @@ function 치킨이나피자냐그것이문제로다(food) {
 
 치킨이나피자냐그것이문제로다("치킨")
 ```
+
+📍 선언이 제일 위로 올라가고 할당, 결과 출력 순서대로 동작한다고 이해할 수 있습니다. (이해를 돕기 위해 작성한 것일뿐 실제 저렇게 변환되는 것은 아닙니다.)
+
+#### 함수 선언문과 함수 표현식
+
+- 함수 선언문 : function 정의부만 존재하고 별도의 할당 명령이 없는 것.
+
+- 함수 표현식 : 정의한 function을 별도의 변수애 할당하는 것.
+
+```javascript
+function 치킨() {
+  // 함수 선언문.
+  console.log("치킨의 정석은 BBQ!")
+}
+
+치킨() // 실행 가능
+
+const pizza = function () {
+  // 익명 함수 표현식.
+  console.log("피자의 정석은 파파존스!")
+}
+
+pizza() // 실행 가능
+
+const hamburger = function 버거킹() {
+  // 기명 함수 표현식.
+  console.log("버거킹의 정석은 와퍼!")
+}
+
+hamburger() // 실행 가능
+
+버거킹() // ReferenceError: 버거킹 is not defined
+```
+
+자 그럼 선언문과 표현식에 대해서 구체적으로 알게 되었으니, 호이스팅이 어떻게 되는지 한번 알아볼까요? 😆
+
+```javascript
+스시오마카세()
+스위스여행()
+
+function 스시오마카세() {
+  console.log("장인의 손길!")
+}
+
+const 스위스여행 = function () {
+  console.log("양때목장!")
+}
+```
+
+과연 위에 코드가 정상동작 할까요? 이걸 호이스팅된 결과로 한번 바꾸어 보겠습니다.
+
+```javascript
+var 스시오마카세 = function 스시오마카세() {
+  // 함수 선언문은 전체를 끌어올립니다.
+  console.log("장인의 손길!")
+}
+
+var 스위스여행 // 변수는 선언문만 끌어올립니다.
+
+스시오마카세()
+스위스여행()
+
+스위스여행 = function () {
+  // 변수의 할당문은 원래 자리에 둡니다.
+  console.log("양때목장!")
+}
+```
+
+❗️ 함수 선언문은 개발자가 의도한 위치에서 정상동작하지 않을 가능성이 있습니다. 되도록 ~~(아니 꼭)~~ 함수 표현식을 사용하도록 합시다!
+
+### outerEnvironmentReference
+
+아까 LexicalEnvironment에는 2가지의 수집자료가 있다고 공부했습니다. 하나는 지금까지 공부했던 environmentRecord (호이스팅) 이였고 지금 배울 또 다른 하나는 `outerEnvironmentReference` 입니다.
+
+#### 스코프, 스코프체인
+
+변수에는 지역변수와 전역변수가 있습니다. 특정 함수 내에서 쓰이는 변수를 지역변수라 하고 함수밖에서도 사용가능한 변수를 전역변수라 합니다. 이것은 스코프가 생성되었기 때문에 가능한 것인데, 이러한 `식별자의 유효범위`를 안에서부터 바깥으로 차례로 검색해 나가는 것을 `스코프체인` 이라고 합니다. outerEnvironmentReference는 이를 가능하게 합니다!!
+
+📍 outerEnvironmentReference는 현재 호출된 함수가 선언될 당시의 LexicalEnvironment를 참조합니다. 이걸 꼭 기억해주세요.
+
+```javascript
+(01) var 파파존스 = '존스페이보릿';
+(02) var outer = function () {
+(03)  var inner = function () {
+(04)    console.log(파파존스);
+(05)    var 파파존스 = '수퍼 파파스';
+(06)  };
+(07)  inner();
+(08)  console.log(파파존스);
+(09) };
+(10) outer();
+(11) console.log(파파존스);
+```
+
+결과가 어떻게 나올까요? 답은 undefined, 존스페이보릿, 존스페이보릿이 나옵니다. 수퍼파파스는 왜 찍히지 않을까요? undefined는 왜 찍힐까요? 구체적인 동작이 어떻게 되는지 한번 알아보죠.
+
+- 시작~ : 전역컨텍스트가 활성화됩니다. 전역컨텍스트의 LexicalEnvironment의 environmentRecord에는 { 파파존스, outer } 식별자가 저장됩니다. 전역컨텍스트는 선언된 시점이 없으므로 outerEnvironmentReference에는 아무것도 담기지 않습니다.
+
+- 1, 2번째 줄 : 전역 스코프에 있는 파파존스와 outer에 존스페이보릿과 함수를 할당합니다.
+
+- 10번째 줄 : outer함수를 실행합니다. 이제 콜스택에는 전역컨텍스트가 일시 중단되고 outer함수의 실행컨텍스트가 쌓이고 활성화됩니다.
+
+- 2번째 줄 : outer함수에 대한 LexicalEnvironment를 구성합니다. environmentRecord에 { inner } 식별자를 저장합니다. outerEnvironmentReference에는 outer 함수가 선언될 시점의 LexicalEnvironment가 저장됩니다. [ GLOBAL, { 파파존스, outer } ]. (첫번째는 실행컨텍스트의 이름입니다.)
+
+- 3번째 줄 : outer 스코프에 있는 inner에 함수를 할당합니다.
+
+- 7번째 줄 : inner함수를 실행합니다. 이에 outer 실행컨텍스트가 일시 중단되고 콜스택에 inner 실행컨텍스트가 실행됩니다.
+
+- 3번째 줄 : inner함수에 대한 LexicalEnvironment를 구성합니다. environmentRecord에 { 파파존스 } 식별자를 저장합니다. outerEnvironmentReference에는 inner 함수가 선언될 시점의 LexicalEnvironment가 저장됩니다. inner 함수는 outer함수 내부에서 선언되었음으로 outer함수의 LexicalEnvironment를 참조합니다. [ outer, { inner }].
+
+- 4번째 줄 : 파파존스를 콘솔에 찍어야합니다. inner의 LexicalEnvironment부터 파파존스가 존재하는지 검색합니다. inner 함수의 environmentRecord에는 파파존스 식별자가 존재하지만 값이 할당되지 않았습니다. undefined를 출력합니다.
+
+- 5번째 줄 : 선언된 파파존스 식별자에 수퍼파파스를 할당합니다.
+
+- 6번째 줄 : inner 함수의 실행컨텍스트가 종료됩니다. 이에 inner의 실행컨텍스트가 콜스택에서 제거되고 일시 중단됬던 outer 실행컨텍스트가 다시 활성화되면서 8번째 줄로 이동합니다.
+
+- 8번째 줄 : 파파존스를 콘솔에 찍어야합니다. outer의 LexicalEnvironment 부터 파파존스가 존재하는지 검색합니다. outer함수의 environmentRecord에는 inner 식별자 밖에 없습니다. 그럼 outerEnvironmentReference에 저장된 다음 LexicalEnvironment (즉 전역 컨텍스트 environmentRecord) 를 뒤집니다. 전역컨텍스트의 environmentRecord ({ 파파존스, outer })에는 파파존스가 존재합니다. 이는 존스페이보릿이라고 할당되어 있습니다. 따라서 존스페이보릿을 출력합니다.
+
+- 9번째 줄 : outer 함수의 실행컨텍스트가 종료됩니다. 이에 outer의 실행컨텍스트가 콜스택에서 제거되고 일시 중단됬던 전역컨텍스트가 다시 활성화 되면서 11번째 줄로 이동합니다.
+
+- 11번째 줄 : 파파존스를 콘솔에 찍어야합니다. 전역컨텍스트의 LexicalEnvironment부터 파파존스가 존재하는지 검색합니다. 전역컨텍스트의 environmentRecord ({ 파파존스, outer })에는 파파존스가 존재합니다. 이는 존스페이보릿이라고 할당되어 있습니다. 따라서 존스페이보릿을 출력합니다. 모든 코드가 실행되었습니다. 전역컨텍스트가 콜스택에서 제거되고 종료합니다.
+
+##### 변수은닉화 (variable shadowing)
+
+위에서 알아봤던 코드 (아래와 같음)를 다시 살펴보겠습니다.
+
+```javascript
+(01) var 파파존스 = '존스페이보릿';
+(02) var outer = function () {
+(03)  var inner = function () {
+(04)    console.log(파파존스);
+(05)    var 파파존스 = '수퍼 파파스';
+(06)  };
+(07)  inner();
+(08)  console.log(파파존스);
+(09) };
+(10) outer();
+(11) console.log(파파존스);
+```
+
+4번째 줄에서 파파존스라는 변수를 콘솔에 찍으라 했을 때 이미 5번째 줄에도 파파존스라는 변수가 할당되어 있고 심지어 전역변수에도 파파존스라는 변수가 존재합니다. 하지만 콘솔 결과는 undefined가 나옵니다.
+
+이는 해당 함수의 LexicalEnvironment에서 부터 변수가 선언되었는지 찾아보기 때문입니다. 전역변수에 파파존스가 존재하지만 inner함수 내부에 이미 파파존스가 선언이 되어있습니다. 하지만 할당은 되어 있지 않기 때문에 전역스코프의 파파존스까지 값을 찾아보지 않고 inner에 있는 파파존스까지만 찾아보기 때문에 전역 공간에서 선언한 동일한 파파존스 변수에는 접근할 수 없는 셈입니다. 이를 **변수 은닉화** 라고 합니다.
+
+## 마무리 하며
+
+사실 실무에서 React와 javascript를 사용하면서 동작원리까지 구체적으로 알기는 어려웠는데 이번 기회에 확실히 정리할 수 있어서 참 좋았다. 굉장히 도움이 되는 책이라고 생각했고 다른 분들에게도 꼭 추천하고 싶은 책이다.
