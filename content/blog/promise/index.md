@@ -77,7 +77,7 @@ console.log(worksheet);
 
 _reader.onload() 함수는 `비동기 함수` 이기 때문이다._
 
-비동기이기 때문에 제대로 된 값을 읽어오기 전에 기존의 빈 배열이 찍혀버리는 것이다.
+비동기이기 때문에 제대로 된 값을 읽어오기 전에 기존의 빈 값이 찍혀버리는 것이다.
 
 ### 그래서 어떻게 해야해?
 
@@ -413,19 +413,14 @@ await는 promise.then보다 좀 더 세련되게 프라미스의 result 값을 �
 ```javascript
 // file을 읽어서 worksheet를 반환하는 Promise 반환 함수 생성.
 const excelFileReadFnc = (file) => {
-  // ...
-  let workwheet = new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsBinaryString(file);
+
+  const workwheet = new Promise((resolve, reject) => {
     reader.onload = (e) => {
       // ... 파일 읽어오는 동작
-      if (...) {
-        resolve(읽어온 데이터);
-      } else {
-        // ...
-        reader.onload = (e) => {
-          // ... 파일 읽어오는 동작
-          resolve(읽어온 데이터);
-        };
-      }
+
+      resolve(읽어온 데이터);
     };
   });
   return workwheet;
