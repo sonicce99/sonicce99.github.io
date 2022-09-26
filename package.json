@@ -1,9 +1,12 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "dongsu-blog",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "동수의 블로그, 동수의 로그북입니다.",
+  "version": "1.0.1",
+  "author": {
+    "name" : "이동수",
+    "email" : "sonicce99@naver.com"
+  },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
@@ -40,7 +43,7 @@
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
   "keywords": [
-    "gatsby"
+    "동수", "로그북", "블로그", "blog"
   ],
   "license": "0BSD",
   "repository": {
