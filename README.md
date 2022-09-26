@@ -5,9 +5,11 @@
   <!-- </a> -->
 </p>
 <h1 align="center">
-  👋🏻 Welcome to my Blog
+  👋🏻 Welcome to my blog
 </h1>
 
-안녕하세요. 기억보단 기록을, 기록보단 공유를 좋아하는 주니어 개발자 이동수입니다. 블로그를 보고 싶으시다면 [여기를 클릭해 주세요.](https://sonicce99.github.io/)
+안녕하세요. 기억보단 기록을, 기록보단 공유를 좋아하는 주니어 개발자 이동수입니다. 
+<br />
+블로그를 보고 싶으시다면 [여기를 클릭해 주세요!](https://sonicce99.github.io/) :)
 
 <!-- AUTO-GENERATED-CONTENT:END -->
