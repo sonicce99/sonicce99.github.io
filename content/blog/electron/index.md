@@ -4,17 +4,19 @@ date: "2022-09-27"
 description: "javascript로 desktop application 만들기"
 ---
 
-## Electron은 무엇인가요?
+## Get Started
+
+### Electron은 무엇인가요?
 
 Electron은 Javascript, HTML, CSS를 사용해서 desktop application을 만들 수 있는 Framework입니다. `Chromium`과 `Node.js`를 포함함으로서, Electron은 Javascript 코드 베이스로 Window, macOS, Linux에서 동작시킬 수 있습니다. 특별한 개발 경험이 필요하지 않습니다.
 
 ***
 
-## Quick Start  
+### Quick Start  
 
 여기서는 Electron으로 Hello World app을 만들 수 있습니다. 이 튜토리얼이 끝나면 앱은 실행 중인 Chromium, Node.js 및 Electron 버전에 대한 정보가 포함된 웹 페이지를 표시하는 브라우저 창을 엽니다.  
 
-### 설치
+#### 설치
 
 ```bash
 mkdir my-electron-app && cd my-electron-app
@@ -62,14 +64,14 @@ npm start
 
 > 참고: 이 스크립트는 Electron이 프로젝트의 루트 폴더에서 실행되도록 지시합니다. 이 단계에서 앱은 실행할 앱을 찾을 수 없다는 오류를 즉시 표시합니다.
 
-### Run the main process
+#### Run the main process
 
 실행되는 동안 Electron은 package.json에 있는 `main` 필드를 찾습니다.   
 
 electron application의 진입점은 `main.js`입니다. 이 스크립트는 **main process**를 컨트롤합니다. main process는 전체 Node.js 환경에서 실행되고 앱의 수명 주기를 제어하는 ​​주요 프로세스를 제어합니다.
 
 
-### 브라우저창에서 web page 열기  
+#### 브라우저창에서 web page 열기  
 
 자 이제 main.js를 만들었으니 우리는 2가지의 Electron module이 필요합니다.
 
@@ -107,11 +109,11 @@ app.whenReady().then(() => {
 })
 ```
 
-### 윈도우 라이프사이클 관리하기
+#### 윈도우 라이프사이클 관리하기
 
 이제 앱을 열 수 있게 되었지만, 운영체제 별로 좀 더 native한 느낌을 주기 위해 추가적인 boilerPlate code가 필요합니다. Application windows는 각각의 OS별로 다르게 움직입니다.
 
-#### Window & Linux
+##### Window & Linux
 
 Windows 및 Linux에서 모든 창을 종료하면 일반적으로 응용 프로그램이 완전히 종료됩니다.
 
@@ -121,7 +123,7 @@ app.on('window-all-closed', () => {
 })
 ```
 
-#### macOS
+##### macOS
 
 Linux 및 Windows 앱은 창이 열려 있지 않으면 종료되지만 macOS 앱은 일반적으로 창이 열리지 않아도 계속 실행되며 사용 가능한 창이 없을 때 앱을 활성화하면 새 창이 열립니다.
 
@@ -139,7 +141,7 @@ app.whenReady().then(() => {
 })
 ```
 
-### preload script를 사용하여 Node.js에 access하기  
+#### preload script를 사용하여 Node.js에 access하기  
 
 우리가 해야할 일은 Electron의 version과 devDependencies를 웹페이지에 출력하는 것입니다.
 
@@ -183,4 +185,27 @@ const createWindow = () => {
 // ...
 ```
 
-### 보너ㅅ: 추가적인 web contents 추가하기
+#### 보너스: 추가적인 web contents 추가하기
+
+이 시점에서 어떻게 추가적인 기능을 넣을 수 있을지 궁금하실겁니다!
+
+더 많은 콘텐츠를 위해, scripts를 renderer process에 추가 할 수 있습니다. renderer은 normal web 환경에서 돌아가기 때문에 `<script> tag` 를 index.html의 </body> tag 앞에 추가할 수 있습니다.
+
+```html
+<script src="./renderer.js"></script>
+```
+
+renderer.js에 포함된 코드는 같은 Javascript API과 프론트엔드에서 사용하는 전형적인 개발 도구에서 사용가능합니다.
+
+
+#### 요약
+
+- 앱을 컨트롤하고 Node.js 환경에서 돌아가는 main process를 main.js에 script를 생성했습니다.
+
+- main.js에서 브라우저 창을 생성하고 웹 컨텐츠를 보여주기 위해 Electron의 `app`과 `BrowserWindow` 모듈을 사용했습니다.
+
+***
+
+## 튜토리얼  
+
+### 전제조건 (Prerequisites)  
