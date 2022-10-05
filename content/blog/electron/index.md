@@ -1,7 +1,7 @@
 ---
 title: "Electron 공식문서 뿌시기🗿"
 date: "2022-09-27"
-description: "javascript로 desktop application 만들기"
+description: "Electron 공식문서를 읽고 내용을 정리합니다."
 ---
 
 ## Get Started
@@ -10,11 +10,11 @@ description: "javascript로 desktop application 만들기"
 
 Electron은 Javascript, HTML, CSS를 사용해서 desktop application을 만들 수 있는 Framework입니다. `Chromium`과 `Node.js`를 포함함으로서, Electron은 Javascript 코드 베이스로 Window, macOS, Linux에서 동작시킬 수 있습니다. 특별한 개발 경험이 필요하지 않습니다.
 
-***
+---
 
-### Quick Start  
+### Quick Start
 
-여기서는 Electron으로 Hello World app을 만들 수 있습니다. 이 튜토리얼이 끝나면 앱은 실행 중인 Chromium, Node.js 및 Electron 버전에 대한 정보가 포함된 웹 페이지를 표시하는 브라우저 창을 엽니다.  
+여기서는 Electron으로 Hello World app을 만들 수 있습니다. 이 튜토리얼이 끝나면 앱은 실행 중인 Chromium, Node.js 및 Electron 버전에 대한 정보가 포함된 웹 페이지를 표시하는 브라우저 창을 엽니다.
 
 #### 설치
 
@@ -66,19 +66,17 @@ npm start
 
 #### Run the main process
 
-실행되는 동안 Electron은 package.json에 있는 `main` 필드를 찾습니다.   
+실행되는 동안 Electron은 package.json에 있는 `main` 필드를 찾습니다.
 
 electron application의 진입점은 `main.js`입니다. 이 스크립트는 **main process**를 컨트롤합니다. main process는 전체 Node.js 환경에서 실행되고 앱의 수명 주기를 제어하는 ​​주요 프로세스를 제어합니다.
 
-
-#### 브라우저창에서 web page 열기  
+#### 브라우저창에서 web page 열기
 
 자 이제 main.js를 만들었으니 우리는 2가지의 Electron module이 필요합니다.
 
 - app module (app의 이벤트 라이브사이클을 컨트롤합니다.)
 
-- BrowserWindow module (app의 windows를 생성하고 관리합니다.)  
-
+- BrowserWindow module (app의 windows를 생성하고 관리합니다.)
 
 main process가 node.js 런타임환경이니 `CommonJS` 모듈을 import 할 수 있습니다.
 
@@ -92,10 +90,10 @@ const { app, BrowserWindow } = require('electron')
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
   })
 
-  win.loadFile('index.html')
+  win.loadFile("index.html")
 }
 ```
 
@@ -118,8 +116,8 @@ app.whenReady().then(() => {
 Windows 및 Linux에서 모든 창을 종료하면 일반적으로 응용 프로그램이 완전히 종료됩니다.
 
 ```javascript
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit()
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit()
 })
 ```
 
@@ -135,13 +133,13 @@ Electron app은 ready 이벤트 전에 창을 만들 수 없으므로 앱이 ini
 app.whenReady().then(() => {
   createWindow()
 
-  app.on('activate', () => {
+  app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 })
 ```
 
-#### preload script를 사용하여 Node.js에 access하기  
+#### preload script를 사용하여 Node.js에 access하기
 
 우리가 해야할 일은 Electron의 version과 devDependencies를 웹페이지에 출력하는 것입니다.
 
@@ -152,13 +150,13 @@ app.whenReady().then(() => {
 `preload.js`를 아래와 같이 생성하세요.
 
 ```javascript
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener("DOMContentLoaded", () => {
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector)
     if (element) element.innerText = text
   }
 
-  for (const dependency of ['chrome', 'node', 'electron']) {
+  for (const dependency of ["chrome", "node", "electron"]) {
     replaceText(`${dependency}-version`, process.versions[dependency])
   }
 })
@@ -168,7 +166,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 ```javascript
 // include the Node.js 'path' module at the top of your file
-const path = require('path')
+const path = require("path")
 
 // modify your existing createWindow() function
 const createWindow = () => {
@@ -176,11 +174,11 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
+      preload: path.join(__dirname, "preload.js"),
+    },
   })
 
-  win.loadFile('index.html')
+  win.loadFile("index.html")
 }
 // ...
 ```
@@ -197,15 +195,38 @@ const createWindow = () => {
 
 renderer.js에 포함된 코드는 같은 Javascript API과 프론트엔드에서 사용하는 전형적인 개발 도구에서 사용가능합니다.
 
-
 #### 요약
 
 - 앱을 컨트롤하고 Node.js 환경에서 돌아가는 main process를 main.js에 script를 생성했습니다.
 
 - main.js에서 브라우저 창을 생성하고 웹 컨텐츠를 보여주기 위해 Electron의 `app`과 `BrowserWindow` 모듈을 사용했습니다.
 
-***
+---
 
-## 튜토리얼  
+## 튜토리얼
 
-### 전제조건 (Prerequisites)  
+### 전제조건 (Prerequisites)
+
+Electron은 HTML, CSS, Javascript를 사용해 desktop application을 만들기 위한 프레임워크 입니다. ` Chromium` 과 `Node.js`을 single binary file에 추가함으로써, Electron은 Javascript 코드 베이스로 Windows, macOS, Linux에서 동작하는 cross-platform apps를 만들 수 있게 해줍니다.
+
+이번 튜토리얼에서는 Electron을 사용해 desktop application을 개발하는 과정을 가이드합니다.
+
+#### 가정
+
+Electron은 Web apps을 위한 기본 wrapper layer이며 Node.js 환경에서 실행됩니다. 따라서 이번 튜토리얼에서는 일반적으로 Node 및 프런트 엔드 웹 개발 기본 사항에 익숙하다고 가정합니다.
+
+### 앱 만들기 (Building your First App)
+
+- 내용은 위에 [Quick Start](#quick-start)와 동일함.
+
+### 요약
+
+- Electron 애플리케이션은 npm 패키지를 사용하여 설정됩니다. Electron 실행 파일은 프로젝트의 devDependencies에 설치되어야 하며 package.json 파일의 스크립트를 사용하여 개발 모드에서 실행할 수 있습니다.
+
+- 앱은 package.json에 `main` property를 찾아 진입하며, 이 파일은 Node.js의 인스턴스를 실행하고 앱의 수명 주기, 기본 인터페이스 표시, 권한 있는 작업 수행, renderer process 관리를 담당하는 Electron의 **main process**를 컨트롤합니다.     
+
+- Renderer process는 그래픽 콘텐츠 표시를 담당합니다. 웹 주소나 로컬 HTML 파일을 가리키도록 하여 웹 페이지를 렌더러에 로드할 수 있습니다. renderer는 일반 웹 페이지와 매우 유사하게 작동하며 동일한 웹 API에 액세스할 수 있습니다.    
+
+- 다음 섹션에서는 privileged API로 renderer process를 컨트롤 하는 방법과 프로세스 간에 통신하는 방법을 배웁니다.    
+
+### Preload script 활용하기 (Using Preload Scripts)  
