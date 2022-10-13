@@ -219,7 +219,7 @@ Electron은 Web apps을 위한 기본 wrapper layer이며 Node.js 환경에서 �
 
 - 내용은 위에 [Quick Start](#quick-start)와 동일함.
 
-### 요약
+#### 요약  
 
 - Electron 애플리케이션은 npm 패키지를 사용하여 설정됩니다. Electron 실행 파일은 프로젝트의 devDependencies에 설치되어야 하며 package.json 파일의 스크립트를 사용하여 개발 모드에서 실행할 수 있습니다.
 
@@ -229,4 +229,155 @@ Electron은 Web apps을 위한 기본 wrapper layer이며 Node.js 환경에서 �
 
 - 다음 섹션에서는 privileged API로 renderer process를 컨트롤 하는 방법과 프로세스 간에 통신하는 방법을 배웁니다.    
 
-### Preload script 활용하기 (Using Preload Scripts)  
+### Preload script 활용하기 (Using Preload Scripts)
+
+#### 목표  
+
+이번장에서는 preload script는 무엇인지, renderer process에서 privileged API를 어떻게 안전하게 사용할 수 있는지에 대해 학습합니다. 또한 main process와 renderer process 사이에서 어떻게 통신하는지에 대해서 배울 수 있습니다.
+
+#### preload script는 무엇인가요?
+
+Electron의 main process는 전체 운영 체제 액세스 권한이 있는 Node.js 환경입니다. Electron 모듈 외에도 Node.js 내장 기능과 npm을 통해 설치된 모든 패키지에 액세스할 수 있습니다. 반면에 renderer process는 웹 페이지를 실행하며 보안상의 이유로 기본적으로 Node.js를 실행하지 않습니다.
+
+서로 다른 프로세스 유형을 연결하려면 **preload** 라는 special script를 사용해야 합니다.
+
+#### preload script를 통한 renderer 확장  
+
+BrowserWindow의 preload script는 HTML DOM과 Node.js 및 Electron API의 제한된 하위 집합에 모두 액세스할 수 있는 컨텍스트에서 실행됩니다.
+
+preload script는 웹 페이지가 renderer에 로드되기 전에 주입됩니다. 필요한 기능을 renderer에 추가하려면 contextBridge API를 통해 전역 객체를 정의할 수 있습니다.  
+
+이 개념을 시연하기 위해 앱의 Chrome, Node 및 Electron 버전을 renderer에 노출하는 preload script를 만듭니다.    
+
+```javascript
+// preload.js
+
+const { contextBridge } = require('electron')
+
+contextBridge.exposeInMainWorld('versions', {
+  node: () => process.versions.node,
+  chrome: () => process.versions.chrome,
+  electron: () => process.versions.electron,
+  // we can also expose variables, not just functions
+})
+```
+
+preload script를 renderer process에 연결하려면 해당 경로를 BrowserWindow 생성자의 webPreferences.preload 옵션에 전달하세요.
+
+```javascript
+// main.js
+
+const { app, BrowserWindow } = require('electron')
+const path = require('path')
+
+const createWindow = () => {
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+    },
+  })
+
+  win.loadFile('index.html')
+}
+
+app.whenReady().then(() => {
+  createWindow()
+})
+```
+
+이 시점에서 renderer는 versions global에 접근할 수 있으므로, 이 정보를 window에 띄워보겠습니다.
+renderer.js를 생성하고 아래와 같이 작성하세요.
+
+```javascript
+// renderer.js
+
+const information = document.getElementById('info')
+information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
+```
+
+html에 renderer.js script를 추가해줍니다.
+
+```HTML
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Hello from Electron renderer!</title>
+  </head>
+  <body>
+    <h1>Hello from Electron renderer!</h1>
+    <p>👋</p>
+    <p id="info"></p>
+  </body>
+  <script src="./renderer.js"></script>
+</html>
+```
+
+<img width="600" alt="스크린샷 2022-10-13 오전 10 45 02" src="https://user-images.githubusercontent.com/87749134/195479488-0044412b-faad-4140-9547-515b0fbcdd63.png">
+
+
+#### 프로세스간 통신
+
+위에서 언급했다 싶이, main과 renderer process는 전혀 다른 환경을 가지고 있습니다. 그래서 renderer process에서 Node.js APIs에 바로 접근하는건 불가능할 뿐만 아니라 HTML DOM 에서 main process로 접근도 불가능 하죠.
+
+이런 문제를 해결하기 위해서 Electron의 `ipcMain` 과 `ipcRenderer` 모듈을 사용하는 것입니다. 우리의 웹페이지에서 main process로 메세지를 보내기 위해, `ipcMain.handle` 이라는 main process handler를 설정할 수 있습니다. 그리고 `ipcRender.invoke` 를 preload.js에서 호출하면 됩니다.
+
+우선, main process에서 renderer에 string을 return 하는 `ping()` 이라는 전역 함수를 추가합니다.   
+
+```javascript
+// preload.js
+
+const { contextBridge, ipcRenderer } = require('electron')
+
+contextBridge.exposeInMainWorld('versions', {
+  node: () => process.versions.node,
+  chrome: () => process.versions.chrome,
+  electron: () => process.versions.electron,
+  ping: () => ipcRenderer.invoke('ping'),
+  // we can also expose variables, not just functions
+})
+```
+
+그런 다음 main process에서 handle listener를 설정합니다. HTML 파일을 load하기 전에 이 작업을 수행하여 renderer에서 호출을 보내기 전에 처리기가 준비되었음을 보장합니다.
+
+
+```javascript
+const { ipcMain } = require('electron')
+
+const createWindow = () => {
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+    },
+  })
+  ipcMain.handle('ping', () => 'pong')
+  win.loadFile('index.html')
+}
+```
+
+sender와 receiver를 설정했으면 이제 정의한 'ping' 채널을 통해 renderer에서 main process로 메시지를 보낼 수 있습니다.  
+
+```javascript
+const func = async () => {
+  const response = await window.versions.ping()
+  console.log(response) // prints out 'pong'
+}
+
+func()
+```
+
+***
+
+### 기능 추가하기 (Adding Features)
