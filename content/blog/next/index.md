@@ -245,3 +245,210 @@ getServerSideProps를 독립적인 함수로 내보내야 합니다. getServerSi
 getServerSideProps를 사용하는 page는 매번 요청시에 서버측에서 rendering 되고 `cache-control headers`가 존재하는 경우에만 cached 됩니다.
 
 #### getStaticPaths
+
+만약 page에 Dynamic Routes가 있고 getStaticProps를 사용하는 경우 정적으로 생성할 경로 목록을 정의해야 합니다. 왜냐하면 Next.js는 getStaticPaths에 의해 지정된 모든 경로를 정적으로 Pre-Renering 하기 때문 입니다.
+
+```javascript
+// pages/posts/[id].js
+
+// Generates `/posts/1` and `/posts/2`
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { id: "1" } }, { params: { id: "2" } }],
+    fallback: false, // can also be true or 'blocking'
+  }
+}
+```
+
+##### 언제 getStaticPaths를 사용해야 하나요?
+
+dynamic routes를 사용하고 statically Pre-Rendering 하고 있다면 사용해야 합니다.
+
+##### 언제 getStaticPaths가 동작하나요?
+
+getStaticPaths는 production 환경에서 build하는 동안에만 실행되며 런타임에는 호출되지 않습니다.
+즉 getStaticPaths 내부에 작성된 코드가 클라이언트 측 번들에서는 볼 수 없습니다.
+
+##### 어디서 getStaticPaths를 사용할 수 있나요?
+
+- getStaticPaths는 **반드시** getStaticProps와 같이 사용되어야합니다.
+
+- getStaticPaths는 getServerSideProps와 같이 사용할 수 없습니다.
+
+- getStaticPaths는 none-page file 에서는 사용할 수 없습니다.
+
+❗️ 개발모드에서 getStaticPaths는 모든 요청 마다 호출 됩니다.
+
+#### getStaticProps
+
+getStaticProps를 내보내면 Next.js는 getStaticProps에서 반환된 props를 사용하여 빌드 시 이 페이지를 Pre-Rendering 합니다.
+
+```javascript
+export async function getStaticProps(context) {
+  return {
+    props: {}, // will be passed to the page component as props
+  }
+}
+```
+
+모든 props는 페이지 구성 요소로 전달되고 초기 HTML의 클라이언트 측에서 볼 수 있습니다. 이것은 페이지가 적절하게 hydrated 되기 위한 것입니다.
+❗️ props에서 클라이언트가 사용할 수 없어야 하는 민감한 정보를 전달하지 않도록 합니다.
+
+##### 언제 getStaticProps가 동작하나요?
+
+getStaticProps는 항상 서버에서 실행되고 클라이언트에서는 실행되지 않습니다.
+
+- 항상 `next build` 중에 실행됩니다.
+
+- fallback: true, revalidate을 사용할 때 background에서 실행됩니다.
+
+- 최초 렌더링 전 fallback: blocking을 사용하면 실행됩니다.
+
+##### server-side code 바로 사용하기
+
+getStaticProps는 서버 측에서만 실행되므로 클라이언트 측에서는 실행되지 않습니다. 브라우저용 JS 번들에도 포함되지 않으므로 브라우저로 보내지 않고 직접 데이터베이스 쿼리를 작성할 수 있습니다.
+
+```javascript
+// lib/load-posts.js
+
+// The following function is shared
+// with getStaticProps and API routes
+// from a `lib/` directory
+export async function loadPosts() {
+  // Call an external API endpoint to get posts
+  const res = await fetch('https://.../posts/')
+  const data = await res.json()
+
+  return data
+}
+
+// pages/blog.js
+import { loadPosts } from '../lib/load-posts'
+
+// This function runs only on the server side
+export async function getStaticProps() {
+  // Instead of fetching your `/api` route you can call the same
+  // function directly in `getStaticProps`
+  🌟 const posts = await loadPosts()
+
+  // Props returned will be passed to the page component
+  return { props: { posts } }
+}
+```
+
+##### HTML와 JSON을 모두 정적 생성 합니다.
+
+getStaticProps가 있는 페이지가 빌드 시 Pre-Rendering 되면 HTML 파일 외에도 Next.js가 getStaticProps 실행 결과를 포함하는 JSON 파일을 생성합니다.
+
+이 JSON 파일은 next/link 또는 next/router를 통한 클라이언트 측 라우팅에 사용됩니다. getStaticProps를 사용하여 Pre-Rendering 된 페이지로 이동하면 Next.js는 이 JSON 파일(빌드 시 미리 계산됨)을 가져와 페이지 구성 요소의 소품으로 사용합니다. 즉, 내보낸 JSON만 사용되므로 클라이언트 측 페이지 전환이 getStaticProps를 호출하지 않습니다.
+
+##### 어디서 getStaticProps를 사용할 수 있나요?
+
+getStaticProps는 page에서만 내보낼 수 있습니다. 페이지가 아닌 파일, \_app, \_document 또는 \_error에서는 내보낼 수 없습니다.
+
+❗️ 개발모드에서 getStaticProps는 모든 요청 마다 호출 됩니다.
+
+#### Incremental Static Regeneration
+
+Next.js를 사용하면 사이트를 build한 후 정적 페이지를 만들거나 업데이트할 수 있습니다. ISR을 사용하면 전체 사이트를 다시 빌드할 필요 없이 페이지별로 정적 생성할 수 있습니다. ISR을 사용하면 수백만 페이지로 확장하면서 정적의 이점을 유지할 수 있습니다.
+
+```javascript
+function Blog({ posts }) {
+  return (
+    <ul>
+      {posts.map(post => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  )
+}
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// revalidation is enabled and a new request comes in
+export async function getStaticProps() {
+  const res = await fetch("https://.../posts")
+  const posts = await res.json()
+
+  return {
+    props: {
+      posts,
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
+    revalidate: 10, // In seconds
+  }
+}
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// the path has not been generated.
+export async function getStaticPaths() {
+  const res = await fetch("https://.../posts")
+  const posts = await res.json()
+
+  // Get the paths we want to pre-render based on posts
+  const paths = posts.map(post => ({
+    params: { id: post.id },
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: blocking } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: "blocking" }
+}
+
+export default Blog
+```
+
+Pre-Rendering된 페이지에 대한 요청이 이루어지면 처음에는 캐시된 페이지가 표시됩니다.
+
+- 초기 요청 후 10초 전에 페이지에 대한 모든 요청도 여전히 캐시됩니다.
+
+- 10초 후 다음 요청은 여전히 ​​캐시된(stale) 페이지를 표시합니다.
+
+- Next.js는 백그라운드에서 페이지 regeneration을 트리거합니다.
+
+- 페이지가 성공적으로 생성되면 Next.js는 캐시를 무효화하고 업데이트된 페이지를 표시합니다. 백그라운드 regeneration이 실패하면 이전 페이지는 여전히 변경되지 않습니다.
+
+자세한 내용은 [여기](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration) 를 참조하세요.
+
+#### Client-side data fetching
+
+Client-side data fetching SEO가 필요하지 않거나 데이터를 Pre-Rendering 할 필요가 없거나 페이지 콘텐츠를 자주 업데이트해야 할 때 유용합니다.
+
+page level에서 수행하면 런타임에 데이터를 가져오고 데이터가 변경되면 페이지 내용이 업데이트됩니다. 컴포넌트 level에서 사용하는 경우 컴포넌트 마운트 시 데이터를 가져오고 데이터가 변경되면 컴포넌트의 내용이 업데이트됩니다.
+
+client-side data fetching을 사용하면 애플리케이션의 성능과 페이지의 로드 속도에 영향을 미칠 수 있다는 점에 유의해야 합니다. 이는 컴포넌트나 페이지가 마운트되는 시점에 데이터 페칭이 이루어지고 데이터가 캐싱되지 않기 때문이다.
+
+```javascript
+function Profile() {
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    fetch("/api/profile-data")
+      .then(res => res.json())
+      .then(data => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
+
+  if (isLoading) return <p>Loading...</p>
+  if (!data) return <p>No profile data</p>
+
+  return (
+    <div>
+      <h1>{data.name}</h1>
+      <p>{data.bio}</p>
+    </div>
+  )
+}
+```
+
+---
+
+### Built-In CSS Support
