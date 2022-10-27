@@ -1,6 +1,6 @@
 ---
 title: "Next.js 공식문서 뿌시기🗿"
-date: "2022-10-14"
+date: "2022-10-20"
 description: "Next.js 공식문서를 읽고 내용을 정리합니다."
 ---
 
@@ -452,3 +452,1307 @@ function Profile() {
 ---
 
 ### Built-In CSS Support
+
+Next.js를 사용하면 JavaScript 파일에서 CSS 파일을 가져올 수 있습니다.
+
+#### Global Stylesheet 추가하기
+
+전역 스타일을 주고 싶다면 `pages/_app.js` 에 CSS 파일을 import 하세요.
+
+```css
+ {
+  /* styles.css */
+}
+
+body {
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+  padding: 20px 20px 60px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+```
+
+```javascript
+{
+  /* pages/_app.js */
+}
+
+import "../styles.css"
+
+// This default export is required in a new `pages/_app.js` file.
+export default function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+```
+
+이러한 스타일은 애플리케이션의 모든 페이지와 구성 요소에 적용됩니다. 스타일시트의 글로벌 특성으로 인해 충돌을 피하기 위해 pages/\_app.js 내에서만 가져올 수 있습니다.
+
+❗️ production 모드에서, 모든 CSS 파일은 자동으로 하나의 단일 .css 파일로 작성됩니다.
+
+##### node_modules에서 스타일 import 하기
+
+Next.js 9.5.4부터 node_modules에서 CSS 파일을 가져올 수 있습니다.
+
+```javascript
+// pages/_app.js
+import "bootstrap/dist/css/bootstrap.css"
+
+export default function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+```
+
+#### Component-Level CSS 추가하기
+
+Next.js는 `[name].module.css` 파일명 convention을 사용하여 CSS 모듈을 지원합니다.
+
+CSS module은 unique한 class 이름을 자동으로 생성하여 로컬에서 CSS 범위를 지정합니다. 이를 통해 충돌에 대한 걱정 없이 다른 파일에서 동일한 CSS class 이름을 사용할 수 있습니다.
+
+```css
+/*
+다른 `.css` or `.module.css` 파일과 .error {}가 출돌할 걱정을 할 필요 없습니다.
+*/
+.error {
+  color: white;
+  background-color: red;
+}
+```
+
+```javascript
+import styles from "./Button.module.css"
+
+export function Button() {
+  return (
+    <button
+      type="button"
+      // Note how the "error" class is accessed as a property on the imported
+      // `styles` object.
+      className={styles.error}
+    >
+      Destroy
+    </button>
+  )
+}
+```
+
+CSS 모듈은 선택적 기능이며 확장자가 .module.css인 파일에만 사용할 수 있습니다. 일반 `<link>` 스타일시트와 global CSS 파일은 계속 지원됩니다.
+
+production에서 모든 CSS 모듈 파일은 자동으로 여러 축소 및 코드 분할 .css 파일로 연결됩니다. 이러한 .css 파일은 응용 프로그램이 그리기 위해 로드되는 CSS의 양을 최소화합니다.
+
+#### SASS 지원
+
+Next.js를 사용하면 .scss 및 .sass 확장자를 모두 사용하여 Sass를 가져올 수 있습니다.
+CSS 모듈 및 .module.scss 또는 .module.sass 확장을 통해 Component-level Sass를 사용할 수 있습니다.
+
+❗️ 참고: Sass는 각각 고유한 extension을 가진 두 가지 구문을 지원합니다. .scss 확장자는 SCSS 구문을 사용해야 하고 .sass 확장자는 들여쓰기 구문("Sass")을 사용해야 합니다.
+
+어떤 것을 선택해야 할지 잘 모르겠다면 CSS의 상위 집합인 .scss 확장자를 사용하세요.
+
+##### SASS Customizing
+
+Sass 컴파일러를 구성하려면 `next.config.js`에서 sassOptions를 사용하여 구성할 수 있습니다.
+
+```javascript
+// next.config.js
+
+const path = require("path")
+
+module.exports = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+}
+```
+
+---
+
+### Layouts
+
+만약 React를 사용하면 page를 여러 components로 분해할 수 있습니다. 이러한 components는 재사용되는 경우가 많습니다. 예를 들어 모든 페이지에 동일한 navigation bar 나 footer가 있을 수 있습니다.
+
+```javascript
+// components/layout.js
+
+import Navbar from "./navbar"
+import Footer from "./footer"
+
+export default function Layout({ children }) {
+  return (
+    <>
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
+    </>
+  )
+}
+```
+
+#### Examples
+
+##### Single Layout
+
+전체 애플리케이션에 대해 하나의 레이아웃만 있는 경우 사용자는 Custom App을 만들고 레이아웃으로 애플리케이션을 래핑할 수 있습니다. <Layout /> 컴포넌트는 페이지를 변경할 때 재사용되기 때문에 컴포넌트 상태가 유지됩니다.
+
+```javascript
+// pages/_app.js
+
+import Layout from "../components/layout"
+
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
+}
+```
+
+##### Per-Page Layout
+
+여러 레이아웃이 필요한 경우 페이지에 `getLayout` 속성을 추가하여 레이아웃에 대한 React component를 반환할 수 있습니다. 이를 통해 페이지별로 레이아웃을 정의할 수 있습니다. 함수를 반환하기 때문에 원하는 경우 복잡한 중첩 레이아웃을 가질 수 있습니다.
+
+```javascript
+// pages/index.js
+
+import Layout from "../components/layout"
+import NestedLayout from "../components/nested-layout"
+
+export default function Page() {
+  return {
+    /** Your content */
+  }
+}
+
+Page.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      <NestedLayout>{page}</NestedLayout>
+    </Layout>
+  )
+}
+```
+
+```javascript
+// pages/_app.js
+
+export default function MyApp({ Component, pageProps }) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || (page => page)
+
+  return getLayout(<Component {...pageProps} />)
+}
+```
+
+페이지를 navigating 할 때, 우리는 state가 유지되기를 원합니다. (input values, scroll position ...)
+
+이 레이아웃 패턴은 페이지 전환 시 React component tree가 유지되기 때문에 상태 지속성을 가능하게 합니다. 컴포넌트 트리를 사용하여 React는 상태를 유지하기 위해 변경된 요소를 이해할 수 있습니다.
+
+##### Data Fetching
+
+```javascript
+// components/layout.js
+
+import useSWR from "swr"
+import Navbar from "./navbar"
+import Footer from "./footer"
+
+export default function Layout({ children }) {
+  const { data, error } = useSWR("/api/navigation", fetcher)
+
+  if (error) return <div>Failed to load</div>
+  if (!data) return <div>Loading...</div>
+
+  return (
+    <>
+      <Navbar links={data.links} />
+      <main>{children}</main>
+      <Footer />
+    </>
+  )
+}
+```
+
+레이아웃 내에서 useEffect 또는 SWR과 같은 라이브러리를 사용하여 클라이언트 측에서 데이터를 가져올 수 있습니다. 이 파일은 page가 아니고 component이므로 getStaticProps 또는 getServerSideProps를 사용할 수 없습니다.
+
+---
+
+### 이미지 컴포넌트와 최적화
+
+Next.js 이미지 Component인 next/image는 최신 웹용으로 발전된 HTML `<img>` 요소의 extension입니다. 여기에는 우수한 `Core Web Vitals`를 달성하는 데 도움이 되는 다양한 기본 제공 성능 최적화가 포함되어 있습니다. 이 점수는 웹사이트에서 사용자 경험을 측정하는 중요한 척도이며 Google 검색 순위에 반영됩니다.
+
+Image component에 내장된 몇 가지 최적화는 다음과 같습니다.
+
+- Improved Performance : 최신 이미지 형식을 사용하여 항상 각 기기에 올바른 크기의 이미지를 제공합니다.
+
+- Visual Stability :
+
+- Faster Page Loads : Image는 viewport에 들어갈 때만 only 로드 됩니다.
+
+- Asset Flexibility : 원격 서버에 이미지가 저장된 경우에도, On-demand image resizing.
+
+#### Image 컴포넌트 사용하기
+
+```javascript
+import Image from "next/image"
+```
+
+or 기본 `<img>` 요소에 훨씬 더 가까운 구성 요소가 필요한 경우 `next/future/image`를 가져올 수 있습니다.
+
+```javascript
+import Image from "next/future/image"
+```
+
+##### Local Images
+
+로컬 이미지를 사용하려면 .jpg, .png 또는 .webp 파일을 가져오세요.
+
+```javascript
+import profilePic from "../public/me.png"
+```
+
+Dynamic await import() 또는 require()는 지원되지 않습니다. import는 빌드 시 분석할 수 있도록 static 이어야 합니다.
+
+Next.js는 가져온 파일을 기반으로 이미지의 width와 height를 자동으로 결정합니다. 이 값은 이미지가 로드되는 동안 누적 레이아웃 이동을 방지하는 데 사용됩니다.
+
+```javascript
+import Image from "next/image"
+import profilePic from "../public/me.png"
+
+function Home() {
+  return (
+    <>
+      <h1>My Homepage</h1>
+      <Image
+        src={profilePic}
+        alt="Picture of the author"
+        // width={500} automatically provided
+        // height={500} automatically provided
+        // blurDataURL="data:..." automatically provided
+        // placeholder="blur" // Optional blur-up while loading
+      />
+      <p>Welcome to my homepage!</p>
+    </>
+  )
+}
+```
+
+##### Remote Images
+
+원격 이미지를 사용하려면 src 속성은 URL 문자열이어야 하며 상대경로 또는 절대경로 일 수 있습니다. Next.js는 빌드 프로세스 중에 원격 파일에 액세스할 수 없으므로 너비, 높이 및 선택적 blurDataURL props를 메뉴얼로 제공해야 합니다.
+
+```javascript
+import Image from "next/image"
+
+export default function Home() {
+  return (
+    <>
+      <h1>My Homepage</h1>
+      <Image
+        src="/me.png"
+        alt="Picture of the author"
+        width={500}
+        height={500}
+      />
+      <p>Welcome to my homepage!</p>
+    </>
+  )
+}
+```
+
+##### Domains
+
+만약 remote 이미지를 최적화하고 싶지만 내장된 Next.js 이미지 최적화 API를 계속 사용하고 싶을 수 있습니다. 이렇게 하려면 로더를 기본 설정으로 두고 Image src props에 절대 URL을 입력하세요.
+
+악의적인 사용자로부터 애플리케이션을 보호하려면 next/image Component와 함께 사용할 원격 호스트 이름 list을 정의해야 합니다.
+
+##### Loaders
+
+앞의 예에서 remote 이미지에 대해 부분 URL("/me.png")이 제공된다는 점에 주의하세요. 이것은 next/image loader 아키텍처 때문에 가능합니다.
+
+로더는 이미지의 URL을 생성하는 기능입니다. 제공된 src를 수정하고 여러 URL을 생성하여 다양한 크기의 이미지를 요청합니다. 이러한 여러 URL은 자동 srcset 생성에 사용되므로 사이트 방문자에게 표시 영역에 적합한 크기의 이미지가 제공됩니다.
+
+##### Priority
+
+각 페이지에 가장 중요한 이미지에 우선 순위 속성을 추가해야 합니다. 이렇게 하면 Next.js가 로드할 이미지의 우선 순위를 특별히 지정할 수 있습니다.
+
+```javascript
+import Image from "next/image"
+
+export default function Home() {
+  return (
+    <>
+      <h1>My Homepage</h1>
+      <Image
+        src="/me.png"
+        alt="Picture of the author"
+        width={500}
+        height={500}
+        priority
+      />
+      <p>Welcome to my homepage!</p>
+    </>
+  )
+}
+```
+
+##### Image Sizing
+
+이미지가 가장 일반적으로 성능을 저하시키는 방법 중 하나는 이미지가 로드될 때 페이지의 다른 요소를 밀어내는 layout shift 할 때입니다. 이 문제는 사용자 경험에 매우 좋지 않아서 `Cumulative Layout Shift` 이라는 자체 Core Web Vital이 있습니다.
+
+이러한 layout shift를 피하는 방법은 항상 이미지 크기를 조정하는 것입니다. 이를 통해 브라우저는 이미지가 로드되기 전에 이미지를 위한 충분한 공간을 정확하게 예약할 수 있습니다.
+
+next/image는 좋은 성능 결과를 보장하도록 설계되었기 때문에 layout shift가 일어나도록 하지 않으며, 다음 세 가지 방법 중 하나로 크기를 조정해야 합니다.
+
+- 정적 이미지 사용하기
+
+- 명시적으로 `width`, `height` 포함하기
+
+- layout="fill" 사용하여 부모 요소를 채우기 위해 이미지를 확장되도록 하기
+
+> ❗️ 내 이미지 사이즈를 모르면 어떡하나요..?
+
+> 🌟 layout="fill" 을 사용하세요.
+
+> layout='fill' 을 사용하면 부모 요소에 따라 이미지 크기를 조정할 수 있습니다. CSS를 사용하여 페이지에 이미지의 부모 요소 공간을 제공한 다음, objectPosition 속성과 함께 fill, contain 또는 cover와 함께 objectFit 속성을 사용하여 이미지가 해당 공간을 차지하는 방식을 정의하는 것을 고려하세요.
+
+##### Styling
+
+Image Component의 스타일 지정은 일반 `<img>` 요소의 스타일 지정과 크게 다르지 않지만 명심해야 할 몇 가지가 있습니다.
+
+- 올바른 layout mode를 고르세요.
+
+  > 이미지 component에는 페이지에서 크기가 조정되는 방식을 정의하는 여러 가지 layout mode가 있습니다. 이미지 스타일이 원하는 대로 되지 않으면 다른 레이아웃 모드를 실험해 보세요.
+
+  - layout= 'fill' 일 경우에는 부모는 반드시 `position: relative` 여야 합니다.
+
+  - layout= 'responsive' 일 경우에는 부모는 반드시 `display: block` 이여야 합니다.
+
+- DOM 구조를 기반으로 하지 않고 className으로 이미지를 지정
+
+---
+
+### 폰트 최적화
+
+Next.js는 빌드 할 동안 웹 폰트 로딩을 최적화합니다. 이 최적화는 아래와 같이 선언된 글꼴 파일을 가져오기 위한 추가 네트워크 왕복을 제거합니다.
+
+```html
+// Before
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
+  rel="stylesheet"
+/>
+
+// After
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<style
+  data-href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
+>
+  @font-face{font-family:'Inter';font-style:normal...
+</style>
+```
+
+#### 사용
+
+웹 폰트는 Next.js에서 사용하려면 다음과 같이 추가하세요.
+
+```javascript
+// pages/_document.js
+
+import { Html, Head, Main, NextScript } from "next/document"
+
+export default function Document() {
+  return (
+    <Html>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
+          rel="stylesheet"
+        />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+개별 페이지보다 `_document`에 글꼴을 추가하는 것이 좋습니다. next/head가 있는 단일 페이지에 글꼴을 추가하면 클라이언트 측 또는 스트리밍을 사용할 때 페이지 간 navigations에서 동작하지 않습니다.
+
+##### 최적화 끄기
+
+```javascript
+// next.config.js
+
+module.exports = {
+  optimizeFonts: false,
+}
+```
+
+---
+
+### Static File Serving
+
+Next.js는 루트 디렉터리의 public이라는 폴더 아래에 이미지와 같은 정적 파일을 제공할 수 있습니다. 그런 다음 기본 URL(/)에서 시작하는 코드에서 공용 내부의 파일을 참조할 수 있습니다.
+
+예를 들어 public/me.png에 이미지를 추가하면 다음 코드가 이미지에 액세스합니다.
+
+```javascript
+import Image from "next/image"
+
+function Avatar() {
+  return <Image src="/me.png" alt="me" width="64" height="64" />
+}
+
+export default Avatar
+```
+
+---
+
+### Fast Refresh
+
+Fast Refresh는 React component에 대한 수정 사항에 대해 즉각적인 피드백을 제공하는 Next.js 기능입니다. Fast Refresh는 9.4 이상의 모든 Next.js 애플리케이션에서 기본적으로 활성화되어 있습니다. Next.js Fast Refresh가 활성화되면 대부분의 수정 내용은 상태를 잃지 않고 1초 이내에 표시되어야 합니다.
+
+#### 어떻게 동작하나요?
+
+- React Component(s)만 exports 하는 파일을 수정하는 경우 Fast Refresh는 해당 파일에 대한 코드만 업데이트하고 components를 다시 렌더링합니다. 스타일, 렌더링 logic, event handlers 또는 effets를 포함하여 해당 파일의 모든 것을 수정 할 수 있습니다.
+
+- React component가 아닌 파일을 수정하는 경우 Fast Refresh는 해당 파일과 파일을 가져오는 다른 파일을 모두 다시 실행합니다. 따라서 Button.js와 Modal.js가 모두 theme.js를 가져오는 경우 theme.js를 수정하면 두 component가 모두 업데이트됩니다.
+
+#### 제한
+
+Fast Refresh는 수정 중인 component에서 local React state를 유지하려고 시도하지만 그렇게 하는 것이 안전한 경우에만 가능합니다. 다음은 파일을 수정할 때마다 local state가 reset되는 몇 가지 이유입니다.
+
+- local state는 class component에 대해 유지되지 않습니다. (오직 함수형 컴포넌트 및 Hook만 상태 유지)
+
+- 수정중인 파일이 React component 외에 다른 exports가 있는 경우.
+
+- HOC 와 같은 고차함수를 내보낼 때, 반환된 컴포넌트가 class 컴포넌트면 reset 됩니다.
+
+- 익명 화살표 함수의 경우.
+
+#### Tips
+
+- 상태를 강제로 reset하고 component를 다시 마운트해야 하는 경우가 있습니다. 예를 들어 마운트 시에만 발생하는 애니메이션을 조정하는 경우 유용할 수 있습니다. 이렇게 하려면 수정 중인 파일의 아무 곳에나 `// @refresh reset`을 추가할 수 있습니다.
+
+#### Fast Refresh and Hooks
+
+가능한 경우 Fast Refresh는 컴포넌트의 상태를 가능한 유지하려고 합니다. 특히, useState 및 useRef는 인수나 Hook 호출의 순서를 변경하지 않는 한 이전 값을 유지합니다.
+
+useEffect, useMemo 및 useCallback과 같은 hooks는 Fast Refresh 동안 항상 업데이트됩니다. Fast Refresh가 발생하는 동안 dependencies는 무시됩니다.
+
+---
+
+### ESLint
+
+11.0.0 버전 이후로, Next.js는 완전한 ESLint 경험을 제공합니다.
+
+```json
+"scripts": {
+  "lint": "next lint"
+}
+```
+
+애플리케이션에 ESLint를 아직 설정하지 않은 경우 설치 및 설정 프로세스를 안내합니다.
+
+```bash
+yarn lint
+
+# You'll see a prompt like this:
+#
+# ? How would you like to configure ESLint?
+#
+# ❯   Base configuration + Core Web Vitals rule-set (recommended)
+#     Base configuration
+#     None
+```
+
+아래의 3가지 옵션이 존재합니다.
+
+- Strict: 보다 엄격한 `Core Web Vitals`와 함께 Next.js의 기본 ESLint 구성을 포함합니다. ESLint를 처음 설정하는 개발자에게 권장되는 구성입니다.
+
+```json
+{
+  "extends": "next/core-web-vitals"
+}
+```
+
+- Base: Next.js의 기본 ESLint config 입니다.
+
+```json
+{
+  "extends": "next"
+}
+```
+
+- Cancel: ESLint config를 포함하지 않습니다. 사용자 정의 ESLint config를 설정할 계획인 경우에만 이 옵션을 선택하세요.
+
+두 구성 옵션 중 하나가 선택되면 Next.js는 자동으로 `eslint` 및 `eslint-config-next`를 애플리케이션의 development dependencies로 설치하고 선택한 구성을 포함하는 프로젝트 루트에 .eslintrc.json 파일을 생성합니다.
+
+이제 오류를 잡기 위해 ESLint를 실행할 때마다 `next lint`를 실행할 수 있습니다. ESLint가 설정되면 build 중에 자동으로 실행됩니다. 오류는 빌드에 실패하지만 경고는 그렇지 않습니다.
+
+#### 다른 tool과 사용
+
+##### Prettier
+
+ESLint에는 기존 Prettier config와 충돌할 수 있는 코드 형식 지정 규칙도 포함되어 있습니다. ESLint와 Prettier가 함께 작동하도록 ESLint 구성에 `eslint-config-prettier`를 포함하는 것이 좋습니다.
+
+```bash
+npm install --save-dev eslint-config-prettier
+```
+
+```json
+// ESLint config
+
+{
+  "extends": ["next", "prettier"]
+}
+```
+
+---
+
+### TypeScript
+
+Next.js는 zero-config와 훌륭한 TypeScript 환경을 제공합니다.
+
+다음과 같이 --ts, --typescript 플래그를 사용하여 create-next-app으로 TypeScript 프로젝트를 만들 수 있습니다.
+
+```bash
+npx create-next-app@latest --ts
+# or
+yarn create next-app --typescript
+# or
+pnpm create next-app --ts
+```
+
+#### Existing projects
+
+기존 프로젝트에서 시작하려면 루트 폴더에 빈 `tsconfig.json` 파일을 만듭니다.
+
+그런 다음 (일반적으로 npm run dev 또는 yarn dev)을 실행하면 Next.js가 설정을 완료하는 데 필요한 패키지 설치를 안내합니다.
+
+```bash
+npm run dev
+
+# You'll see instructions like these:
+#
+# Please install TypeScript, @types/react, and @types/node by running:
+#
+#         yarn add --dev typescript @types/react @types/node
+#
+# ...
+```
+
+❗️ 프로젝트 루트에 `next-env.d.ts`라는 파일이 생성됩니다. 이 파일은 TypeScript 컴파일러가 Next.js types을 선택하도록 합니다. 언제든지 변경될 수 있으므로 제거하거나 편집하지 마십시오. 이 파일은 커밋되어서는 안 되며 버전 제어에서 무시되어야 합니다. (ex .gitignore 파일 내부)
+
+TypeScript strict mode는 기본적으로 꺼져 있습니다. TypeScript에 익숙해지면 tsconfig.json에서 켜는 것이 좋습니다.
+
+#### Static Generation 과 Server-side Rendering type
+
+getStaticProps, getStaticPaths 및 getServerSideProps의 경우 각각 GetStaticProps, GetStaticPaths 및 GetServerSideProps type을 사용할 수 있습니다.
+
+```javascript
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next"
+
+export const getStaticProps: GetStaticProps = async context => {
+  // ...
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // ...
+}
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  // ...
+}
+```
+
+#### \_App
+
+custom App이 있는 경우 내장된 `AppProps`를 사용하고 다음과 같이 파일 이름을 ./pages/\_app.tsx로 변경할 수 있습니다.
+
+```javascript
+import type { AppProps } from "next/app"
+
+export default function MyApp({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />
+}
+```
+
+---
+
+### 환경변수
+
+Next.js에는 환경 변수에 대한 지원이 내장되어 있어 다음을 수행할 수 있습니다.
+
+- `.env.local`을 사용.
+
+- `NEXT_PUBLIC_` 사용.
+
+#### 환경변수 load하기
+
+Next.js에는 `.env.local`에서 `process.env`로 환경 변수를 load하는 기능이 내장되어 있습니다.
+
+```javascript
+// .env.local
+
+DB_HOST = localhost
+DB_USER = myuser
+DB_PASS = mypassword
+```
+
+이렇게 하면 process.env.DB_HOST, process.env.DB_USER 및 process.env.DB_PASS가 Node.js 환경에 자동으로 load되어 Next.js 데이터 fetching methods 및 API routes에서 사용할 수 있습니다.
+
+```javascript
+// pages/index.js
+
+export async function getStaticProps() {
+  const db = await myDB.connect({
+    host: process.env.DB_HOST,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+  })
+  // ...
+}
+```
+
+#### 브라우저에서 활용하기
+
+기본적으로 환경 변수는 `Node.js` 환경에서만 사용할 수 있습니다. 즉, 브라우저에 노출되지 않습니다.
+
+브라우저에 변수를 노출하려면 변수에 `NEXT_PUBLIC_ `접두어를 붙여야 합니다.
+
+```javascript
+// .env.local
+
+NEXT_PUBLIC_ANALYTICS_ID = abcdefghijk
+```
+
+이렇게 하면 `process.env.NEXT_PUBLIC_ANALYTICS_ID`가 Node.js 환경에 자동으로 로드되어 코드의 어디에서나 사용할 수 있습니다. 값은 NEXT*PUBLIC* 접두사로 인해 브라우저로 전송되는 JavaScript에 인라인됩니다. 이 인라인은 빌드 시 발생하므로 프로젝트를 빌드할 때 다양한 NEXT*PUBLIC* 환경을 설정해야 합니다.
+
+```javascript
+// pages/index.js
+import setupAnalyticsService from "../lib/my-analytics-service"
+
+// 'NEXT_PUBLIC_ANALYTICS_ID' can be used here as it's prefixed by 'NEXT_PUBLIC_'.
+// It will be transformed at build time to `setupAnalyticsService('abcdefghijk')`.
+setupAnalyticsService(process.env.NEXT_PUBLIC_ANALYTICS_ID)
+
+function HomePage() {
+  return <h1>Hello World</h1>
+}
+
+export default HomePage
+```
+
+---
+
+## Routing
+
+Next.js는 pages를 컨셉으로한 라우터 시스템을 가지고 있습니다.
+
+pages 디렉토리에 파일이 추가되면 자동으로 router로 사용할 수 있습니다.
+
+- Index routes
+
+  - router는 index라는 이름의 파일을 디렉터리의 루트로 자동 라우팅합니다.
+
+  > pages/index.js → /
+
+  > pages/blog/index.js → /blog
+
+- Nested routes
+
+  - 라우터는 중첩 파일을 지원합니다. 중첩된 폴더 구조를 생성하면 파일이 동일한 방식으로 자동으로 라우팅됩니다.
+
+  > pages/blog/first-post.js → /blog/first-post
+
+- Dynamic route segments
+
+  - Dynamic route를 사용하기 위해 대괄호 구문을 사용할 수 있습니다. 이렇게 하면 매개변수를 일치시킬 수 있습니다.
+
+  > pages/blog/`[slug]`.js → /blog/:slug (/blog/hello-world)
+
+  > pages/post/`[...all]`.js → /post/\* (/post/2020/id/title)
+
+### pages 간 이동
+
+Next.js router를 사용하면 SPA와 유사하게 페이지 간에 client-side route transitions을 수행할 수 있습니다.
+
+이 client-side route transitions을 수행하기 위해 `Link`라는 React component가 제공됩니다.
+
+```javascript
+import Link from "next/link"
+
+function Home() {
+  return (
+    <ul>
+      <li>
+        <Link href="/">
+          <a>Home</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/about">
+          <a>About Us</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/blog/hello-world">
+          <a>Blog Post</a>
+        </Link>
+      </li>
+    </ul>
+  )
+}
+
+export default Home
+```
+
+#### dynamic 경로 이동
+
+- 템플릿 리터럴을 사용할 수 있습니다.
+
+```javascript
+import Link from "next/link"
+
+function Posts({ posts }) {
+  return (
+    <ul>
+      {posts.map(post => (
+        <li key={post.id}>
+          <Link href={`/blog/${encodeURIComponent(post.slug)}`}>
+            <a>{post.title}</a>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export default Posts
+```
+
+- URL Object를 사용할 수 있습니다.
+
+```javascript
+import Link from "next/link"
+
+function Posts({ posts }) {
+  return (
+    <ul>
+      {posts.map(post => (
+        <li key={post.id}>
+          <Link
+            href={{
+              pathname: "/blog/[slug]",
+              query: { slug: post.slug },
+            }}
+          >
+            <a>{post.title}</a>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export default Posts
+```
+
+---
+
+### Dynamic Routes
+
+다음 페이지를 살펴 보세요. pages/post/`[pid]`.js:
+
+```javascript
+import { useRouter } from "next/router"
+
+const Post = () => {
+  const router = useRouter()
+  const { pid } = router.query
+
+  return <p>Post: {pid}</p>
+}
+
+export default Post
+```
+
+post/1, /post/abc 등과 같은 모든 경로는 pages/post/`[pid]`.js와 matched 됩니다. matched되는 경로 매개변수는 page에 query parameter로 전송되고 다른 query parameter와 병합됩니다.
+
+- /post/abc
+
+  > { "pid": "abc" }
+
+- /post/abc?foo=bar
+
+  > { "foo": "bar", "pid": "abc" }
+
+- pages/post/`[pid]`/`[comment]`.js
+
+  > { "pid": "abc", "comment": "a-comment" }
+
+❗️ 그러나 route parameter는 동일한 이름의 query parameter를 overriding 합니다. 예를 들어 /post/abc?pid=123 경로에는 다음 쿼리 개체가 있습니다.
+
+> { "pid": "abc" }
+
+#### Catch all routes
+
+Dynamic routes는 [] 안에 세 개의 점(...)을 추가하여 모든 경로를 catch 하도록 할 수 있습니다.
+
+- pages/post/`[...slug]`.js
+
+  > /post/a
+
+  > /post/a/b
+
+  > /post/a/b/c
+
+matched된 parameter는 query parameter로 page에 전송되며 항상 `배열`입니다.
+
+- /post/a
+
+  > { "slug": `["a"]` }
+
+- /post/a/b
+
+  > { "slug": ["a", "b"] }
+
+#### Optional catch all routes
+
+Catch all route는 parameter를 이중 괄호 안에 포함하여 optional로 만들 수 있습니다.
+
+- pages/post/`[[...slug]]`.js
+
+  > /post
+
+  > /post/a
+
+  > /post/a/b
+
+❗️ catch all과 optional catch all route의 주요 차이점은 optional을 사용하면 매개변수가 없는 경로도 일치한다는 것입니다(위의 예에서 /post).
+
+```javascript
+{ } // GET `/post` (empty object)
+{ "slug": ["a"] } // `GET /post/a` (single-element array)
+{ "slug": ["a", "b"] } // `GET /post/a/b` (multi-element array)
+```
+
+#### 주의
+
+Predefined routes는 dynamic routes 보다 `우선`합니다.
+
+- pages/post/create.js -> /post/create
+
+- pages/post/`[pid]`.js -> /post/1, /post/abc, etc.
+
+  > **But not /post/create**
+
+- pages/post/`[...slug]`.js -> /post/1/2, /post/a/b/c, etc.
+
+  > **But not /post/create, /post/abc**
+
+---
+
+### Imperatively
+
+next/link는 대부분의 라우팅 요구 사항을 처리할 수 있어야 하지만 이것 없이도 클라이언트 측 탐색을 수행할 수 있습니다. next/router에 대한 설명서를 살펴보세요.
+
+다음 예는 useRouter를 사용하여 기본 페이지 탐색을 수행하는 방법을 보여줍니다.
+
+```javascript
+import { useRouter } from "next/router"
+
+export default function ReadMore() {
+  const router = useRouter()
+
+  return (
+    <button onClick={() => router.push("/about")}>
+      Click here to read more
+    </button>
+  )
+}
+```
+
+---
+
+## API Routes
+
+API routes는 Next.js로 API를 빌드하기 위한 solution을 제공합니다.
+
+pages/api 폴더 내의 모든 파일은 /api/\*에 매핑되며 page 대신 `API endpoint`로 처리됩니다. 서버 측 전용 번들이며 클라이언트 측 번들 크기를 늘리지 않습니다.
+
+예를 들어 pages/api/user.js는 상태 코드가 200인 json 응답을 반환합니다.
+
+```javascript
+export default function handler(req, res) {
+  res.status(200).json({ name: "John Doe" })
+}
+```
+
+API route가 작동하려면 함수를 default로 export해야 합니다. 그러면 아래 매개변수가 수신됩니다.
+
+- req
+
+- res
+
+API route에서 다른 HTTP 메소드를 처리하기 위해 다음과 같이 req.method를 사용할 수 있습니다.
+
+```javascript
+export default function handler(req, res) {
+  if (req.method === "POST") {
+    // Process a POST request
+  } else {
+    // Handle any other HTTP method
+  }
+}
+```
+
+---
+
+### Dynamic API Routes
+
+API routes는 dynamic routes를 지원하며 pages에 사용되는 것과 동일한 파일 naming rules를 따릅니다.
+
+예를 들어 API 경로 pages/api/post/`[pid]`.js에는 다음 코드가 있습니다.
+
+```javascript
+export default function handler(req, res) {
+  const { pid } = req.query
+  res.end(`Post: ${pid}`)
+}
+```
+
+/api/post/abc에 대한 요청은 Post: abc 텍스트로 응답합니다.
+
+#### Index routes 와 Dynamic API routes
+
+#### Catch all API routes
+
+API routes는 대괄호 안에 세 개의 점(...)을 추가하여 모든 경로를 포착하도록 확장할 수 있습니다.
+
+- pages/api/post/`[...slug]`.js
+
+  > /api/post/a
+
+  > /api/post/a/b
+
+  > /api/post/a/b/c
+
+matched된 parameter는 query parameter로 page에 전송되며 항상 배열입니다.
+
+- /api/post/a
+
+  > { "slug": `["a"]` }
+
+- /api/post/a/b
+
+  > { "slug": ["a", "b"] }
+
+#### Optional catch all API routes
+
+parameter에 이중 괄호 (`[[...slug]]`) 를 사용할 수 있습니다.
+
+catch all과 optional catch all routes의 주요 차이점은 optional을 사용하면 매개변수가 없는 경로도 일치한다는 것입니다(위 예의 /api/post).
+
+---
+
+### API Routes Request helpers
+
+API routes는 들어오는 request를 분석하는 built-in request helpers를 제공합니다.
+
+- req.cookies: request에서 보낸 cookie가 포함된 object입니다. default로 {}
+
+- req.query: query string을 포함하는 object입니다. default로 {}
+
+- req.body: content-type이 포함된 body를 포함하는 object. body가 전송되지 않은 경우 null.
+
+---
+
+### API Routes Response helpers
+
+Server Response object (보통 res로 불림) 에는 개발자 경험을 개선하고 새 API endpoints 생성 속도를 높이기 위한 Express.js와 유사한 helper moethods가 포함되어 있습니다.
+
+- res.status(code)
+
+- res.json(body): JSON response를 보냅니다. body는 **serializable object** 이여야합니다.
+
+- res.send(body): HTTP responsse를 보냅니다. body는 **string**, **object**, **Buffer** 이여야합니다.
+
+- res.redirect([status, ] path]): 지정된 경로 또는 URL로 리디렉션합니다. status는 유효한 HTTP 상태 코드여야 합니다. 지정하지 않으면 상태는 기본적으로 "307" "임시 리디렉션"으로 설정됩니다.
+
+- res.revalidate(urlPath): getStaticProps를 사용하여 요청 시 페이지를 재검증합니다. urlPath는 문자열이어야 합니다.
+
+#### response의 status code 설정
+
+client에 response를 보낼 때 status code를 설정할 수 있습니다.
+
+다음 예제에서는 응답의 상태 코드를 200(OK)으로 설정하고 Next.js에서 Hello 값이 있는 메시지 속성을 반환합니다!
+
+```javascript
+export default function handler(req, res) {
+  res.status(200).json({ message: "Hello from Next.js!" })
+}
+```
+
+#### JSON response 보내기
+
+client에 response을 보낼 때 JSON 응답을 보낼 수 있습니다. 이것은 `serializable object`여야 합니다.
+
+```javascript
+export default async function handler(req, res) {
+  try {
+    const result = await someAsyncOperation()
+    res.status(200).json({ result })
+  } catch (err) {
+    res.status(500).json({ error: "failed to load data" })
+  }
+}
+```
+
+#### HTTP response 보내기
+
+HTTP 응답을 보내는 것은 JSON 응답을 보낼 때와 같은 방식으로 작동합니다. 유일한 차이점은 응답 body가 string, object 또는 Buffer일 수 있다는 것입니다.
+
+```javascript
+export default async function handler(req, res) {
+  try {
+    const result = await someAsyncOperation()
+    res.status(200).send({ result })
+  } catch (err) {
+    res.status(500).send({ error: "failed to fetch data" })
+  }
+}
+```
+
+#### 다른 경로나 URL로 Redirects 하기
+
+Form을 예로 들면 클라이언트가 form을 제출한 후 지정된 경로나 URL로 리디렉션할 수 있습니다.
+
+```javascript
+export default async function handler(req, res) {
+  const { name, message } = req.body
+  try {
+    await handleFormInputAsync({ name, message })
+    res.redirect(307, "/")
+  } catch (err) {
+    res.status(500).send({ error: "failed to fetch data" })
+  }
+}
+```
+
+##### Typescript types 추가하기
+
+```javascript
+import type { NextApiRequest, NextApiResponse } from "next"
+
+type ResponseData = {
+  message: string,
+}
+
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ResponseData>
+) {
+  res.status(200).json({ message: "Hello from Next.js!" })
+}
+```
+
+---
+
+## API Reference
+
+### next/router
+
+#### useRouter
+
+만약 함수형 컴포넌트에 있는 router object에 access하려면 `userRouter` hook을 사용할 수 있습니다.
+
+```javascript
+import { useRouter } from "next/router"
+
+function ActiveLink({ children, href }) {
+  const router = useRouter()
+  const style = {
+    marginRight: 10,
+    color: router.asPath === href ? "red" : "black",
+  }
+
+  const handleClick = e => {
+    e.preventDefault()
+    router.push(href)
+  }
+
+  return (
+    <a href={href} onClick={handleClick} style={style}>
+      {children}
+    </a>
+  )
+}
+
+export default ActiveLink
+```
+
+#### router object
+
+- pathname: /pages 뒤에 오는 현재 route file의 path입니다. 따라서 basePath, locale 및 trailing slash는 포함되지 않습니다.
+
+- query: dynamic route parameter를 포함한 query string입니다. page에서 Server-side Rendering을 사용하지 않는 경우 prerendering 중에 빈 object가 됩니다. 기본값은 {}
+
+- asPath: search parameter를 포함하고 trailingSlash config을 따릅니다. basePath 및 locale은 포함되지 않습니다.
+
+- isFallback: 현재 페이지가 fallback mode인지 여부입니다.
+
+- basePath: 활성화된 basePath
+
+- locale: 활성화된 locale
+
+- locales: 지원하는 모든 locale
+
+- defaultLocale: 현재 default locale
+
+##### router.push
+
+client-side transition을 처리합니다. 이 방법은 next/lint가 충분하지 않은 경우에 유용합니다.
+
+```javascript
+router.push(url, as, options)
+```
+
+- url
+
+- as: browser URL 표시줄에 대체 표시됩니다.
+
+- options
+
+  - scroll: navigation 후 페이지 상단으로 스크롤하는 것을 제어합니다. 기본값은 true
+
+  - shallow: getStaticProps, getServerSideProps 또는 getInitialProps를 다시 실행하지 않고 현재 페이지의 경로를 업데이트합니다. 기본값은 false
+
+  - locale: 새 페이지의 로케일을 나타냅니다.
+
+---
+
+### next/link
+
+route 간의 Client-side 전환은 Link component를 통해 활성화할 수 있습니다.
+
+`Link`는 아래와 같은 props를 갖습니다.
+
+- href: navigate할 path or URL입니다. 반드시 필요한 props입니다.
+
+- as: browser URL 표시줄에 대체 표시됩니다.
+
+- legacyBehavior: 자식이 `<a>`여야 하도록 동작을 변경합니다. 기본값은 false입니다.
+
+- passHref: Link가 href 속성을 자식에게 보내도록 합니다. 기본값은 false
+
+- prefetch: 백그라운드에서 page를 prefetch 합니다. 기본값은 true입니다. 뷰포트에 있는 모든 `<Link />`는 preloaded 됩니다. prefetch={false}를 전달하여 prefetch를 비활성화할 수 있습니다. prefetch가 false로 설정되어 있으면 hover 시 prefetch가 계속 발생합니다. SSG를 사용하는 페이지는 더 빠른 페이지 전환을 위해 데이터와 함께 JSON 파일을 미리 로드합니다. prefetch는 프로덕션에서만 활성화됩니다.
+
+- replace: stack에 새 URL을 추가하는 대신 현재 history state를 바꿉니다. 기본값은 false
+
+- scroll: navigation 후 페이지 상단으로 스크롤하는 것을 제어합니다. 기본값은 true
+
+- shallow: getStaticProps, getServerSideProps 또는 getInitialProps를 다시 실행하지 않고 현재 페이지의 경로를 업데이트합니다. 기본값은 false
+
+- locale
+
+#### child가 a태그를 감싼 custom component인 경우
+
+Link의 child가 `<a>` 태그를 래핑하는 custom component인 경우 Link에 passHref를 추가해야 합니다. 이는 styled-components와 같은 라이브러리를 사용하는 경우 필요합니다. 이것이 없으면 `<a>` 태그에 href 속성이 없어 사이트의 접근성을 해치고 SEO에 영향을 줄 수 있습니다. ESLint를 사용하는 경우 passHref의 올바른 사용을 보장하는 내장 규칙 next/link-passhref가 있습니다.
+
+```javascript
+import Link from "next/link"
+import styled from "styled-components"
+
+// This creates a custom component that wraps an <a> tag
+const RedLink = styled.a`
+  color: red;
+`
+
+function NavLink({ href, name }) {
+  return (
+    <Link href={href} passHref legacyBehavior>
+      <RedLink>{name}</RedLink>
+    </Link>
+  )
+}
+
+export default NavLink
+```
+
+- 만약 emotion의 JSX pragma 기능(@jsx jsx)을 사용하는 경우, `<a>` 태그를 직접 사용하더라도 반드시 passHref를 사용해야 합니다.
+
+- component는 navigation을 올바르게 트리거하기 위해 onClick 속성을 지원해야 합니다.
+
+#### child가 함수형 컴포넌트인 경우
+
+Link의 child가 함수형 컴포넌트인 경우 passHref 및 legacyBehavior를 사용하는 것 외에도 React.forwardRef에서 component를 래핑해야 합니다.
+
+```javascript
+import Link from "next/link"
+
+// `onClick`, `href`, and `ref` need to be passed to the DOM element
+// for proper handling
+const MyButton = React.forwardRef(({ onClick, href }, ref) => {
+  return (
+    <a href={href} onClick={onClick} ref={ref}>
+      Click Me
+    </a>
+  )
+})
+
+function Home() {
+  return (
+    <Link href="/about" passHref legacyBehavior>
+      <MyButton />
+    </Link>
+  )
+}
+
+export default Home
+```
+
+#### a태그 없이 Link 태그 사용하기
+
+Link는 URL object를 수신할 수도 있으며 자동으로 형식을 지정하여 URL 문자열을 생성합니다.
+
+```javascript
+import Link from "next/link"
+
+function Home() {
+  return (
+    <ul>
+      <li>
+        <Link
+          href={{
+            pathname: "/about",
+            query: { name: "test" },
+          }}
+        >
+          About us
+        </Link>
+      </li>
+      <li>
+        <Link
+          href={{
+            pathname: "/blog/[slug]",
+            query: { slug: "my-post" },
+          }}
+        >
+          Blog Post
+        </Link>
+      </li>
+    </ul>
+  )
+}
+
+export default Home
+```
+
+---
+
+### next/image
