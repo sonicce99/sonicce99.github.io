@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[기억보단 기록을, 기록보단 공유를.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 01 Nov 2022 02:39:38 GMT</lastBuildDate><item><title><![CDATA[Next.js 공식문서 뿌시기🗿 (till 12 version)]]></title><description><![CDATA[Get Started Next.js 공식문서에 오신것을 환영합니다! 만약 여러분이 Next.js에 처음이라면, learn-course 에서 시작하는 것을 추천합니다. 시스템 요구사항 12.22.0 / 이후 Node.js MacOS, Windows…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/next/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/next/</guid><pubDate>Tue, 01 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Get Started&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[기억보단 기록을, 기록보단 공유를.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 01 Nov 2022 02:47:07 GMT</lastBuildDate><item><title><![CDATA[Next.js 공식문서 뿌시기🗿 (till 12 version)]]></title><description><![CDATA[Get Started Next.js 공식문서에 오신것을 환영합니다! 만약 여러분이 Next.js에 처음이라면, learn-course 에서 시작하는 것을 추천합니다. 시스템 요구사항 12.22.0 / 이후 Node.js MacOS, Windows…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/next/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/next/</guid><pubDate>Tue, 01 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Get Started&lt;/h2&gt;
 &lt;p&gt;Next.js 공식문서에 오신것을 환영합니다!&lt;/p&gt;
 &lt;p&gt;만약 여러분이 Next.js에 처음이라면, &lt;a href=&quot;https://nextjs.org/learn/basics/create-nextjs-app&quot;&gt;learn-course&lt;/a&gt; 에서 시작하는 것을 추천합니다.&lt;/p&gt;
 &lt;h4&gt;시스템 요구사항&lt;/h4&gt;
@@ -179,11 +179,11 @@
 &lt;h3&gt;Data Fetching&lt;/h3&gt;
 &lt;h4&gt;getServerSideProps&lt;/h4&gt;
 &lt;p&gt;페이지에서 getServerSideProps라는 함수를 내보내면 Next.js는 getServerSideProps에서 반환된 데이터를 사용하여 해당 페이지를 Pre-Rendering 합니다.&lt;/p&gt;
-&lt;p&gt;❗️ SSG, SSR에 관계없이 모든 props는 페이지 구성 요소로 전달되고 초기 HTML의 클라이언트 측에서 볼 수 있습니다. 이것은 페이지가 적절하게 hydrated 되도록 하기 위한 것입니다. props에서 클라이언트에서 사용할 수 없어야 하는 민감한 정보를 전달하지 않도록 합니다.&lt;/p&gt;
+&lt;p&gt;❗️ SSG, SSR에 관계없이 모든 props는 Component로 전달되고 초기 HTML의 클라이언트 측에서 볼 수 있습니다. 이것은 페이지가 적절하게 hydrated 되도록 하기 위한 것입니다. props에서 클라이언트에서 사용할 수 없어야 하는 민감한 정보를 전달하지 않도록 합니다.&lt;/p&gt;
 &lt;h5&gt;언제 getServerSideProps가 동작하나요?&lt;/h5&gt;
 &lt;p&gt;getServerSideProps는 서버 측에서만 실행되며 브라우저에서는 실행되지 않습니다.&lt;/p&gt;
 &lt;p&gt;getServerSideProps는 page에서만 내보낼 수 있습니다. non-page files 에서는 내보낼 수 없습니다.&lt;/p&gt;
-&lt;p&gt;getServerSideProps를 독립적인 함수로 내보내야 합니다. getServerSideProps를 페이지 구성 요소의 property로 추가하면 동작하지 않습니다.&lt;/p&gt;
+&lt;p&gt;getServerSideProps를 독립적인 함수로 내보내야 합니다. getServerSideProps를 Component의 property로 추가하면 동작하지 않습니다.&lt;/p&gt;
 &lt;h5&gt;언제 getServerSideProps를 사용해야 하나요?&lt;/h5&gt;
 &lt;p&gt;매번 요청 할 때마다 데이터를 fetch 해야 할 경우에 getServerSideProps를 사용해야 합니다.&lt;/p&gt;
 &lt;p&gt;getServerSideProps를 사용하는 page는 매번 요청시에 서버측에서 rendering 되고 &lt;code class=&quot;language-text&quot;&gt;cache-control headers&lt;/code&gt;가 존재하는 경우에만 cached 됩니다.&lt;/p&gt;
@@ -223,7 +223,7 @@
     &lt;span class=&quot;token literal-property property&quot;&gt;props&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// will be passed to the page component as props&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;모든 props는 페이지 구성 요소로 전달되고 초기 HTML의 클라이언트 측에서 볼 수 있습니다. 이것은 페이지가 적절하게 hydrated 되기 위한 것입니다.
+&lt;p&gt;모든 props는 Component로 전달되고 초기 HTML의 클라이언트 측에서 볼 수 있습니다. 이것은 페이지가 적절하게 hydrated 되기 위한 것입니다.
 ❗️ props에서 클라이언트가 사용할 수 없어야 하는 민감한 정보를 전달하지 않도록 합니다.&lt;/p&gt;
 &lt;h5&gt;언제 getStaticProps가 동작하나요?&lt;/h5&gt;
 &lt;p&gt;getStaticProps는 항상 서버에서 실행되고 클라이언트에서는 실행되지 않습니다.&lt;/p&gt;
@@ -267,7 +267,7 @@
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h5&gt;HTML와 JSON을 모두 정적 생성 합니다.&lt;/h5&gt;
 &lt;p&gt;getStaticProps가 있는 페이지가 빌드 시 Pre-Rendering 되면 HTML 파일 외에도 Next.js가 getStaticProps 실행 결과를 포함하는 JSON 파일을 생성합니다.&lt;/p&gt;
-&lt;p&gt;이 JSON 파일은 next/link 또는 next/router를 통한 클라이언트 측 라우팅에 사용됩니다. getStaticProps를 사용하여 Pre-Rendering 된 페이지로 이동하면 Next.js는 이 JSON 파일(빌드 시 미리 계산됨)을 가져와 페이지 구성 요소의 소품으로 사용합니다. 즉, 내보낸 JSON만 사용되므로 클라이언트 측 페이지 전환이 getStaticProps를 호출하지 않습니다.&lt;/p&gt;
+&lt;p&gt;이 JSON 파일은 next/link 또는 next/router를 통한 클라이언트 측 라우팅에 사용됩니다. getStaticProps를 사용하여 Pre-Rendering 된 페이지로 이동하면 Next.js는 이 JSON 파일(빌드 시 미리 계산됨)을 가져와 Component의 props으로 사용합니다. 즉, 내보낸 JSON만 사용되므로 클라이언트 측 페이지 전환이 getStaticProps를 호출하지 않습니다.&lt;/p&gt;
 &lt;h5&gt;어디서 getStaticProps를 사용할 수 있나요?&lt;/h5&gt;
 &lt;p&gt;getStaticProps는 page에서만 내보낼 수 있습니다. 페이지가 아닌 파일, _app, _document 또는 _error에서는 내보낼 수 없습니다.&lt;/p&gt;
 &lt;p&gt;❗️ 개발모드에서 getStaticProps는 모든 요청 마다 호출 됩니다.&lt;/p&gt;
@@ -390,7 +390,7 @@
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;MyApp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Component&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; pageProps &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Component &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;pageProps&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이러한 스타일은 애플리케이션의 모든 페이지와 구성 요소에 적용됩니다. 스타일시트의 글로벌 특성으로 인해 충돌을 피하기 위해 pages/_app.js 내에서만 가져올 수 있습니다.&lt;/p&gt;
+&lt;p&gt;이러한 스타일은 애플리케이션의 모든 Component에 적용됩니다. 스타일시트의 글로벌 특성으로 인해 충돌을 피하기 위해 pages/_app.js 내에서만 가져올 수 있습니다.&lt;/p&gt;
 &lt;p&gt;❗️ production 모드에서, 모든 CSS 파일은 자동으로 하나의 단일 .css 파일로 작성됩니다.&lt;/p&gt;
 &lt;h5&gt;node_modules에서 스타일 import 하기&lt;/h5&gt;
 &lt;p&gt;Next.js 9.5.4부터 node_modules에서 CSS 파일을 가져올 수 있습니다.&lt;/p&gt;
@@ -545,7 +545,7 @@ Page&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class
 &lt;/ul&gt;
 &lt;h4&gt;Image 컴포넌트 사용하기&lt;/h4&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Image &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;next/image&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;or 기본 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;img&gt;&lt;/code&gt; 요소에 훨씬 더 가까운 구성 요소가 필요한 경우 &lt;code class=&quot;language-text&quot;&gt;next/future/image&lt;/code&gt;를 가져올 수 있습니다.&lt;/p&gt;
+&lt;p&gt;or 기본 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;img&gt;&lt;/code&gt; 요소에 훨씬 더 가까운 Component가 필요한 경우 &lt;code class=&quot;language-text&quot;&gt;next/future/image&lt;/code&gt;를 가져올 수 있습니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Image &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;next/future/image&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h5&gt;Local Images&lt;/h5&gt;
 &lt;p&gt;로컬 이미지를 사용하려면 .jpg, .png 또는 .webp 파일을 가져오세요.&lt;/p&gt;
