@@ -228,7 +228,7 @@ export default Page
 
 페이지에서 getServerSideProps라는 함수를 내보내면 Next.js는 getServerSideProps에서 반환된 데이터를 사용하여 해당 페이지를 Pre-Rendering 합니다.
 
-❗️ SSG, SSR에 관계없이 모든 props는 페이지 구성 요소로 전달되고 초기 HTML의 클라이언트 측에서 볼 수 있습니다. 이것은 페이지가 적절하게 hydrated 되도록 하기 위한 것입니다. props에서 클라이언트에서 사용할 수 없어야 하는 민감한 정보를 전달하지 않도록 합니다.
+❗️ SSG, SSR에 관계없이 모든 props는 Component로 전달되고 초기 HTML의 클라이언트 측에서 볼 수 있습니다. 이것은 페이지가 적절하게 hydrated 되도록 하기 위한 것입니다. props에서 클라이언트에서 사용할 수 없어야 하는 민감한 정보를 전달하지 않도록 합니다.
 
 ##### 언제 getServerSideProps가 동작하나요?
 
@@ -236,7 +236,7 @@ getServerSideProps는 서버 측에서만 실행되며 브라우저에서는 실
 
 getServerSideProps는 page에서만 내보낼 수 있습니다. non-page files 에서는 내보낼 수 없습니다.
 
-getServerSideProps를 독립적인 함수로 내보내야 합니다. getServerSideProps를 페이지 구성 요소의 property로 추가하면 동작하지 않습니다.
+getServerSideProps를 독립적인 함수로 내보내야 합니다. getServerSideProps를 Component의 property로 추가하면 동작하지 않습니다.
 
 ##### 언제 getServerSideProps를 사용해야 하나요?
 
@@ -291,7 +291,7 @@ export async function getStaticProps(context) {
 }
 ```
 
-모든 props는 페이지 구성 요소로 전달되고 초기 HTML의 클라이언트 측에서 볼 수 있습니다. 이것은 페이지가 적절하게 hydrated 되기 위한 것입니다.
+모든 props는 Component로 전달되고 초기 HTML의 클라이언트 측에서 볼 수 있습니다. 이것은 페이지가 적절하게 hydrated 되기 위한 것입니다.
 ❗️ props에서 클라이언트가 사용할 수 없어야 하는 민감한 정보를 전달하지 않도록 합니다.
 
 ##### 언제 getStaticProps가 동작하나요?
@@ -340,7 +340,7 @@ export async function getStaticProps() {
 
 getStaticProps가 있는 페이지가 빌드 시 Pre-Rendering 되면 HTML 파일 외에도 Next.js가 getStaticProps 실행 결과를 포함하는 JSON 파일을 생성합니다.
 
-이 JSON 파일은 next/link 또는 next/router를 통한 클라이언트 측 라우팅에 사용됩니다. getStaticProps를 사용하여 Pre-Rendering 된 페이지로 이동하면 Next.js는 이 JSON 파일(빌드 시 미리 계산됨)을 가져와 페이지 구성 요소의 소품으로 사용합니다. 즉, 내보낸 JSON만 사용되므로 클라이언트 측 페이지 전환이 getStaticProps를 호출하지 않습니다.
+이 JSON 파일은 next/link 또는 next/router를 통한 클라이언트 측 라우팅에 사용됩니다. getStaticProps를 사용하여 Pre-Rendering 된 페이지로 이동하면 Next.js는 이 JSON 파일(빌드 시 미리 계산됨)을 가져와 Component의 props으로 사용합니다. 즉, 내보낸 JSON만 사용되므로 클라이언트 측 페이지 전환이 getStaticProps를 호출하지 않습니다.
 
 ##### 어디서 getStaticProps를 사용할 수 있나요?
 
@@ -486,7 +486,7 @@ export default function MyApp({ Component, pageProps }) {
 }
 ```
 
-이러한 스타일은 애플리케이션의 모든 페이지와 구성 요소에 적용됩니다. 스타일시트의 글로벌 특성으로 인해 충돌을 피하기 위해 pages/\_app.js 내에서만 가져올 수 있습니다.
+이러한 스타일은 애플리케이션의 모든 Component에 적용됩니다. 스타일시트의 글로벌 특성으로 인해 충돌을 피하기 위해 pages/\_app.js 내에서만 가져올 수 있습니다.
 
 ❗️ production 모드에서, 모든 CSS 파일은 자동으로 하나의 단일 .css 파일로 작성됩니다.
 
@@ -697,7 +697,7 @@ Image component에 내장된 몇 가지 최적화는 다음과 같습니다.
 import Image from "next/image"
 ```
 
-or 기본 `<img>` 요소에 훨씬 더 가까운 구성 요소가 필요한 경우 `next/future/image`를 가져올 수 있습니다.
+or 기본 `<img>` 요소에 훨씬 더 가까운 Component가 필요한 경우 `next/future/image`를 가져올 수 있습니다.
 
 ```javascript
 import Image from "next/future/image"
