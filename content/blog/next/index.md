@@ -1,6 +1,6 @@
 ---
-title: "Next.js 공식문서 뿌시기🗿"
-date: "2022-10-20"
+title: "Next.js 공식문서 뿌시기🗿 (till 12 version)"
+date: "2022-11-01"
 description: "Next.js 공식문서를 읽고 내용을 정리합니다."
 ---
 
@@ -1756,3 +1756,577 @@ export default Home
 ---
 
 ### next/image
+
+#### 필수 props
+
+image component에는 다음 property가 필요합니다.
+
+##### src
+
+1. static imported image file
+
+2. path string 입니다. absolute external URL 이거나 loader prop에 따라 internal path 일 수 있습니다.
+
+❗️ 외부 URL을 사용하는 경우 next.config.js의 [remotePatterns](#remote-patterns)에 추가해야 합니다.
+
+##### width / height
+
+statically imported Image 또는 fill property 속성이 있는 이미지를 제외하고 필수입니다.
+
+##### alt
+
+이미지가 순전히 장식적이거나 사용자를 위한 것이 아닌 경우 alt 속성은 빈 문자열(alt="")이어야 합니다.
+
+#### optional props
+
+##### loader
+
+이미지 URL을 resolve하는 데 사용되는 custom function 입니다.
+
+loader는 다음 parameter가 주어지면 이미지의 URL 문자열을 반환하는 함수입니다.
+
+- src
+
+- width
+
+- quality
+
+```javascript
+import Image from "next/image"
+
+const myLoader = ({ src, width, quality }) => {
+  return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+}
+
+const MyImage = props => {
+  return (
+    <Image
+      loader={myLoader}
+      src="me.png"
+      alt="Picture of the author"
+      width={500}
+      height={500}
+    />
+  )
+}
+```
+
+또는 next.config.js의 loaderFile config을 사용하여 prop을 전달하지 않고 애플리케이션에서 next/image의 모든 인스턴스를 설정할 수 있습니다.
+
+```javascript
+module.exports = {
+  images: {
+    loader: "custom",
+    loaderFile: "./my/image/loader.js",
+  },
+}
+```
+
+##### fill
+
+width와 height를 설정하는 대신 이미지가 부모 요소를 채우도록 하는 boolean입니다.
+
+부모 요소는 position: "relative", position: "fixed" 또는 position: "absolute" 스타일을 지정해야 합니다.
+
+기본적으로 img 요소는 자동으로 position: "absolute" 로 지정됩니다.
+
+기본적으로는 container에 맞게 이미지를 늘립니다. container에 맞고 가로세로 비율을 유지하기 위해 object-fit: "contain"을 설정하는 것을 선호할 수 있습니다.
+
+또는 object-fit: "cover"를 사용하면 이미지가 전체 컨테이너를 채우고 가로 세로 비율을 유지하기 위해 잘립니다. 이것이 올바르게 보이려면 overflow: "hidden" 스타일이 상위 요소에 할당되어야 합니다.
+
+- [object-fit CSS 예제 보러가기](https://developer.mozilla.org/ko/docs/Web/CSS/object-fit)
+
+##### size
+
+size 값은 fill을 사용하거나 반응형 size를 갖도록 스타일이 지정된 이미지의 성능에 큰 영향을 미칩니다.
+
+size 속성은 이미지 성능과 관련된 두 가지 중요한 목적을 수행합니다.
+
+- 브라우저에게 미리 알려준다.
+
+> size 값은 next/image로부터 다운로드할 이미지의 크기를 결정해 브라우저에게 알려주는데 사용됩니다. 브라우저는 이미지를 선택할 때 페이지의 이미지 크기를 아직 알지 못하기 때문에 뷰포트보다 크거나 같은 크기의 이미지를 선택합니다. size 속성을 사용하면 이미지가 실제로 전체 화면보다 작을 것임을 브라우저에 알릴 수 있습니다. fill 속성을 사용하여 이미지에 크기 값을 지정하지 않으면 기본값인 100vw(전체 화면 너비)가 사용됩니다.
+
+- 이미지 최적화에 도움
+
+> size 속성은 next/image가 이미지 세트를 자동으로 생성하는 방법을 구성합니다. 크기 값이 없으면 고정 size 이미지에 적합한 작은 소스 세트가 생성됩니다. 크기가 정의되면 반응형 이미지에 적합한 대용량 소스 세트가 생성됩니다. size 속성이 50vw와 같은 크기를 포함하는 경우 소스 세트가 너무 작아서 필요하지 않은 값을 포함하지 않도록 잘립니다.
+
+예를 들어, 스타일 지정으로 인해 모바일 장치에서는 이미지가 전체 너비로 표시되고 태블릿에서는 2열 레이아웃으로, 데스크톱 디스플레이에서는 3열 레이아웃으로 표시되는 경우 다음과 같은 크기 속성을 포함해야 합니다.
+
+```javascript
+import Image from "next/image"
+
+const Example = () => (
+  <div className="grid-element">
+    <Image
+      src="/example.png"
+      fill
+      sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+    />
+  </div>
+)
+```
+
+##### quality
+
+최적화된 이미지의 품질로 1에서 100 사이의 정수입니다. 여기서 100은 최상의 품질이므로 가장 큰 파일 크기입니다. 기본값은 75입니다.
+
+##### priority
+
+true인 경우 이미지가 높은 우선 순위와 preload로 간주됩니다. lazy loading은 priority를 사용하는 이미지에 대해 자동으로 비활성화됩니다.
+
+LCP(Large Contentful Paint) 요소로 감지된 모든 이미지에 priority 속성을 사용해야 합니다. 다른 이미지는 다른 뷰포트 크기에 대한 LCP 요소일 수 있으므로 여러 우선순위 이미지를 갖는 것이 적절할 수 있습니다.
+
+scroll 없이 볼 수 있는 부분에 이미지가 표시되는 경우에만 사용해야 합니다. 기본값은 `false`입니다.
+
+##### placeholder
+
+이미지가 load되는 동안 사용됩니다. 가능한 값은 blur or empty 입니다. 기본값은 empty 입니다.
+
+blur 처리하면 blurDataURL 속성이 placeholder로 사용됩니다. src가 static imported 이고 가져온 이미지가 .jpg, .png, .webp 또는 .avif이면 blurDataURL이 자동으로 채워집니다.
+
+동적 이미지의 경우 blurDataURL 속성을 제공해야 합니다.
+
+비어 있으면 이미지가 로드되는 동안 placeholder가 없고 빈 공간만 있습니다.
+
+#### Advanced props
+
+경우에 따라 고급 사용법이 필요할 수 있습니다.
+
+##### onLoadingComplete
+
+이미지가 완전히 load되고 placeholder가 제거되면 호출되는 콜백 함수입니다.
+
+##### onLoad
+
+이미지가 로드될 때 호출되는 콜백 함수입니다.
+
+##### onError
+
+이미지 로드에 실패하면 호출되는 콜백 함수입니다.
+
+##### loading
+
+이미지의 load 동작입니다. 기본값은 lazy입니다.
+
+lazy인 경우 뷰포트에서 계산된 거리에 도달할 때까지 이미지 load를 defer 합니다.
+
+eager인 경우 즉시 이미지를 로드합니다.
+
+> eager로 로드하도록 이미지를 전환하면 일반적으로 성능이 저하됩니다. 거의 모든 사용 사례에 priority를 대신 사용하는 것이 좋습니다.
+
+##### blurDataURL
+
+src 이미지가 성공적으로 load되기 전에 placeholder 이미지로 사용할 데이터 URL입니다. placeholder="blur"와 결합된 경우에만 적용됩니다.
+
+base64로 인코딩된 이미지여야 합니다. 확대되어 흐려지므로 아주 작은(10px 이하) 이미지를 권장합니다. 더 큰 이미지를 자리 표시자로 포함하면 애플리케이션 성능이 저하될 수 있습니다.
+
+#### Configuration Options
+
+##### Remote Patterns
+
+악의적인 user로부터 애플리케이션을 보호하기 위해 외부 이미지를 사용하기 위한 config가 필요합니다. 이렇게 하면 계정의 외부 이미지만 Next.js Image Optimization API에서 제공될 수 있습니다. 이러한 외부 이미지는 아래와 같이 `next.config.js` 파일의 remotePatterns 속성으로 구성할 수 있습니다.
+
+```javascript
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "example.com",
+        port: "",
+        pathname: "/account123/**",
+      },
+    ],
+  },
+}
+```
+
+참고: 위의 예에서는 next/image의 src 속성이 https://example.com/account123/으로 시작해야 합니다. 다른 프로토콜, 호스트 이름, 포트 또는 일치하지 않는 경로는 400 Bad Request로 응답합니다.
+
+```javascript
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.example.com",
+      },
+    ],
+  },
+}
+```
+
+Wildcard patterns은 경로 이름과 호스트 이름 모두에 사용할 수 있으며 다음 구문을 가집니다.
+
+- \*: single path 세그먼트 또는 subdomain과 일치
+
+- \*\*: end or 시작 부분의 subdomain의 어떠한 숫자와도 일치
+
+\*\* 구문은 패턴 중간에 작동하지 않습니다.
+
+##### Domains
+
+remotePatterns와 유사하게 domain config를 사용하여 외부 이미지에 대해 허용된 호스트 이름 목록을 제공할 수 있습니다.
+
+그러나 domain config은 Wildcard patterns을 지원하지 않으며 프로토콜, 포트 또는 경로 이름을 제한할 수 없습니다.
+
+다음은 next.config.js 파일에 있는 도메인 속성의 예입니다.
+
+```javascript
+module.exports = {
+  images: {
+    domains: ["assets.acme.com"],
+  },
+}
+```
+
+---
+
+### Data Fetching
+
+#### getInitialProps
+
+> ❗️ next v9 이상에서는 getInitialProps 대신 getStaticProps, getStaticPaths, getServerSideProps을 사용하도록 가이드 합니다.
+
+getInitialProps는 page에서 Server-side rendering을 가능하게 하고 초기 데이터 채우기를 수행할 수 있도록 합니다. 이는 서버에서 이미 채워진 데이터로 페이지를 보내는 것을 의미합니다. 이것은 SEO에 특히 유용합니다.
+
+getInitialProps는 Automatic Static Optimization를 비활성화합니다.
+
+getInitialProps는 static method로 모든 페이지에 추가할 수 있는 비동기 함수입니다.
+
+```javascript
+function Page({ stars }) {
+  return <div>Next stars: {stars}</div>
+}
+
+Page.getInitialProps = async ctx => {
+  const res = await fetch("https://api.github.com/repos/vercel/next.js")
+  const json = await res.json()
+  return { stars: json.stargazers_count }
+}
+
+export default Page
+```
+
+getInitialProps는 일부 데이터를 비동기적으로 가져온 다음 props로 전달합니다.
+
+getInitialProps에서 반환된 데이터는 JSON.stringify가 하는 것과 비슷하게 서버 렌더링 시 serialized 됩니다. getInitialProps에서 반환된 객체가 Date, Map 또는 Set을 사용하지 않는 일반 객체인지 확인하세요.
+
+초기 페이지 load의 경우 getInitialProps는 서버에서만 실행됩니다.
+
+하지만 next/link component를 통하거나 next/router를 사용하여 다른 경로로 이동할 때는 클라이언트에서 실행됩니다.
+
+##### Context Object
+
+getInitialProps는 context라는 single argument를 받으며 다음 properties을 가진 객체입니다.
+
+- pathname: 현재 경로. /pages에 있는 페이지의 경로입니다.
+
+- query: URL의 쿼리 문자열
+
+- asPath: 브라우저에 표시되는 실제 경로(쿼리 포함)의 문자열
+
+- req: HTTP request object (server only)
+
+- res: HTTP request object (server only)
+
+- err: 렌더링 중 오류가 발생한 경우 오류 개체
+
+##### TypeScript
+
+```javascript
+import { NextPage } from "next"
+
+interface Props {
+  userAgent?: string;
+}
+
+const Page: NextPage<Props> = ({ userAgent }) => (
+  <main>Your user agent: {userAgent}</main>
+)
+
+Page.getInitialProps = async ({ req }) => {
+  const userAgent = req ? req.headers["user-agent"] : navigator.userAgent
+  return { userAgent }
+}
+
+export default Page
+```
+
+---
+
+#### getServerSideProps
+
+page에서 getServerSideProps라는 함수를 내보내면 Next.js는 반환된 데이터를 사용하여 each request 마 이 페이지를 pre-rendering 합니다. 자주 데이터가 변경된다거나 가장 최신 데이터를 표시하도록 페이지를 업데이트하려는 경우에 유용합니다.
+
+```javascript
+export async function getServerSideProps(context) {
+  return {
+    props: {}, // will be passed to the page component as props
+  }
+}
+```
+
+getServerSideProps는 최상위 level에서 모듈을 가져올 수 있습니다. 사용된 데이터는 client에서 번들로 제공되지 않습니다. 즉, DB에서 데이터 fetch를 포함하여 getServerSideProps에서 직접 서버 측 코드를 작성할 수 있습니다.
+
+##### Context parameter
+
+- params: page에서 dynamic route를 사용하는 경우 params에 route parameter가 포함됩니다. 페이지 이름이 `[id]`.js이면 params는 { id: ... }처럼 보일 것입니다.
+
+- req
+
+- res: HTTP 응답 개체.
+
+- query: 쿼리 문자열을 나타내는 개체입니다.
+
+- preview: 페이지가 preview mode라면 true이고 그렇지 않으면 false입니다.
+
+- previewData
+
+- resolvedUrl
+
+- locale
+
+- locales
+
+- defaultLocale
+
+##### getServerSideProps return values
+
+- props
+
+props 개체는 page component에서 각 값을 받는 key-value 쌍입니다. 전달된 모든 props가 JSON.stringify로 직렬화될 수 있도록 직렬화 가능한 객체여야 합니다.
+
+```javascript
+export async function getServerSideProps(context) {
+  return {
+    props: { message: `Next.js is awesome` }, // will be passed to the page component as props
+  }
+}
+```
+
+- notFound
+
+notFound를 사용하면 페이지가 404 상태 및 404 페이지를 반환할 수 있습니다. 이전에 성공적으로 생성된 페이지가 있더라도 페이지가 404를 반환합니다.
+
+```javascript
+export async function getServerSideProps(context) {
+  const res = await fetch(`https://.../data`)
+  const data = await res.json()
+
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: { data }, // will be passed to the page component as props
+  }
+}
+```
+
+- redirect
+
+redirect을 사용하면 내부 및 외부 리소스로 redirect 할 수 있습니다.
+
+> { destination: string, permanent: boolean }
+
+```javascript
+export async function getServerSideProps(context) {
+  const res = await fetch(`https://.../data`)
+  const data = await res.json()
+
+  if (!data) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {}, // will be passed to the page component as props
+  }
+}
+```
+
+##### TypeScript
+
+```javascript
+import { GetServerSideProps } from "next"
+
+type Data = { ... }
+
+export const getServerSideProps: GetServerSideProps<{
+  data: Data,
+}> = async context => {
+  const res = await fetch("https://.../data")
+  const data: Data = await res.json()
+
+  return {
+    props: {
+      data,
+    },
+  }
+}
+```
+
+---
+
+#### getStaticPaths
+
+dynamic routes를 사용하는 page에서 getStaticPaths라는 함수를 내보낼 때 Next.js는 getStaticPaths에 의해 지정된 모든 경로를 정적으로 pre-rendering 합니다.
+
+```javascript
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { ... } } // See the "paths" section below
+    ],
+    fallback: true, false or "blocking" // See the "fallback" section below
+  };
+}
+```
+
+##### getStaticPaths return values
+
+getStaticPaths 함수는 다음 필수 속성이 있는 객체를 반환해야 합니다.
+
+- paths
+
+path key는 pre-rendering 될 path를 결정합니다. 예를 들어, pages/posts/`[id]`.js라는 dynamic routes를 사용하는 페이지가 있다고 가정합니다.
+
+```javascript
+return {
+  paths: [
+    { params: { id: '1' }},
+    {
+      params: { id: '2' },
+      // with i18n configured the locale for the path can be returned as well
+      locale: "en",
+    },
+  ],
+  fallback: ...
+}
+```
+
+그러면 Next.js는 pages/posts/`[id]`.js의 page component를 사용하여 next/build 중에 /posts/1 및 /posts/2를 정적으로 생성합니다.
+
+각 params 객체의 value은 페이지 이름에 사용된 매개변수와 일치해야 합니다.
+
+- pages/posts/`[postId]`/`[commentId]`
+
+  > params에는 postId 및 commentId가 포함되어야 합니다.
+
+- pages/`[...slug]` (catch-all route)
+
+  > params에는 slug(배열)가 포함되어야 합니다. 이 배열이 ['hello', 'world']이면 Next.js는 정적으로 /hello/world에 페이지를 생성합니다.
+
+- pages/`[[...slug]]` (optional catch-all route)
+
+  > null, [], undefined 또는 false를 사용하여 최상위 경로를 렌더링합니다.
+
+❗️ params 문자열은 대소문자를 구분하며 경로가 올바르게 생성되도록 이상적으로 정규화해야 합니다. 예를 들어 WoRLD가 매개변수에 대해 반환된 경우 WoRLD가 실제 방문한 경로일 때만 일치하며 world 또는 World가 아닙니다.
+
+##### fallback: false
+
+fallback이 false인 경우 getStaticPaths에서 반환하지 않은 모든 경로는 404 페이지가 됩니다.
+
+next/build가 실행되면 Next.js는 getStaticPaths가 fallback: false를 반환했는지 확인한 다음 getStaticPaths가 반환한 경로만 빌드합니다. 이 옵션은 생성할 경로가 적거나 새 페이지 데이터가 자주 추가되지 않는 경우에 유용합니다. 더 많은 경로를 추가해야 하고 fallback: false가 있는 경우 새 경로를 생성할 수 있도록 next/build를 다시 실행해야 합니다.
+
+```javascript
+// pages/posts/[id].js
+
+function Post({ post }) {
+  // Render post...
+}
+
+// This function gets called at build time
+export async function getStaticPaths() {
+  // Call an external API endpoint to get posts
+  const res = await fetch("https://.../posts")
+  const posts = await res.json()
+
+  // Get the paths we want to pre-render based on posts
+  const paths = posts.map(post => ({
+    params: { id: post.id },
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false }
+}
+
+// This also gets called at build time
+export async function getStaticProps({ params }) {
+  // params contains the post `id`.
+  // If the route is like /posts/1, then params.id is 1
+  const res = await fetch(`https://.../posts/${params.id}`)
+  const post = await res.json()
+
+  // Pass post data to the page via props
+  return { props: { post } }
+}
+
+export default Post
+```
+
+##### fallback: true
+
+fallback이 true이면 getStaticProps의 동작이 다음과 같이 변경됩니다.
+
+- getStaticPaths에서 반환된 경로는 getStaticProps에 의해 빌드 시 HTML로 렌더링됩니다.
+
+- 빌드 시 생성되지 않은 경로는 404 페이지를 생성하지 않습니다. 대신 Next.js는 이러한 경로에 대한 첫 번째 요청에서 [“fallback” page](https://nextjs.org/docs/api-reference/data-fetching/get-static-paths#fallback-pages)를 제공합니다. 그리고 서버에서 static하게 페이지를 생성합니다.
+
+- fallback: true가 있는 페이지가 next/link 또는 next/router(client side)를 통해 이동될 때 Next.js는 fallback을 제공하지 않고 대신 페이지가 fallback: 'blocking'으로 작동합니다.
+
+fallback: true는 앱에 데이터에 의존하는 정적 페이지가 매우 많은 경우에 유용합니다. 모든 제품 페이지를 미리 렌더링하려면 빌드 시간이 매우 오래 걸립니다.
+
+> (예: 매우 큰 전자 상거래 사이트).
+
+대신 페이지의 작은 하위 집합을 정적으로 생성하고 나머지는 fallback: true를 사용할 수 있습니다. 누군가 아직 생성되지 않은 페이지를 요청하면 사용자는 로딩 표시기 또는 스켈레톤 component가 있는 페이지를 보게 됩니다.
+
+잠시 후 getStaticProps가 완료되고 페이지가 요청된 데이터로 렌더링됩니다. 이제부터 동일한 페이지를 요청하는 모든 사람은 정적으로 pre-rendering 된 페이지를 받게 됩니다.
+
+이를 통해 사용자는 빠른 빌드와 정적 생성의 이점을 유지하면서 항상 빠른 경험을 할 수 있습니다.
+
+fallback: true는 생성된 페이지를 업데이트하지 않습니다. 이에 대해서는 Incremental Static Regeneration을 살펴보세요.
+
+##### fallback: 'blocking'
+
+fallback이 'blocking'인 경우 getStaticPaths에서 반환되지 않은 새 path는 SSR과 동일하게 HTML이 생성될 때까지 기다린 다음 이후 요청을 위해 cached 되어 path 당 한 번만 발생합니다.
+
+getStaticProps는 다음과 같이 작동합니다.
+
+- getStaticPaths에서 반환된 경로는 getStaticProps에 의해 빌드 시 HTML로 렌더링됩니다.
+
+- 빌드 시 생성되지 않은 경로는 404 페이지를 생성하지 않습니다. 대신 첫 번째 요청에서 SSR을 수행하고 생성된 HTML을 반환합니다.
+
+- 완료되면 브라우저는 생성된 경로에 대한 HTML을 수신합니다. 사용자의 관점에서 "브라우저가 페이지를 요청하는 중"에서 "전체 페이지가 로드됨"으로 전환됩니다.
+
+- 동시에 Next.js는 이 경로를 pre-rendering 된 페이지 목록에 추가합니다. 동일한 경로에 대한 후속 요청은 빌드 시 미리 렌더링된 다른 페이지와 마찬가지로 생성된 페이지를 제공합니다.
+
+- fallback: 'blocking'은 기본적으로 생성된 페이지를 업데이트하지 않습니다.
+
+##### TypeScript
+
+```javascript
+import { GetStaticPaths } from "next"
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // ...
+}
+```
+
+---
+
+#### getStaticProps
+
+- getServerSideProps와 property가 거의 비슷하여 생략함. 확인 하고 싶으신 분은 아래 링크에서 참조하세요.
+
+[여기서 확인하세요.](https://nextjs.org/docs/api-reference/data-fetching/get-static-props)
