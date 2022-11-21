@@ -78,7 +78,7 @@ const Seo = ({ description, lang, meta, title }) => {
 Seo.defaultProps = {
   lang: `ko`,
   meta: [],
-  description: ``,
+  description: `Front-end developer`,
 }
 
 Seo.propTypes = {
