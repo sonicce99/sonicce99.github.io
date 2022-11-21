@@ -4,8 +4,15 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Toc from "../components/toc"
+import { scrollHandler } from "../js/scroll"
+import { useScrollEvent } from "../hooks/useScrollEvent"
 
 const BlogPostTemplate = ({ data, location }) => {
+  useScrollEvent(() => {
+    return scrollHandler()
+  })
+
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
@@ -25,15 +32,23 @@ const BlogPostTemplate = ({ data, location }) => {
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>{post.frontmatter.date}</p>
         </header>
-        <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
-          itemProp="articleBody"
-        />
+
+        <div className="blog-container">
+          <section
+            className="blog-section"
+            dangerouslySetInnerHTML={{ __html: post.html }}
+            itemProp="articleBody"
+          />
+
+          <Toc tableOfContents={post.tableOfContents} />
+        </div>
+
         <hr />
         <footer>
           <Bio />
         </footer>
       </article>
+
       <nav className="blog-post-nav">
         <ul
           style={{
@@ -81,6 +96,7 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       html
+      tableOfContents
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
