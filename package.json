@@ -42,7 +42,7 @@
   "devDependencies": {
     "prettier": "^2.6.2"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://github.com/sonicce99",
   "keywords": [
     "동수",
     "로그북",
@@ -52,7 +52,7 @@
   "license": "0BSD",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/sonicce99/sonicce99.github.io"
   },
   "scripts": {
     "build": "gatsby build",
