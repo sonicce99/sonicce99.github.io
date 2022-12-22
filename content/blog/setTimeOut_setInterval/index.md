@@ -88,14 +88,17 @@ setTimeout이나 setInterval도 Web Api 중에 하나이기 때문에 호출되�
 ```javascript
 // 클로져 실행 예시. useEffect 안에서 number를 console로 찍어보면 항상 0이다.
 // useEffect 밖에서 콘솔을 찍어보면 정상 동작한다.
+import { useState, useEffect } from "react"
+
 export default function App() {
   const [number, setNumber] = useState(0)
 
-  console.log("number", number) // 정상 동작.
+  console.log("numberOuter", number) // 1초마다 1씩 증가.
   useEffect(() => {
     const loop = setInterval(() => {
       setNumber(prev => prev + 1)
-      console.log("number", number) // 항상 0.
+      console.log("numberInner", number) // 항상 0.
+
       if (number === 10) clearInterval(loop)
     }, 1000)
   }, [])
@@ -210,6 +213,40 @@ const longPolling = async (delay: number) => {
   }
 }
 ```
+
+### 부록. (캡슐화, 은닉화)
+
+클로저는 정보 은닉과 관계가 매우 깊습니다.
+
+javascript는 Prototype 기반 OOP를 가지고 있으며, 이러한 객체 지향 프로그래밍에서 외부 사용자에게 노출이 불필요한 속성, 행위를 노출하는 것은 매우 좋지 않습니다.
+
+나쁜 의도를 가진 사용자가 정보를 조작할 수 있기 때문입니다.
+
+아래는 간단한 counter 클로저입니다.
+
+```javascript
+const counter = (() => {
+  let privateCounter = 0
+
+  return {
+    value: () => privateCounter,
+    increment: () => privateCounter++,
+    decreasement: () => privateCounter--,
+  }
+})()
+
+console.log(counter.value()) // 0
+counter.increment()
+console.log(counter.value()) // 1
+counter.decreasement()
+console.log(counter.value()) // 0
+```
+
+console.log를 통해 privateCounter에 접근하고 싶습니다. 그런데 방법이 있나요?
+
+방법이 없습니다. 우리는 클로저를 사용하여 privateCounter를 은닉할 수 있고 사용자는 privateCounter 변수의 존재 여부에 대해 알 수 없습니다.
+
+즉 counter를 사용하는 사용자는 철저히 value, increment, decreasement를 통해 privateCounter를 조회, 증가, 감소 하는 행위만을 할 수 있습니다.
 
 ### 마치며.
 
