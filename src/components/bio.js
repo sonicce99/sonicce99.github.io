@@ -33,22 +33,18 @@ const Bio = () => {
   // const social = data.site.siteMetadata?.social
 
   return (
-    <div
-      className="bio"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <StaticImage
-        className="bio-avatar"
-        formats={["auto", "webp", "avif"]}
-        src="../images/profile-pic.png"
-        width={90}
-        height={90}
-        alt="Profile picture"
-      />
+    <div className="bio">
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <StaticImage
+          className="bio-avatar"
+          formats={["auto", "webp", "avif"]}
+          src="../images/profile-pic.png"
+          width={90}
+          height={90}
+          style={{ objectFit: "cover" }}
+          alt="Profile picture"
+        />
+      </div>
       {author?.name && (
         <div>
           <h3>안녕하세요 🙌🏻 동수입니다.</h3>
