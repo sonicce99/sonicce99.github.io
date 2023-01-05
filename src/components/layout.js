@@ -27,7 +27,7 @@ const Layout = ({ location, title, children }) => {
       <footer>
         © {new Date().getFullYear()}, Welcome to my Github
         {` `}
-        <a href="https://github.com/sonicce99" target="_blank">
+        <a href="https://github.com/sonicce99" target="_blank" rel="noreferrer">
           DongSu Lee
         </a>
       </footer>
