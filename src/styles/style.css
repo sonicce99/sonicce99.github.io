@@ -325,11 +325,6 @@ a:focus {
   margin-bottom: var(--spacing-8);
 }
 
-.blog-container {
-  display: flex;
-  width: calc(var(--maxWidth-wrapper) - 40px + 350px + 6rem);
-}
-
 .blog-section {
   max-width: calc(var(--maxWidth-wrapper) - 40px);
 }
@@ -337,10 +332,11 @@ a:focus {
 /* toc 관련 css */
 
 .tocContainer {
-  position: sticky;
-  top: 10vh;
+  position: fixed;
+  width: 20rem;
+  top: 3.6rem;
+  left: calc(50% + 270px);
   font-size: 15px;
-  width: 350px;
   height: 80vh;
   overflow: scroll;
   border-left: 2px solid #2a2a2a;
@@ -386,6 +382,12 @@ a:focus {
 @media (prefers-color-scheme: dark) {
   .tocContainer a:hover {
     color: white;
+  }
+}
+
+@media (max-width: 42rem) {
+  .tocContainer {
+    display: none;
   }
 }
 

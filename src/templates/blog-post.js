@@ -33,15 +33,12 @@ const BlogPostTemplate = ({ data, location }) => {
           <p>{post.frontmatter.date}</p>
         </header>
 
-        <div className="blog-container">
-          <section
-            className="blog-section"
-            dangerouslySetInnerHTML={{ __html: post.html }}
-            itemProp="articleBody"
-          />
-
-          <Toc tableOfContents={post.tableOfContents} />
-        </div>
+        <section
+          className="blog-section"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+          itemProp="articleBody"
+        />
+        <Toc tableOfContents={post.tableOfContents} />
 
         <hr />
         <footer>
