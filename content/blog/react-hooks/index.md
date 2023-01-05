@@ -11,7 +11,7 @@ description: "황준일 개발자님의 블로그를 보고 공부한 포스팅�
 
 그러던 어느날... 🥲
 
-<img width='700px' src="https://user-images.githubusercontent.com/87749134/182306514-75065fbf-0bb5-49a8-98d2-aad8d51b6e3e.png" />
+<img width='632px' src="https://user-images.githubusercontent.com/87749134/182306514-75065fbf-0bb5-49a8-98d2-aad8d51b6e3e.png" />
 
 오잉? 이게 무슨 말이야 😭
 
@@ -485,7 +485,7 @@ const render = debounce(() => {
 
 이젠 무섭지 않아!! 🎃
 
-<img width='700px' src="https://user-images.githubusercontent.com/87749134/182306514-75065fbf-0bb5-49a8-98d2-aad8d51b6e3e.png" />
+<img width='632px' src="https://user-images.githubusercontent.com/87749134/182306514-75065fbf-0bb5-49a8-98d2-aad8d51b6e3e.png" />
 
 이 에러가 왜 발생했는지 이제는 확실하게 말할 수 있다.
 
