@@ -363,7 +363,39 @@ information<span class="token punctuation">.</span>innerText <span class="token 
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./renderer.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre></div>
-<img width="632" alt="스크린샷 2022-12-14 오전 11 29 42" src="https://user-images.githubusercontent.com/87749134/207490601-605e2afb-a124-4390-87bd-abb63c0ec895.png">
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/77044941c25e67a317f6e83edad5d17c/29007/electronEx1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 74.68354430379746%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA5klEQVQ4y+1TS4qFMBDM9ZWJTFzpci4i4gmekrnDgBrFhZ/4qUc3k8dDZ6Uup6HoTyrdRZqIr0hCxQrqM4SUEr7vMzzPQxiGiOMYURQxKFZKMS8IggOk/IB4FN/QhYbWGlmWIU1TJEmCPM9xxoQdDMbJYhxHDMMAay1jWRZs28Yk8vt4XVfmvHu6J1rzg6Zt0f7CGIO6rlGWJaqq4rxpGj6j3HH6vj8Mm+cZws4LqyNM08RTyLvc1VzdeVL1Z0NcsPdneDV0E87gdoV7pf8Nb2q439aVjb8UusJVhfT9BP3fuxR2XYcnf8KHQWHc/egAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="electronEx1"
+        title="electronEx1"
+        src="/static/77044941c25e67a317f6e83edad5d17c/f058b/electronEx1.png"
+        srcset="/static/77044941c25e67a317f6e83edad5d17c/c26ae/electronEx1.png 158w,
+/static/77044941c25e67a317f6e83edad5d17c/6bdcf/electronEx1.png 315w,
+/static/77044941c25e67a317f6e83edad5d17c/f058b/electronEx1.png 630w,
+/static/77044941c25e67a317f6e83edad5d17c/40601/electronEx1.png 945w,
+/static/77044941c25e67a317f6e83edad5d17c/78612/electronEx1.png 1260w,
+/static/77044941c25e67a317f6e83edad5d17c/29007/electronEx1.png 1600w"
+        sizes="(max-width: 630px) 100vw, 630px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
 <h3 id="communicating-between-processes" style="position:relative;">Communicating between processes<a href="#communicating-between-processes" aria-label="communicating between processes permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h3>
 <p>위에서 언급한 바와 같이 Electron의 main process와 renderer process는 서로 다른 역할을 하며 상호 교환할 수 없습니다.</p>
 <p>즉, renderer process 에서 직접 Node.js API에 액세스하거나 main process에서 HTML DOM에 액세스할 수 없습니다.</p>
@@ -468,7 +500,37 @@ npx electron-forge <span class="token function">import</span></code></pre></div>
 <p>이 문제를 해결하기 위해 Chrome 팀은 각 탭이 자체 프로세스에서 렌더링되어 웹 페이지의 버그 또는 악성 코드가 앱 전체에 미칠 수 있는 피해를 제한하기로 결정했습니다.</p>
 <p>그러면 단일 브라우저 프로세스가 이러한 프로세스와 전체 애플리케이션 수명 주기를 제어합니다.</p>
 <p>아래 다이어그램은 이 모델을 시각화합니다.</p>
-<img width="632px" src="https://user-images.githubusercontent.com/87749134/207746316-4f5b421b-bd3c-4c31-afa3-5e8f70b65028.png">
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/96c107a5b5d087e5bc489b1dc8bcb426/9be90/process.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 28.48101265822785%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAABnUlEQVQY002RzWoTYRSG5wpUKmScn06aMT/tTGhMSjIZaDRpOvRLvIAimJnY4iW466LQCuqidWcXXdiFFhT8awpqsFi1BmtdSEZ0I27cuPMOnpJJERcP58B535dzOJKmjaKeoCkqsXSB8enLpBwP0xEkHBHVqC/Ncd5toudrKAO9qg99/yFpusEAwxjjzKnTLNxY4defv4Q/f/PiQ5+dgz6dg5Dn77+y2/tG52PIdveQeCKJqmjoJ/5/gXJMRo7FUBSVkZGzVCsVAj+gHbRp+y0WAp/ri4tc833arasErRZX5ueja2T53JAoQ0ZVdSRrcgrrQolUxiabK5DOFtDjSUbjJmOpLHpiHEUzMNM2RtJGM0zM1AR23iE9MYll57ByRTLZfLSptP+5z+PXPZZW7vB0t0v38Ds31ze4/+AR+19+sPWky/Lqbd4dhTzbO2L51l12Xu3xsheyunaPza2HvPkUst15SyZjITUaTWbrsxRLDjN1DyEE5bJL5WKVwaxWrVEslRGiied5OI471M0J3LLLdOUSQjSoz9SjPxwDvVrnZ5NIg8gAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="process"
+        title="process"
+        src="/static/96c107a5b5d087e5bc489b1dc8bcb426/f058b/process.png"
+        srcset="/static/96c107a5b5d087e5bc489b1dc8bcb426/c26ae/process.png 158w,
+/static/96c107a5b5d087e5bc489b1dc8bcb426/6bdcf/process.png 315w,
+/static/96c107a5b5d087e5bc489b1dc8bcb426/f058b/process.png 630w,
+/static/96c107a5b5d087e5bc489b1dc8bcb426/9be90/process.png 636w"
+        sizes="(max-width: 630px) 100vw, 630px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
 <p>Electron applications은 매우 유사하게 구성됩니다. 개발자 main, renderer라는 두 가지 유형의 프로세스를 제어합니다.</p>
 <p>이는 위에서 설명한 Chrome의 자체 브라우저 및 renderer processes와 유사합니다.</p>
 <h4 id="the-main-process" style="position:relative;">The main process<a href="#the-main-process" aria-label="the main process permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h4>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[기억보단 기록을, 기록보단 공유를.]]></description><link>https://sonicce99.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 05 Jan 2023 02:06:11 GMT</lastBuildDate><item><title><![CDATA[Electron 공식문서 뿌시기🗿]]></title><description><![CDATA[Tutorial Prerequisites Electron은 HTML, CSS, Javascript를 사용해 desktop application을 만들기 위한 프레임워크 입니다.  과 을 single binary file에 추가함으로써, Electron…]]></description><link>https://sonicce99.github.io/electron/</link><guid isPermaLink="false">https://sonicce99.github.io/electron/</guid><pubDate>Thu, 05 Jan 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;tutorial&quot; style=&quot;position:relative;&quot;&gt;Tutorial&lt;a href=&quot;#tutorial&quot; aria-label=&quot;tutorial permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[기억보단 기록을, 기록보단 공유를.]]></description><link>https://sonicce99.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 05 Jan 2023 05:06:38 GMT</lastBuildDate><item><title><![CDATA[Electron 공식문서 뿌시기🗿]]></title><description><![CDATA[Tutorial Prerequisites Electron은 HTML, CSS, Javascript를 사용해 desktop application을 만들기 위한 프레임워크 입니다.  과 을 single binary file에 추가함으로써, Electron…]]></description><link>https://sonicce99.github.io/electron/</link><guid isPermaLink="false">https://sonicce99.github.io/electron/</guid><pubDate>Thu, 05 Jan 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;tutorial&quot; style=&quot;position:relative;&quot;&gt;Tutorial&lt;a href=&quot;#tutorial&quot; aria-label=&quot;tutorial permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h2&gt;
 &lt;h3 id=&quot;prerequisites&quot; style=&quot;position:relative;&quot;&gt;Prerequisites&lt;a href=&quot;#prerequisites&quot; aria-label=&quot;prerequisites permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Electron은 HTML, CSS, Javascript를 사용해 desktop application을 만들기 위한 프레임워크 입니다. &lt;code class=&quot;language-text&quot;&gt; Chromium&lt;/code&gt; 과 &lt;code class=&quot;language-text&quot;&gt;Node.js&lt;/code&gt;을 single binary file에 추가함으로써, Electron은 Javascript 코드 베이스로 Windows, macOS, Linux에서 동작하는 cross-platform apps를 만들 수 있게 해줍니다.&lt;/p&gt;
 &lt;p&gt;이번 튜토리얼에서는 Electron을 사용해 desktop application을 개발하는 과정을 가이드합니다.&lt;/p&gt;
@@ -310,7 +310,39 @@ information&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;innerTe
   &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;./renderer.js&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;html&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;img width=&quot;632&quot; alt=&quot;스크린샷 2022-12-14 오전 11 29 42&quot; src=&quot;https://user-images.githubusercontent.com/87749134/207490601-605e2afb-a124-4390-87bd-abb63c0ec895.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/77044941c25e67a317f6e83edad5d17c/29007/electronEx1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 74.68354430379746%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA5klEQVQ4y+1TS4qFMBDM9ZWJTFzpci4i4gmekrnDgBrFhZ/4qUc3k8dDZ6Uup6HoTyrdRZqIr0hCxQrqM4SUEr7vMzzPQxiGiOMYURQxKFZKMS8IggOk/IB4FN/QhYbWGlmWIU1TJEmCPM9xxoQdDMbJYhxHDMMAay1jWRZs28Yk8vt4XVfmvHu6J1rzg6Zt0f7CGIO6rlGWJaqq4rxpGj6j3HH6vj8Mm+cZws4LqyNM08RTyLvc1VzdeVL1Z0NcsPdneDV0E87gdoV7pf8Nb2q439aVjb8UusJVhfT9BP3fuxR2XYcnf8KHQWHc/egAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;electronEx1&quot;
+        title=&quot;electronEx1&quot;
+        src=&quot;/static/77044941c25e67a317f6e83edad5d17c/f058b/electronEx1.png&quot;
+        srcset=&quot;/static/77044941c25e67a317f6e83edad5d17c/c26ae/electronEx1.png 158w,
+/static/77044941c25e67a317f6e83edad5d17c/6bdcf/electronEx1.png 315w,
+/static/77044941c25e67a317f6e83edad5d17c/f058b/electronEx1.png 630w,
+/static/77044941c25e67a317f6e83edad5d17c/40601/electronEx1.png 945w,
+/static/77044941c25e67a317f6e83edad5d17c/78612/electronEx1.png 1260w,
+/static/77044941c25e67a317f6e83edad5d17c/29007/electronEx1.png 1600w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&quot;communicating-between-processes&quot; style=&quot;position:relative;&quot;&gt;Communicating between processes&lt;a href=&quot;#communicating-between-processes&quot; aria-label=&quot;communicating between processes permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;위에서 언급한 바와 같이 Electron의 main process와 renderer process는 서로 다른 역할을 하며 상호 교환할 수 없습니다.&lt;/p&gt;
 &lt;p&gt;즉, renderer process 에서 직접 Node.js API에 액세스하거나 main process에서 HTML DOM에 액세스할 수 없습니다.&lt;/p&gt;
@@ -415,7 +447,37 @@ npx electron-forge &lt;span class=&quot;token function&quot;&gt;import&lt;/span&
 &lt;p&gt;이 문제를 해결하기 위해 Chrome 팀은 각 탭이 자체 프로세스에서 렌더링되어 웹 페이지의 버그 또는 악성 코드가 앱 전체에 미칠 수 있는 피해를 제한하기로 결정했습니다.&lt;/p&gt;
 &lt;p&gt;그러면 단일 브라우저 프로세스가 이러한 프로세스와 전체 애플리케이션 수명 주기를 제어합니다.&lt;/p&gt;
 &lt;p&gt;아래 다이어그램은 이 모델을 시각화합니다.&lt;/p&gt;
-&lt;img width=&quot;632px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/207746316-4f5b421b-bd3c-4c31-afa3-5e8f70b65028.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/96c107a5b5d087e5bc489b1dc8bcb426/9be90/process.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 28.48101265822785%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAABnUlEQVQY002RzWoTYRSG5wpUKmScn06aMT/tTGhMSjIZaDRpOvRLvIAimJnY4iW466LQCuqidWcXXdiFFhT8awpqsFi1BmtdSEZ0I27cuPMOnpJJERcP58B535dzOJKmjaKeoCkqsXSB8enLpBwP0xEkHBHVqC/Ncd5toudrKAO9qg99/yFpusEAwxjjzKnTLNxY4defv4Q/f/PiQ5+dgz6dg5Dn77+y2/tG52PIdveQeCKJqmjoJ/5/gXJMRo7FUBSVkZGzVCsVAj+gHbRp+y0WAp/ri4tc833arasErRZX5ueja2T53JAoQ0ZVdSRrcgrrQolUxiabK5DOFtDjSUbjJmOpLHpiHEUzMNM2RtJGM0zM1AR23iE9MYll57ByRTLZfLSptP+5z+PXPZZW7vB0t0v38Ds31ze4/+AR+19+sPWky/Lqbd4dhTzbO2L51l12Xu3xsheyunaPza2HvPkUst15SyZjITUaTWbrsxRLDjN1DyEE5bJL5WKVwaxWrVEslRGiied5OI471M0J3LLLdOUSQjSoz9SjPxwDvVrnZ5NIg8gAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;process&quot;
+        title=&quot;process&quot;
+        src=&quot;/static/96c107a5b5d087e5bc489b1dc8bcb426/f058b/process.png&quot;
+        srcset=&quot;/static/96c107a5b5d087e5bc489b1dc8bcb426/c26ae/process.png 158w,
+/static/96c107a5b5d087e5bc489b1dc8bcb426/6bdcf/process.png 315w,
+/static/96c107a5b5d087e5bc489b1dc8bcb426/f058b/process.png 630w,
+/static/96c107a5b5d087e5bc489b1dc8bcb426/9be90/process.png 636w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Electron applications은 매우 유사하게 구성됩니다. 개발자 main, renderer라는 두 가지 유형의 프로세스를 제어합니다.&lt;/p&gt;
 &lt;p&gt;이는 위에서 설명한 Chrome의 자체 브라우저 및 renderer processes와 유사합니다.&lt;/p&gt;
 &lt;h4 id=&quot;the-main-process&quot; style=&quot;position:relative;&quot;&gt;The main process&lt;a href=&quot;#the-main-process&quot; aria-label=&quot;the main process permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h4&gt;
@@ -800,9 +862,39 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
   win&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;loadURL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;https://google.com&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[2022년 회고록]]></title><description><![CDATA[풀필먼트 물류를 배우다. 들어가기에 앞서 열심이였던 지난 1년. 기대 반 걱정 반으로 회사에 입사한지 거진 1년이 지났다. 이제…]]></description><link>https://sonicce99.github.io/review/2022/</link><guid isPermaLink="false">https://sonicce99.github.io/review/2022/</guid><pubDate>Wed, 07 Dec 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;풀필먼트-물류를-배우다&quot; style=&quot;position:relative;&quot;&gt;풀필먼트 물류를 배우다.&lt;a href=&quot;#%ED%92%80%ED%95%84%EB%A8%BC%ED%8A%B8-%EB%AC%BC%EB%A5%98%EB%A5%BC-%EB%B0%B0%EC%9A%B0%EB%8B%A4&quot; aria-label=&quot;풀필먼트 물류를 배우다 permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[2022년 회고록]]></title><description><![CDATA[풀필먼트 물류를 배우다. 들어가기에 앞서  열심이였던 지난 1년. 기대 반 걱정 반으로 회사에 입사한지 거진 1년이 지났다. 이제…]]></description><link>https://sonicce99.github.io/review/2022/</link><guid isPermaLink="false">https://sonicce99.github.io/review/2022/</guid><pubDate>Wed, 07 Dec 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h1 id=&quot;풀필먼트-물류를-배우다&quot; style=&quot;position:relative;&quot;&gt;풀필먼트 물류를 배우다.&lt;a href=&quot;#%ED%92%80%ED%95%84%EB%A8%BC%ED%8A%B8-%EB%AC%BC%EB%A5%98%EB%A5%BC-%EB%B0%B0%EC%9A%B0%EB%8B%A4&quot; aria-label=&quot;풀필먼트 물류를 배우다 permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id=&quot;들어가기에-앞서&quot; style=&quot;position:relative;&quot;&gt;들어가기에 앞서&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EA%B8%B0%EC%97%90-%EC%95%9E%EC%84%9C&quot; aria-label=&quot;들어가기에 앞서 permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;img width=&quot;632px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/206077338-cedfd0c3-8f62-40a6-8e13-8a81c779f4cf.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/3fbd84b1ba04c045108455c12c3a7851/4971b/commit.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 26.58227848101266%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAABF0lEQVQY0z2QWWrDQBAFdQCPRjNaRrIsaRZry6LYJuDEEEggPkEg979JBekjH9UU/aChX5RXHa2f6VbcTN30mzduIlYlciUpN99IzL+vWWZaTOUoKovKD0SxMhStR/UO5Tv05MjHQNpaMu8pQkCNHu0daWdRbUtmPWbqyccjylt0cCSuQ2hDlOYHmuUJcQ7ozwnzu6Bfe9TsEbcBuQT0fSa5z8TfE7uvEXHt0e8DyW1g99YTf4zIyxFZ7IkSXZFai5ws6bVn//OM6jpkbxEXjzx5xMmjr0fUOSBGu2XxgyN+dMQvnmTxyNAhlCFah8prTOMp1i5qR9kGtGkQskDocntFSINY+5Nm63HdpaZB1geywZKW7XbwD9g/hK3GrRj1AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;commit&quot;
+        title=&quot;commit&quot;
+        src=&quot;/static/3fbd84b1ba04c045108455c12c3a7851/f058b/commit.png&quot;
+        srcset=&quot;/static/3fbd84b1ba04c045108455c12c3a7851/c26ae/commit.png 158w,
+/static/3fbd84b1ba04c045108455c12c3a7851/6bdcf/commit.png 315w,
+/static/3fbd84b1ba04c045108455c12c3a7851/f058b/commit.png 630w,
+/static/3fbd84b1ba04c045108455c12c3a7851/4971b/commit.png 784w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;열심이였던 지난 1년.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -812,7 +904,39 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;p&gt;정말 빠르게 1년이라는 시간이 흘러갔고, 공부할 수 있었던 것도 많았던 1년이였다.&lt;/p&gt;
 &lt;h2 id=&quot;회사-프로젝트&quot; style=&quot;position:relative;&quot;&gt;회사 프로젝트&lt;a href=&quot;#%ED%9A%8C%EC%82%AC-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8&quot; aria-label=&quot;회사 프로젝트 permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h2&gt;
 &lt;h3 id=&quot;1-홈페이지-개편&quot; style=&quot;position:relative;&quot;&gt;1. 홈페이지 개편&lt;a href=&quot;#1-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B0%9C%ED%8E%B8&quot; aria-label=&quot;1 홈페이지 개편 permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h3&gt;
-&lt;img width=&quot;632px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/180675203-4a8aa382-a758-4e2a-879c-8baac094b716.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/46b38d094a893db75a1f4e538571f85c/6e7b6/homePage.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 86.0759493670886%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsTAAALEwEAmpwYAAADdElEQVQ4y3WRa0xbZRzGzxe/bB+UzURUkpmY6PzkFxPdTEz8ojGLzMtUjAyKUczGdR1kI9OgmQkJYRPLRScU6pYwua7AuBWGXLLBGKcN4CaFsYG2pbRAoeectoyDP8Oh3Db24ZfnvG/+z/M+73uEb659R+6NQrK788i7XkhSezbv1B0jxpxJtDmVz+oziGnIJKY+U/s+YtYT25jFJ/V6jphPcqg2mU/NGXx4JZ3Xa48iGEcvUjteQ4X9MtVj1ZTduUieWEShtZR822/ki6X8bDVqalhVWwkFtlLOi0aKhowYhkooHi6jaNhI7kgxQkq5m+NlLpLLpzVNLXeTXOLgeKmTZKMLffkkGab7ZJgm0Zum0JtcHCtx8tUFF2mmGdJNM5quojd5ESJ0Int0VvaEVVsnWDX2Jgzy9plOPvixg/e+/5M3T/cQ9XUfT8aJPP3l2uxWntKJCPsSb7ITL4T1paRBXj1h5ZVUG/uTB3gxycbLacPsS+zf0Sc8G9/NI+i6iYzvJjKuiyhdFxFf9HBAf5VndL0cPNHOR9kW9sb28LyuS5vd6hUiYy3sRFR8O/sTO0g4d4NLjb1UVBpIza0mLaeSQ/oKIj7v4LmjbY/4hF2H63iY3YdreeL9et5NM9HZ+iv2gQYm+qsY78knx5DL7o9b2RVdw05e4Y3UFjZp1fRAWhuvpXQQnWXm1E+XSTnXwilDG2eKmoj74Q/eOtnOwXQL271rCAuSwgZ+hUUpgM83j9/nZeqfaf51S3g883g8PqZnZewTLsbu3sPtnWcx7NEIZwhKIMg6sqywDNzuamTk0rfcabqA1y4iDlZR2XwW391bGAqKyT97ml9yslhaVlECAbZmCLISYB1JUlhS/+PvgT56fj/P7IgF2etEFNuoby5gZmKY6zcHaairoaWhjtCDZSR507/K9oZKgEAwxKJfxuH2IAWXCYRCTDsdLMhBltQV5jwzeNwzrKjqhmdbw61hkqygqiq9fUNc6+zC2t3E7OIconMWaawPn3ccY/8Q5R2dmG+PEwgGN5rtGOiXZFYAS0sz5tpKrpqKcU46ECf82EfGWZjzU3XLRtmVJtr+shMMhR4fuB4aWnqAyzXN6KgdZXVYkhgbG8U1O8eyquKYmmLy/j3UpZD2PI+9skb4tM3BNVabK4pCMLwvSTJy+O8+HPg/j7MR5PYreasAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;homePage&quot;
+        title=&quot;homePage&quot;
+        src=&quot;/static/46b38d094a893db75a1f4e538571f85c/f058b/homePage.png&quot;
+        srcset=&quot;/static/46b38d094a893db75a1f4e538571f85c/c26ae/homePage.png 158w,
+/static/46b38d094a893db75a1f4e538571f85c/6bdcf/homePage.png 315w,
+/static/46b38d094a893db75a1f4e538571f85c/f058b/homePage.png 630w,
+/static/46b38d094a893db75a1f4e538571f85c/40601/homePage.png 945w,
+/static/46b38d094a893db75a1f4e538571f85c/78612/homePage.png 1260w,
+/static/46b38d094a893db75a1f4e538571f85c/6e7b6/homePage.png 1491w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;회사에 입사하고 가장 처음에 했었던 프로젝트였다.&lt;/p&gt;
 &lt;p&gt;필자가 입사하기 전 외주를 주고 웹 퍼블리셔 분들에게 작업을 맡겼다고 했었는데 내가 들어오고나서 일부 기능들이 정상적으로 동작하지 않는걸 나중에 발견했다.&lt;/p&gt;
 &lt;p&gt;(ex. 특정 메뉴를 여러번 빠르게 클릭 시 (초당 2 ~ 3회) 일부 컴퓨터에서 메뉴가 사라지는 버그가 있었음.)&lt;/p&gt;
@@ -881,12 +1005,108 @@ template &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; template&lt
 &lt;p&gt;그러다 어느날 문제가 터졌다.&lt;/p&gt;
 &lt;p&gt;SSG에서 seller들에게 제공하는 엑셀 양식이 변경된것이였다.&lt;/p&gt;
 &lt;p&gt;↓ 구버전 SSG 엑셀 양식.&lt;/p&gt;
-&lt;img width=&quot;632px&quot; alt=&quot;구버전2&quot; src=&quot;https://user-images.githubusercontent.com/87749134/180680110-f8f8c949-ccdf-456d-9b02-2f8b5058594e.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f9c913668af923b821cfd7845dc40ade/b918a/excel1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 8.860759493670885%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAACCAYAAABYBvyLAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAbElEQVQI112KwQqDMBAF/X9Br3E3YBV7lvpXAUFw6aFkd19JoAU9DAPzXsPMMj5GWbeXTPMkRCSlVRNJiFGWrnsvfW/Ptv3EEM6B6Ppj/tMAUDNTzVrt7lpatbsaoNh3w3E4UjLkrP7bby58Ac4rhkaCfIBrAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;excel1&quot;
+        title=&quot;excel1&quot;
+        src=&quot;/static/f9c913668af923b821cfd7845dc40ade/f058b/excel1.png&quot;
+        srcset=&quot;/static/f9c913668af923b821cfd7845dc40ade/c26ae/excel1.png 158w,
+/static/f9c913668af923b821cfd7845dc40ade/6bdcf/excel1.png 315w,
+/static/f9c913668af923b821cfd7845dc40ade/f058b/excel1.png 630w,
+/static/f9c913668af923b821cfd7845dc40ade/40601/excel1.png 945w,
+/static/f9c913668af923b821cfd7845dc40ade/78612/excel1.png 1260w,
+/static/f9c913668af923b821cfd7845dc40ade/b918a/excel1.png 2780w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;↓ 신버전 SSG 엑셀 양식.&lt;/p&gt;
-&lt;img width=&quot;632px&quot; alt=&quot;신버전2&quot; src=&quot;https://user-images.githubusercontent.com/87749134/180680166-67406709-24e7-469a-ab2a-f1edefdc0242.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/2b8e07c2cecede9bbce5bc0094a05b76/b918a/excel2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 9.49367088607595%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAACCAYAAABYBvyLAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAX0lEQVQI11WLsQqAMAxE+/+QzUWaDoIduip+VNdILUJIJFrFDo/j5XJu2VaaYyREpBACee+/tJuRAM4EwNMw7CNi12Fz2xhORCozV1W9Me9S9dCcWXMWLeXx1v037/8F5++GTW8qWOYAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;excel2&quot;
+        title=&quot;excel2&quot;
+        src=&quot;/static/2b8e07c2cecede9bbce5bc0094a05b76/f058b/excel2.png&quot;
+        srcset=&quot;/static/2b8e07c2cecede9bbce5bc0094a05b76/c26ae/excel2.png 158w,
+/static/2b8e07c2cecede9bbce5bc0094a05b76/6bdcf/excel2.png 315w,
+/static/2b8e07c2cecede9bbce5bc0094a05b76/f058b/excel2.png 630w,
+/static/2b8e07c2cecede9bbce5bc0094a05b76/40601/excel2.png 945w,
+/static/2b8e07c2cecede9bbce5bc0094a05b76/78612/excel2.png 1260w,
+/static/2b8e07c2cecede9bbce5bc0094a05b76/b918a/excel2.png 2780w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;신버전 양식의 H열에 ‘배송순번’ 이라는 필드가 추가되면서 그 뒤로 전부 한칸식 밀리게 되었다. 😭&lt;/p&gt;
 &lt;p&gt;(위의 엑셀 파일을 아래에 우리 시스템에 업로드를 해줘야 주문이 반영된다.)&lt;/p&gt;
-&lt;img width=&quot;632px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/180679374-a4b10ec9-48b5-4f6d-8a97-c14ee3fe3316.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/22287490a64d9c387bee4b9a154f1347/c2d13/oms.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 51.89873417721519%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAABeklEQVQoz4WSy0rDQBiF+ySCulAqiFXEjTufwRfxcVxYadV6WbjyBXwBQRAK3sBek6YzmUkytyyO/JM0LdRL4GNmAvlmTs7UVja2cdpsg55YCGRKV2htCoxBkiowkYL/QcQEaps7B2hf3XqhMQbOOeQlriTPnd+APoplhlimJdnCOsOUS9T2j09w/fDohUprWGthnZtjrZemmQaLE4hELYgKZht54d7hETp3916otYZzFspYJMr4OQlzL1QYjEIMifEEQRRjwiRYLCuxF65v7aLZ7lRCa40fCfoFtoxNJyTRYBxV4nDCMGUCUy7mwtV6A+cX10VkpaqIMxYjc5n9H5mErcubqhQqYFG4XMq81R+Fa/UGmuUJGReQSepPQ5BkNspELQl52TDNqTB/bUh41uog0w69YYBROEXEpI/GRfbLNZm/J6lMCkhaCNuFsN/rgw0D9F4/8NJ9Q8gkgjDC+zBFxFNwFvsixsHEM4oVhJB4/ozw1P1Crz/AN5cf4K9lm0qzAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;oms&quot;
+        title=&quot;oms&quot;
+        src=&quot;/static/22287490a64d9c387bee4b9a154f1347/f058b/oms.png&quot;
+        srcset=&quot;/static/22287490a64d9c387bee4b9a154f1347/c26ae/oms.png 158w,
+/static/22287490a64d9c387bee4b9a154f1347/6bdcf/oms.png 315w,
+/static/22287490a64d9c387bee4b9a154f1347/f058b/oms.png 630w,
+/static/22287490a64d9c387bee4b9a154f1347/40601/oms.png 945w,
+/static/22287490a64d9c387bee4b9a154f1347/78612/oms.png 1260w,
+/static/22287490a64d9c387bee4b9a154f1347/c2d13/oms.png 2560w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;기존의 코드에서는 엑셀을 읽기 위해 A열에 ‘순번’, B열에 ‘출고유형’ 등 column의 위치에 종속되어 있어 해당 workSheet를 읽기 위해서는 쇼핑몰 별로 반드시 그 열의 위치에 값( 순번, 출고유형 등 )이 존재해야했다.&lt;/p&gt;
 &lt;p&gt;지금 모두먼트에서 지원하고 있는 온라인 쇼핑몰은 총 28곳 이고 (대표적으로 Coupang, CAFE24, IMWEB, SSG, 오늘의 집 등등 이 있다.) 앞으로 지원하는 마켓은 더더욱 늘어날 것이다.&lt;/p&gt;
 &lt;p&gt;하지만 그때마다 각각의 쇼핑몰에서 어느날 갑자기 주문 엑셀 column의 위치를 바꿔버리면 해당 쇼핑몰에서 물류사로 모두먼트를 이용하는 모든 사용자에게 서비스 장애가 일어날 것이고 이는 반드시 해결하고 넘어가야하는 문제가 되었다.&lt;/p&gt;
@@ -1060,7 +1280,38 @@ const uploadedExcelData = &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;↓ 고심 끝에 개발한 UI.&lt;/p&gt;
-&lt;img width=&quot;632px&quot; alt=&quot;스크린샷 2022-07-29 오전 9 51 58&quot; src=&quot;https://user-images.githubusercontent.com/87749134/181660587-18814db4-bb4a-4a34-a40d-b1cf79959d6f.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/bb9abce81da352cd3607157f4acecd84/e996b/signUp.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 130.37974683544306%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAaCAYAAAC3g3x9AAAACXBIWXMAABYlAAAWJQFJUiTwAAACHklEQVRIx61VyXLaQBDl/w855hvyFTmEuApSORs7No4xBoQ0WmbXgv1S3UiyxBKsKg6verZ+ej3dPRoZ52Gs68E6j0wqzO7uMZ8/YbF4wXONSMRwPj/yafxGth5Yn7OlDXJIM4mfNzf4MR5jMv2FyWSKyXSK5esKeVG2BF3Q2khbj2UosQkCKG14g8hIYVntUO3eeh8iGycJ4iSFNhZS6XbMCo310MbxQuO03gS4//OA29kMt7M7vCxf+XBz5hz2ITt3JDvYhhzaar1hS3MRJwxS0zgfhs0hk8LuF8hSGEpraG2QSclzvms+43oEND9Q6A8OeJRliYpQVdjtdgwaE2ivLIuTCs8QOuR5jqIo4JyDUgpZlrG11jIh7X2KsDlESt7f39jRGMOEUkoe7xWWlwm795AkKcIwhBACaZrVoVYoihLe54xBhNQRj/MnPDzO8fd5wXVJoOR0SS4SNpYKnGqTLIEJpaqLOEMYiX3mT5D2FdbjbbCte5bWbV0q+7Ix3B2q7Yz/EjY2FnEdnmWCHqw9qtvLhHHMKk4SMswwwiiMoNnpHKEdRiil4rY7SzaEkC6ekqI4i65zbx0MVShEjG0YfoR9EgMJo0jsCa9xh0GwbZ2uQphxm6nrZXm1XiMMo7o7bItBSWleYtO+yo6dpbbIavQz/hmF1h087R7ffif48j3C17GAkA6e+3vga/PRqw6pchDSIlbu5D/kUOE/1ZDQr1Uq3l8AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;signup&quot;
+        title=&quot;signup&quot;
+        src=&quot;/static/bb9abce81da352cd3607157f4acecd84/f058b/signUp.png&quot;
+        srcset=&quot;/static/bb9abce81da352cd3607157f4acecd84/c26ae/signUp.png 158w,
+/static/bb9abce81da352cd3607157f4acecd84/6bdcf/signUp.png 315w,
+/static/bb9abce81da352cd3607157f4acecd84/f058b/signUp.png 630w,
+/static/bb9abce81da352cd3607157f4acecd84/40601/signUp.png 945w,
+/static/bb9abce81da352cd3607157f4acecd84/e996b/signUp.png 1050w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;↓ 프로세스 전 과정&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;step1 : 사업자 번호, 회사 주소, 회사 명, 대표자 명, 법인사업자 여부, 법인 번호, 회사 전화번호.&lt;/p&gt;
@@ -1287,12 +1538,102 @@ const uploadedExcelData = &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/
 &lt;p&gt;꾸준히 읽어서 3번은 반복해서 읽어야할듯 하다.&lt;/p&gt;
 &lt;h3 id=&quot;10-백준-online-judge&quot; style=&quot;position:relative;&quot;&gt;10. 백준 Online Judge&lt;a href=&quot;#10-%EB%B0%B1%EC%A4%80-online-judge&quot; aria-label=&quot;10 백준 online judge permalink&quot; class=&quot;custom-class after&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;20&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;20&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;처음 백준 문제를 푼 날이 2021.11.23일이다.&lt;/p&gt;
-&lt;img width=&quot;632px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/205568759-222b9c8b-18d7-45c4-a3e7-34178f98ce30.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/cb7cf970a78040ad1bec5bd5be8b451d/a4262/backjoon1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75.9493670886076%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsTAAALEwEAmpwYAAABKElEQVQ4y42TDY6DIBCFe/877VVWbdbVVmyJoKgwvGZopFr7A8mowOTzzfA4wBOmvx9cxAniIlH+VzDGgIf3/mssY/k+8GO4/EI0JwjRQuseRLRJejd4f3YelnycB6AloO8HGDNESKo6qQeo3mCapofCeZ7jX1ldaozGwJOD9/c5FoXX6xVKqV05n8IRQSodQOv1AGyaBlmWhTeH1vqjWk8E6wijvcPi+gKUUiLPcxRFgbIsQwuWxGdltFLoHG3WNkC2ygJJLVmPNvRtBxRCoKqqCHql7Dm45H56A6zrOgK/wYgewHF2OwFRIUNTbcM2YaAabbTM5lC6rgunm1LquoeT3ecHYNu2OJ/PybB4yvQGyOqOx2PyDYk+5B4SvfYhQ1Pv8LMn1wpvlgKecIOTRdoAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;backjoon1&quot;
+        title=&quot;backjoon1&quot;
+        src=&quot;/static/cb7cf970a78040ad1bec5bd5be8b451d/f058b/backjoon1.png&quot;
+        srcset=&quot;/static/cb7cf970a78040ad1bec5bd5be8b451d/c26ae/backjoon1.png 158w,
+/static/cb7cf970a78040ad1bec5bd5be8b451d/6bdcf/backjoon1.png 315w,
+/static/cb7cf970a78040ad1bec5bd5be8b451d/f058b/backjoon1.png 630w,
+/static/cb7cf970a78040ad1bec5bd5be8b451d/a4262/backjoon1.png 814w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;2022.12.05일 현재 176문제를 푼 모습&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;img width=&quot;632px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/205568758-3deab6e7-f744-4af2-b247-d49b23917e96.png&quot;&gt;
-&lt;img width=&quot;632px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/205568750-089f118c-7b64-45d7-8cd4-602da48aa9c0.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/87c6e252d5ee323c00740b7b329f1ca9/a4262/backjoon2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 31.645569620253163%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA5UlEQVQY032QbW7DIBBEff8T9TxpHDvBeHECBszHi7Dbpj/SjvRALGJ2lo5aCacPruOZ4ao4fZ7x3tNUa/0X+N5f6tqyujtKKbTWpJR+zPjF36aQSsWnsp+74zGUXKAUjr7veactRpwP3F04EjbXkjOpFIb1QVkdeRGSaGrwVPvYydayGIdeHDctyDwjxuCc203z12R7wnmeUXrivMxsy4JXN1Z1JRpDlFYzeBEmZZiMpR8V4zgwaY2IcLkM9H3/MmxdjAibD8Rtw8eID41AiJGY0l6PLUlOx0Q5E9p9CFhrd9ofPgEDVtRCp0FyXAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;backjoon2&quot;
+        title=&quot;backjoon2&quot;
+        src=&quot;/static/87c6e252d5ee323c00740b7b329f1ca9/f058b/backjoon2.png&quot;
+        srcset=&quot;/static/87c6e252d5ee323c00740b7b329f1ca9/c26ae/backjoon2.png 158w,
+/static/87c6e252d5ee323c00740b7b329f1ca9/6bdcf/backjoon2.png 315w,
+/static/87c6e252d5ee323c00740b7b329f1ca9/f058b/backjoon2.png 630w,
+/static/87c6e252d5ee323c00740b7b329f1ca9/a4262/backjoon2.png 814w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f7b6e25cb3532ddf84719269fabf7bf6/a4262/backjoon3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 105.0632911392405%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAYAAABG1c6oAAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVQ4y41UCVLbQBDk/79J5QUQIISjSELOSsBgW+fq2kPaS1KnZiXLrhQkuKrd451VT481u0cAIIRAHMdIkgRt26LruldBdxpWWzhjYbXBMI44GscR3ntYawP6vn8RwzDs436A8Rq5ZngUDEUrydskSBsJJEgOdy5fckvr5K4RNX5kv3GyugXjzSRIX865sFEphbquA5qmWXiHuqnR8DnmDQxvcXx/i5vNHXxrMGLcOyRREpRSLi4P3VJOKw0lFJRU4EIE8fvkAds8gtFm3zL9J1pr1KIGYyyI7sSJQywk7tJPeGQrRFmE0/gc19kVtuUaUbYNhSdBjOh9D6kEkjJGnufPtsxyhrP4BN/jb/gcf8Lb9Rt8ZNf4Gf3AKnkIzheHoe1xQNt1MMbAeQ/n3cw+TAGtd1pDtQpccyQqAdcNqraC0gre+f1LaVWLqihgtUbvPJy18DPcjPDbOfQBHnBD4MH18NaFgmQsCHIl8ZSlyHkNpgRKJcEkR0FxK1G3KqBqZciVSky5GbROI7cIZp3ERb7GZb7GcXyPG7bFu+QBp8kKZ+kKV/kG1/kG79PHgPMDpn20vx8GYJxbTluBi/RpwWW2Xh46I9FkFeKT+B7v4qkQMRWnmApOgrPDvJMhQUL04Okscuhkh+NZ9DBP8UbW+5fCOhVEPmRPoTUCxdQKFbmY129ZhKt8HbogptzOxIqXe0HlLH7xAj8bNjFn+Fpn+FZl+FKlWIkKyls0VqM23cR2xzqw9m4vaKyFkBJSqYXDTFobQMey9/6foDncjw1vEG034U6Moijci2VZhtmiI0n4792o9SQ4Ahh7DYzT0Tn87E4R4e/fL+WCQzpScZqBFQWyPEdRVjA0/dSyMa/GImi6DlWaoMkz1FkCXjAYwWGUXG7y1+CgZQ9YAxgdMJoOQ9dioKr/aPU5/AGiN0VYZquhIgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;backjoon3&quot;
+        title=&quot;backjoon3&quot;
+        src=&quot;/static/f7b6e25cb3532ddf84719269fabf7bf6/f058b/backjoon3.png&quot;
+        srcset=&quot;/static/f7b6e25cb3532ddf84719269fabf7bf6/c26ae/backjoon3.png 158w,
+/static/f7b6e25cb3532ddf84719269fabf7bf6/6bdcf/backjoon3.png 315w,
+/static/f7b6e25cb3532ddf84719269fabf7bf6/f058b/backjoon3.png 630w,
+/static/f7b6e25cb3532ddf84719269fabf7bf6/a4262/backjoon3.png 814w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;코딩테스트를 쳐서 신입으로 대기업을 들어갈 생각은 없다.&lt;/p&gt;
 &lt;p&gt;이직을 할 때 필요할 수도 것이 코딩테스트이긴 하지만 그런 의미보다&lt;/p&gt;
 &lt;p&gt;백준에서 문제 푸는것이 재미있어서 풀고있다.&lt;/p&gt;
@@ -3513,7 +3854,38 @@ type Data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span c
 &lt;p&gt;필자가 React를 처음 배울 때 가장 먼저 배웠던게 useState였다.
 몇 번 써보았던 나는 곧 useState의 편리함에 빠져버렸고 useState를 마구마구 쓰기 시작했다.&lt;/p&gt;
 &lt;p&gt;그러던 어느날… 🥲&lt;/p&gt;
-&lt;img width=&quot;632px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/182306514-75065fbf-0bb5-49a8-98d2-aad8d51b6e3e.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/51ed8/invalid-hooks.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 85.44303797468356%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB2UlEQVQ4y5WSC4+iMBSF+f+/TBA1EcfwkNlR0BQBHzyVR8/mFuqis6yzTU7OpaFfz22rLBYLzGczzFRVaK5pj/qnmpN0HcRS9NkM5scHcsZwZgyh7wtPoghJGP5MxyNMw8BU16Houg7bssB8H/udh4Pn4cgY2qoCOIcYbdvV8puc5qQAbFwXmqp2QMc00Ww2qEwTtWWhsSy0jg3++QkeBOBRBB6GneK4mzufwcsSbZ4DdQ3bcaBpGhSK6dg2wBjge8Bu12n7Bf71C5yxDkKeZeBp2nlRgOc5eJ/QdV2oMqFpmvA8D6c4RlNV3U+yTfKmESkede+c1AN93/8DtG0bWZbhcrkgTVPc73eh28Blfa8q4W1/nrx3CvQEzPMcVVWhaRrUdY2mroWTaP5V/B2Q0oVhKJKWZYmiKISoHoLkJm+BtJBgMuVw8dgg2CgwSRJEUfRo/Xa7CdF5yYVj+iuQLuN0OgknKCUWF9JDXxO9TUgQglHb1+tVAGXLdAT/BbQsC3EcP0BSw6Rj7bb9O3wCOo4jWqN08mbJKdlrqrGx3+874HQ6hWEY4qVvt9snHQ4HMMYQBIHogC6NfCiaoydHxzaZTKBQu+v1Gsvl8ptoo9VqJUT1v0QMYv0GnRX/FxYcCPUAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;InvalidHooks&quot;
+        title=&quot;InvalidHooks&quot;
+        src=&quot;/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/f058b/invalid-hooks.png&quot;
+        srcset=&quot;/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/c26ae/invalid-hooks.png 158w,
+/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/6bdcf/invalid-hooks.png 315w,
+/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/f058b/invalid-hooks.png 630w,
+/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/40601/invalid-hooks.png 945w,
+/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/51ed8/invalid-hooks.png 1021w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;오잉? 이게 무슨 말이야 😭&lt;/p&gt;
 &lt;p&gt;React 공식문서에서 해당 error를 찾아보니 다음과 같은 이유가 나왔다.&lt;/p&gt;
 &lt;ol&gt;
@@ -3842,7 +4214,37 @@ type Data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span c
 &lt;p&gt;keyboard 가 한자씩 입력될 때마다, api 로 데이터를 가져오게 되면, 사용자의 의도와 무관한 요청 이 자주 발생되는데, 이를 줄이기 위해, 입력이 끝난후나, 입력되는 중간 중간 200ms 마다 api 값을 가져온다면, 성능에서 매우 유리해집니다.&lt;/p&gt;
 &lt;p&gt;디바운싱에 대한 자세한 설명이나 예제 코드는 &lt;a href=&quot;https://webclub.tistory.com/607&quot;&gt;여기&lt;/a&gt;에서 확인해 보세요!&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;img width=&quot;500px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/182535326-c25244ad-6cd4-4306-b5a5-58b067bfc893.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/ef9c403805b29d330319daa4805eeb2b/31493/display.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 70.88607594936708%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAACoUlEQVQ4y32T227bRhRF+QtFHVninZzhnRRFWZZEm5It+SpHjlWkRpAW6EODAPmGPhQI+g19L9r+5ypmLCduH/qwMBhe9uxzzmyjzgumdYEIUoQfI4NEU6RDmuERUfjv5woRxERhQhYXpFFBInON+tYIXIkMIjxH4tkS1xJ4TkToJfiOxDVDHDPEOvS+YPd9jTMI9vh4po9rhRiWLcmm18ynS5bTlvO2YzZsiJyYpmyZjjqOqjmvr3fcXe3Y3nzHYn7B2ckVy/aSZXvBottSjN/QP7AwLLciff8705//5Ozj33Qf/iJ/9wd+/RZhSo7rE8bjK1br77m/2bFebKizY1JRk8uRJpMNUdBg9lwM28mJb38h3nwmvf2Mf/Er9vo3wnJLISrtUrG9fcvj7gfOT6+Z1Kccj7o9p0yac7JixaDnYLhmQOZFpK4gcQWZJ8l9SeKnZGJEN1uz6m602MPrR13y5uqBO9UCxeU9m7sfGXU/MTgwMVQjs0jZrjWpWqOaJKzwzYTYryjjMRfLDderLRPVgqplXM5pihlHVUuVTZHBGPPQ3QvKIamoSPer2idBiXByQjvTqFIf7h65Wd8zPzpj2nRMhie0kzNG+QzhDTEPPVXyV8FMvBAMSwIrpYjGzJoFm8s3WlTxNN3L/aTXLBf3VJMdg1fWfxzuyWSlHT67C61Ml/+MOugl/iAmNGOsvofhmAGpEhDlF7RgWCLdQpf9v9gZMqiRwehpyuqmp3shJazIoiGJqBiXrR6KsF8KfO2rcAqCviBdfSJbfaL/TQ9D2fR17ASuFej4+O7TXsVMXVaz97y62Cpqz3FU8TMDbFNgDcSTQyWWxgWxzPEdgcq22idRjm36vPrW5PDAoqcxCf1Yv1O4dqj/i2Wm/1WH/QOOQact6AerxQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;display&quot;
+        title=&quot;display&quot;
+        src=&quot;/static/ef9c403805b29d330319daa4805eeb2b/f058b/display.png&quot;
+        srcset=&quot;/static/ef9c403805b29d330319daa4805eeb2b/c26ae/display.png 158w,
+/static/ef9c403805b29d330319daa4805eeb2b/6bdcf/display.png 315w,
+/static/ef9c403805b29d330319daa4805eeb2b/f058b/display.png 630w,
+/static/ef9c403805b29d330319daa4805eeb2b/31493/display.png 664w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;현재 필자의 맥북의 주사율은 75Hz이다.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -3911,7 +4313,38 @@ type Data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span c
 &lt;p&gt;&lt;del&gt;수미상관 구조&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;필자가 처음 만났던 에러 🥲&lt;/p&gt;
 &lt;p&gt;이젠 무섭지 않아!! 🎃&lt;/p&gt;
-&lt;img width=&quot;632px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/182306514-75065fbf-0bb5-49a8-98d2-aad8d51b6e3e.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/51ed8/invalid-hooks.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 85.44303797468356%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB2UlEQVQ4y5WSC4+iMBSF+f+/TBA1EcfwkNlR0BQBHzyVR8/mFuqis6yzTU7OpaFfz22rLBYLzGczzFRVaK5pj/qnmpN0HcRS9NkM5scHcsZwZgyh7wtPoghJGP5MxyNMw8BU16Houg7bssB8H/udh4Pn4cgY2qoCOIcYbdvV8puc5qQAbFwXmqp2QMc00Ww2qEwTtWWhsSy0jg3++QkeBOBRBB6GneK4mzufwcsSbZ4DdQ3bcaBpGhSK6dg2wBjge8Bu12n7Bf71C5yxDkKeZeBp2nlRgOc5eJ/QdV2oMqFpmvA8D6c4RlNV3U+yTfKmESkede+c1AN93/8DtG0bWZbhcrkgTVPc73eh28Blfa8q4W1/nrx3CvQEzPMcVVWhaRrUdY2mroWTaP5V/B2Q0oVhKJKWZYmiKISoHoLkJm+BtJBgMuVw8dgg2CgwSRJEUfRo/Xa7CdF5yYVj+iuQLuN0OgknKCUWF9JDXxO9TUgQglHb1+tVAGXLdAT/BbQsC3EcP0BSw6Rj7bb9O3wCOo4jWqN08mbJKdlrqrGx3+874HQ6hWEY4qVvt9snHQ4HMMYQBIHogC6NfCiaoydHxzaZTKBQu+v1Gsvl8ptoo9VqJUT1v0QMYv0GnRX/FxYcCPUAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;InvalidHooks&quot;
+        title=&quot;InvalidHooks&quot;
+        src=&quot;/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/f058b/invalid-hooks.png&quot;
+        srcset=&quot;/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/c26ae/invalid-hooks.png 158w,
+/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/6bdcf/invalid-hooks.png 315w,
+/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/f058b/invalid-hooks.png 630w,
+/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/40601/invalid-hooks.png 945w,
+/static/1402e8c8d9acdc8f3c214ed3b6dac0c8/51ed8/invalid-hooks.png 1021w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;이 에러가 왜 발생했는지 이제는 확실하게 말할 수 있다.&lt;/p&gt;
 &lt;p&gt;왜 최상위에 hooks가 존재해야만 하는지 확실하게 말할 수 있다.&lt;/p&gt;
 &lt;p&gt;왜 useEffect안에서 hooks를 호출 할 수 없는지 확살하게 알고 있다.&lt;/p&gt;
@@ -4658,7 +5091,37 @@ module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;exports &lt;
 &lt;p&gt;setTimeout : 일정 시간 후에 해당 func 실행하는 함수.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;다음 그림을 보면 이해가 쉽습니다.&lt;/p&gt;
-&lt;img width=&quot;500px&quot; src=&quot;https://user-images.githubusercontent.com/87749134/172602822-09332d4e-6254-4c1e-8bba-50f189613b65.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/471010a9d5ce6e6fd858f7e97d6dc804/cab43/setTimeOut.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 39.24050632911392%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA8klEQVQoz3VR7W7DIAzM+z/btB+Tpkl7gq1dEsCYQrBzE06TJv2wdAKO42zsDgDmeYatIhDX48BNBerHA6fRY87pwK3RNWITkkf5fFuEqrZK/4vy/bElbFG+3qF+2Az36Pbu7cF9RtVHTmrFq+hUFXUqEKnIKSL6AWE8ww8nSAzIrjeuncNwgsYAbvdXTSIPqZN5tOQ3w1pRcsKFyUSJHJQJUxiRmcDkjFcOyGFEiosmX/houC+Xo7dq9hHJgYO7tQXA+PdjJk+/vB/KmmnpnRqmkg3rWUXsJ3od2suh3Dc+pQQiAjMb2j7GaMg5P33TKvwHKad0YO18V5kAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;setTimeOut&quot;
+        title=&quot;setTimeOut&quot;
+        src=&quot;/static/471010a9d5ce6e6fd858f7e97d6dc804/f058b/setTimeOut.png&quot;
+        srcset=&quot;/static/471010a9d5ce6e6fd858f7e97d6dc804/c26ae/setTimeOut.png 158w,
+/static/471010a9d5ce6e6fd858f7e97d6dc804/6bdcf/setTimeOut.png 315w,
+/static/471010a9d5ce6e6fd858f7e97d6dc804/f058b/setTimeOut.png 630w,
+/static/471010a9d5ce6e6fd858f7e97d6dc804/cab43/setTimeOut.png 755w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;위의 그림처럼 setInterval은 &lt;strong&gt;함수의 실행 시점 부터 시간을 잡기 때문&lt;/strong&gt; 에 실제 함수 호출이 종료되고 다음 함수 호출까지의 시간은 우리가 설정한 시간보다 훨씬 짧아지게 됩니다. 반면에 setTimeout은 해당 시간동안 delay 후 callback 함수가 실행되기 때문에 우리가 설정한 시간만큼 확실히 delay를 보장해 줍니다. 아주 당연한 결과이죠.&lt;/p&gt;
 &lt;p&gt;하지만 setInterval 함수에서 만약 callback 함수의 실행 시간이 우리가 설정해 놓은 시간보다 길어지면 어떻게 될까요?
 엔진은 다행히 묵묵히 그 시간을 기다려 줍니다. 하지만 이건 우리가 원한 결과는 아니죠. 그렇다면 setInterval은 지금 상황에 맞지 않다…🤥 탈락.&lt;/p&gt;
@@ -4898,7 +5361,38 @@ console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cl
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;result&lt;/code&gt; : 처음엔 &lt;code class=&quot;language-text&quot;&gt;undefined&lt;/code&gt;이었다 resolve(value)가 호출되면 value로, reject(error)가 호출되면 error로 변합니다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;img width=&quot;542&quot; alt=&quot;스크린샷 2022-05-14 오후 2 54 30&quot; src=&quot;https://user-images.githubusercontent.com/87749134/168412794-efd1f085-5e18-42d5-81d6-62e68eea4159.png&quot;&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/8a72bb9071078f3d1516fa7914ea3155/48ca3/promiseState.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 48.734177215189874%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABZklEQVQoz5WSQW7bMBBFdY42C8ckhzMkRVKiZMtx2sbtIqiR+P63+a0oRQWKBkgXD39WD5w/bJQRfAgtUCQwIcL4BBNWfASFVFHWodlrxnu8ye6VrcxC7o9w4wmcDpAyQYYTpJ/A+QDtAhpNAk0OxrqadSa3iWYxu4SunNGNj7B5rCIbR9h0AHdHGNuDfIGZhW0aMZP7CSkfFrojfFvg2lJFqTtBfAfidl35L8K8doQih8a3D4jdV4g/InXfkMsTXJhAXODjAGMDdnvaXvtP1IpmNCGeq0jCtAj7J7TpC6wM8O2AXB5gXdp6vJ+reIe9YTTEGZoijE0wFLfZSq59ss/I5VyxkmANgyuypF5ZD9gs13y76jqbP+ssLyNw6DGUM16Mxc0KXpTBKzFu7HFjh1elEecOP/oPd8qCNOOqNK7k8Lzb46ciXI3gx6fPeL67Q/of4d4IjBFcrOA7MS7EW1401ZTfwl/wKynlZNacLQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;promiseState&quot;
+        title=&quot;promiseState&quot;
+        src=&quot;/static/8a72bb9071078f3d1516fa7914ea3155/f058b/promiseState.png&quot;
+        srcset=&quot;/static/8a72bb9071078f3d1516fa7914ea3155/c26ae/promiseState.png 158w,
+/static/8a72bb9071078f3d1516fa7914ea3155/6bdcf/promiseState.png 315w,
+/static/8a72bb9071078f3d1516fa7914ea3155/f058b/promiseState.png 630w,
+/static/8a72bb9071078f3d1516fa7914ea3155/40601/promiseState.png 945w,
+/static/8a72bb9071078f3d1516fa7914ea3155/48ca3/promiseState.png 1084w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;❗️ 처리가 끝난 프라미스에 resolve와 reject를 호출하면 무시됩니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; promise &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;완료&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;

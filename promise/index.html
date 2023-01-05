@@ -143,7 +143,38 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><code class="language-text">result</code> : 처음엔 <code class="language-text">undefined</code>이었다 resolve(value)가 호출되면 value로, reject(error)가 호출되면 error로 변합니다.</p>
 </li>
 </ul>
-<img width="542" alt="스크린샷 2022-05-14 오후 2 54 30" src="https://user-images.githubusercontent.com/87749134/168412794-efd1f085-5e18-42d5-81d6-62e68eea4159.png">
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/8a72bb9071078f3d1516fa7914ea3155/48ca3/promiseState.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 48.734177215189874%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABZklEQVQoz5WSQW7bMBBFdY42C8ckhzMkRVKiZMtx2sbtIqiR+P63+a0oRQWKBkgXD39WD5w/bJQRfAgtUCQwIcL4BBNWfASFVFHWodlrxnu8ye6VrcxC7o9w4wmcDpAyQYYTpJ/A+QDtAhpNAk0OxrqadSa3iWYxu4SunNGNj7B5rCIbR9h0AHdHGNuDfIGZhW0aMZP7CSkfFrojfFvg2lJFqTtBfAfidl35L8K8doQih8a3D4jdV4g/InXfkMsTXJhAXODjAGMDdnvaXvtP1IpmNCGeq0jCtAj7J7TpC6wM8O2AXB5gXdp6vJ+reIe9YTTEGZoijE0wFLfZSq59ss/I5VyxkmANgyuypF5ZD9gs13y76jqbP+ssLyNw6DGUM16Mxc0KXpTBKzFu7HFjh1elEecOP/oPd8qCNOOqNK7k8Lzb46ciXI3gx6fPeL67Q/of4d4IjBFcrOA7MS7EW1401ZTfwl/wKynlZNacLQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="promiseState"
+        title="promiseState"
+        src="/static/8a72bb9071078f3d1516fa7914ea3155/f058b/promiseState.png"
+        srcset="/static/8a72bb9071078f3d1516fa7914ea3155/c26ae/promiseState.png 158w,
+/static/8a72bb9071078f3d1516fa7914ea3155/6bdcf/promiseState.png 315w,
+/static/8a72bb9071078f3d1516fa7914ea3155/f058b/promiseState.png 630w,
+/static/8a72bb9071078f3d1516fa7914ea3155/40601/promiseState.png 945w,
+/static/8a72bb9071078f3d1516fa7914ea3155/48ca3/promiseState.png 1084w"
+        sizes="(max-width: 630px) 100vw, 630px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
 <p>❗️ 처리가 끝난 프라미스에 resolve와 reject를 호출하면 무시됩니다.</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> promise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"완료"</span><span class="token punctuation">)</span>

@@ -83,7 +83,37 @@
 <p>setTimeout : 일정 시간 후에 해당 func 실행하는 함수.</p>
 </blockquote>
 <p>다음 그림을 보면 이해가 쉽습니다.</p>
-<img width="500px" src="https://user-images.githubusercontent.com/87749134/172602822-09332d4e-6254-4c1e-8bba-50f189613b65.png">
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/471010a9d5ce6e6fd858f7e97d6dc804/cab43/setTimeOut.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 39.24050632911392%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA8klEQVQoz3VR7W7DIAzM+z/btB+Tpkl7gq1dEsCYQrBzE06TJv2wdAKO42zsDgDmeYatIhDX48BNBerHA6fRY87pwK3RNWITkkf5fFuEqrZK/4vy/bElbFG+3qF+2Az36Pbu7cF9RtVHTmrFq+hUFXUqEKnIKSL6AWE8ww8nSAzIrjeuncNwgsYAbvdXTSIPqZN5tOQ3w1pRcsKFyUSJHJQJUxiRmcDkjFcOyGFEiosmX/houC+Xo7dq9hHJgYO7tQXA+PdjJk+/vB/KmmnpnRqmkg3rWUXsJ3od2suh3Dc+pQQiAjMb2j7GaMg5P33TKvwHKad0YO18V5kAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="setTimeOut"
+        title="setTimeOut"
+        src="/static/471010a9d5ce6e6fd858f7e97d6dc804/f058b/setTimeOut.png"
+        srcset="/static/471010a9d5ce6e6fd858f7e97d6dc804/c26ae/setTimeOut.png 158w,
+/static/471010a9d5ce6e6fd858f7e97d6dc804/6bdcf/setTimeOut.png 315w,
+/static/471010a9d5ce6e6fd858f7e97d6dc804/f058b/setTimeOut.png 630w,
+/static/471010a9d5ce6e6fd858f7e97d6dc804/cab43/setTimeOut.png 755w"
+        sizes="(max-width: 630px) 100vw, 630px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
 <p>위의 그림처럼 setInterval은 <strong>함수의 실행 시점 부터 시간을 잡기 때문</strong> 에 실제 함수 호출이 종료되고 다음 함수 호출까지의 시간은 우리가 설정한 시간보다 훨씬 짧아지게 됩니다. 반면에 setTimeout은 해당 시간동안 delay 후 callback 함수가 실행되기 때문에 우리가 설정한 시간만큼 확실히 delay를 보장해 줍니다. 아주 당연한 결과이죠.</p>
 <p>하지만 setInterval 함수에서 만약 callback 함수의 실행 시간이 우리가 설정해 놓은 시간보다 길어지면 어떻게 될까요?
 엔진은 다행히 묵묵히 그 시간을 기다려 줍니다. 하지만 이건 우리가 원한 결과는 아니죠. 그렇다면 setInterval은 지금 상황에 맞지 않다…🤥 탈락.</p>
