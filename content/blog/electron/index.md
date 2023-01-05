@@ -425,7 +425,7 @@ information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.
 </html>
 ```
 
-<img width="632" alt="스크린샷 2022-12-14 오전 11 29 42" src="https://user-images.githubusercontent.com/87749134/207490601-605e2afb-a124-4390-87bd-abb63c0ec895.png">
+![electronEx1](./electronEx1.png)
 
 ### Communicating between processes
 
@@ -598,7 +598,7 @@ Electron은 최신 웹 브라우저와 구조적으로 매우 유사하게 만�
 
 아래 다이어그램은 이 모델을 시각화합니다.
 
-<img width='632px' src='https://user-images.githubusercontent.com/87749134/207746316-4f5b421b-bd3c-4c31-afa3-5e8f70b65028.png' />
+![process](./process.png)
 
 Electron applications은 매우 유사하게 구성됩니다. 개발자 main, renderer라는 두 가지 유형의 프로세스를 제어합니다.
 

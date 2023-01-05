@@ -111,7 +111,7 @@ new Promise 생성자가 반환하는 promise 객체는 다음과 같은 내부 
 
 - `result` : 처음엔 `undefined`이었다 resolve(value)가 호출되면 value로, reject(error)가 호출되면 error로 변합니다.
 
-<img width="542" alt="스크린샷 2022-05-14 오후 2 54 30" src="https://user-images.githubusercontent.com/87749134/168412794-efd1f085-5e18-42d5-81d6-62e68eea4159.png">
+![promiseState](./promiseState.png)
 
 ❗️ 처리가 끝난 프라미스에 resolve와 reject를 호출하면 무시됩니다.
 

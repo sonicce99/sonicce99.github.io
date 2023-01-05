@@ -47,7 +47,7 @@ let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
 
 다음 그림을 보면 이해가 쉽습니다.
 
-<img width='500px' src='https://user-images.githubusercontent.com/87749134/172602822-09332d4e-6254-4c1e-8bba-50f189613b65.png' />
+![setTimeOut](./setTimeOut.png)
 
 위의 그림처럼 setInterval은 **함수의 실행 시점 부터 시간을 잡기 때문** 에 실제 함수 호출이 종료되고 다음 함수 호출까지의 시간은 우리가 설정한 시간보다 훨씬 짧아지게 됩니다. 반면에 setTimeout은 해당 시간동안 delay 후 callback 함수가 실행되기 때문에 우리가 설정한 시간만큼 확실히 delay를 보장해 줍니다. 아주 당연한 결과이죠.
 

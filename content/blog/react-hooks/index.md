@@ -11,7 +11,7 @@ description: "황준일 개발자님의 블로그를 보고 공부한 포스팅�
 
 그러던 어느날... 🥲
 
-<img width='632px' src="https://user-images.githubusercontent.com/87749134/182306514-75065fbf-0bb5-49a8-98d2-aad8d51b6e3e.png" />
+![InvalidHooks](./invalid-hooks.png)
 
 오잉? 이게 무슨 말이야 😭
 
@@ -390,7 +390,7 @@ const 야옹 = debounce(() => console.log("야옹"), 100)
 >
 > 디바운싱에 대한 자세한 설명이나 예제 코드는 [여기](https://webclub.tistory.com/607)에서 확인해 보세요!
 
-<img width="500px" src="https://user-images.githubusercontent.com/87749134/182535326-c25244ad-6cd4-4306-b5a5-58b067bfc893.png" />
+![display](./display.png)
 
 > 현재 필자의 맥북의 주사율은 75Hz이다.
 
@@ -485,7 +485,7 @@ const render = debounce(() => {
 
 이젠 무섭지 않아!! 🎃
 
-<img width='632px' src="https://user-images.githubusercontent.com/87749134/182306514-75065fbf-0bb5-49a8-98d2-aad8d51b6e3e.png" />
+![InvalidHooks](./invalid-hooks.png)
 
 이 에러가 왜 발생했는지 이제는 확실하게 말할 수 있다.
 
