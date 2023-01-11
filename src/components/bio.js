@@ -10,6 +10,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import github from "../../static/github.png"
 import notion from "../../static/notion.png"
+import storybook from "../../static/storybook.png"
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -83,7 +84,7 @@ const Bio = () => {
                     marginRight: "15px",
                   }}
                   width="25px"
-                  alt="github 이미지"
+                  alt="github"
                 />
               </a>
 
@@ -97,9 +98,26 @@ const Bio = () => {
                   style={{
                     background: "white",
                     borderRadius: "15px",
+                    marginRight: "15px",
                   }}
                   width="25px"
-                  alt="notion 이미지"
+                  alt="notion"
+                />
+              </a>
+
+              <a
+                href="https://nextjs-css-storybook.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src={storybook}
+                  style={{
+                    background: "white",
+                    borderRadius: "15px",
+                  }}
+                  width="25px"
+                  alt="storybook"
                 />
               </a>
             </div>
