@@ -90,7 +90,7 @@ const Seo = ({ description, lang, meta, title }) => {
         },
         {
           name: `google-site-verification`,
-          content: "UqO2bE8rlQgda0_FcbAF8XKCh_eeFuQeNsSFLuO840o",
+          content: "o58UgrrbQhwRiVlCKP8xnL9-fEeJO5sLCFQxuUxrP18",
         },
       ].concat(meta)}
     />
