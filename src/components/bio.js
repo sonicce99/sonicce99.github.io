@@ -39,7 +39,7 @@ const Bio = () => {
         <StaticImage
           className="bio-avatar"
           formats={["auto", "webp", "avif"]}
-          src="../images/profile-pic.png"
+          src="../../static/profile-pic.png"
           width={90}
           height={90}
           style={{ objectFit: "cover" }}
