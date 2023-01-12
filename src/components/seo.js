@@ -16,19 +16,29 @@ const Seo = ({ description, lang, meta, title }) => {
       query {
         site {
           siteMetadata {
-            title
+            author {
+              name
+              summary
+            }
             description
+            image
+            keywords
+            siteUrl
             social {
               github
             }
+            title
           }
         }
       }
     `
   )
 
+  const author = site.siteMetadata?.author?.name
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+  const image = site.siteMetadata?.image
+  const keywords = site.siteMetadata?.keywords
 
   return (
     <Helmet
@@ -39,8 +49,24 @@ const Seo = ({ description, lang, meta, title }) => {
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
       meta={[
         {
+          name: `title`,
+          content: defaultTitle,
+        },
+        {
+          name: `author`,
+          content: author,
+        },
+        {
+          name: `keywords`,
+          content: keywords,
+        },
+        {
           name: `description`,
           content: metaDescription,
+        },
+        {
+          property: `og:image`,
+          content: image,
         },
         {
           property: `og:title`,
@@ -59,16 +85,8 @@ const Seo = ({ description, lang, meta, title }) => {
           content: `summary`,
         },
         {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.social?.twitter || ``,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
+          name: `creator`,
+          content: site.siteMetadata?.social?.github,
         },
         {
           name: `google-site-verification`,
@@ -82,7 +100,6 @@ const Seo = ({ description, lang, meta, title }) => {
 Seo.defaultProps = {
   lang: `ko`,
   meta: [],
-  description: `Front-end developer`,
 }
 
 Seo.propTypes = {

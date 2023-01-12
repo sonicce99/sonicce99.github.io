@@ -5,11 +5,30 @@ module.exports = {
       name: `이동수`,
       summary: `동수의 로그북을 운영하는 이동수입니다.`,
     },
-    description: `기억보단 기록을, 기록보단 공유를.`,
+    description: `동수의 로그북을 운영하는 이동수입니다. 기억보단 기록을, 기록보단 공유를.`,
     siteUrl: `https://sonicce99.github.io/`,
     social: {
       github: `sonicce99`,
     },
+    image:
+      "https://user-images.githubusercontent.com/87749134/211980126-272f62b8-c31a-44b8-95af-4340424a1076.png",
+    keywords: [
+      "blog",
+      "gatsby",
+      "application",
+      "react",
+      "Dong-Su",
+      "DongSu",
+      "Fontend",
+      "Developer",
+      "Front-end",
+      "Front-end Developer",
+      "개발",
+      "개발자",
+      "프론트엔드",
+      "백엔드",
+      "패스트캠퍼스",
+    ],
   },
   plugins: [
     "gatsby-plugin-sitemap",
@@ -19,13 +38,6 @@ module.exports = {
       options: {
         path: `${__dirname}/content/blog`,
         name: `blog`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
       },
     },
     {
@@ -142,7 +154,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/profile-pic.png`, // This path is relative to the root of the site.
+        icon: `./static/profile-pic.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-react-helmet`,
