@@ -16,19 +16,29 @@ const Seo = ({ description, lang, meta, title }) => {
       query {
         site {
           siteMetadata {
-            title
+            author {
+              name
+              summary
+            }
             description
+            image
+            keywords
+            siteUrl
             social {
               github
             }
+            title
           }
         }
       }
     `
   )
 
+  const author = site.siteMetadata?.author?.name
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+  const image = site.siteMetadata?.image
+  const keywords = site.siteMetadata?.keywords
 
   return (
     <Helmet
@@ -39,12 +49,28 @@ const Seo = ({ description, lang, meta, title }) => {
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
       meta={[
         {
+          name: `title`,
+          content: defaultTitle,
+        },
+        {
+          name: `author`,
+          content: author,
+        },
+        {
+          name: `keywords`,
+          content: keywords,
+        },
+        {
           name: `description`,
           content: metaDescription,
         },
         {
+          property: `og:image`,
+          content: image,
+        },
+        {
           property: `og:title`,
-          content: title,
+          content: defaultTitle,
         },
         {
           property: `og:description`,
@@ -59,16 +85,12 @@ const Seo = ({ description, lang, meta, title }) => {
           content: `summary`,
         },
         {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.social?.twitter || ``,
+          name: `creator`,
+          content: site.siteMetadata?.social?.github,
         },
         {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
+          name: `google-site-verification`,
+          content: "o58UgrrbQhwRiVlCKP8xnL9-fEeJO5sLCFQxuUxrP18",
         },
       ].concat(meta)}
     />
@@ -78,7 +100,6 @@ const Seo = ({ description, lang, meta, title }) => {
 Seo.defaultProps = {
   lang: `ko`,
   meta: [],
-  description: `Front-end developer`,
 }
 
 Seo.propTypes = {
