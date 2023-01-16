@@ -2,6 +2,7 @@
 title: "Next.js 공식문서 뿌시기🗿 (till 12 version)"
 date: "2022-11-01"
 description: "Next.js 공식문서를 읽고 내용을 정리합니다."
+keywords: [react, 자바스크립트, Next.js, javascript, 공식문서, tutorial]
 ---
 
 ## Get Started

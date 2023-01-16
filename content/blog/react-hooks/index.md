@@ -2,6 +2,7 @@
 title: "Vanilla Javascript로 useState 구현하기"
 date: "2022-08-02"
 description: "황준일 개발자님의 블로그를 보고 공부한 포스팅입니다."
+keywords: [react, 자바스크립트, javascript, useState, react-hooks]
 ---
 
 ## 마법 같았던 React-hooks. 🧚‍♀️

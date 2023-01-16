@@ -2,6 +2,7 @@
 title: "Promise는 어떤 것이고 어떻게 사용하나요?"
 date: "2022-05-14"
 description: "실무에서 sheet.js를 사용하며 seller가 업로드한 엑셀 파일을 Json으로 데이터화 시켜야했고 제대로된 동작을 하는 코드를 작성하기 위해 Promise에 대한 정확한 이해와 공부가 필요했습니다. 어떤 이유에서 Promise가 필요했고 어떻게 문제를 해결했는지에 관한 이야기입니다."
+keywords: [react, 자바스크립트, promise, javascript]
 ---
 
 ## 들어가며

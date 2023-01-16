@@ -2,6 +2,15 @@
 title: "실행 컨텍스트와 javascript 동작원리에 대한 이해. (feat.호이스팅)"
 date: "2022-09-25"
 description: "코어 자바스크립트 책을 읽고 공부한 실행컨텍스트에 대한 내용입니다."
+keywords:
+  [
+    react,
+    코어자바스크립트,
+    실행컨택스트,
+    execution context,
+    javascript,
+    자바스크립트,
+  ]
 ---
 
 # 실행 컨텍스트

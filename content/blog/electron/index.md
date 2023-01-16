@@ -2,6 +2,7 @@
 title: "Electron 공식문서 뿌시기🗿"
 date: "2023-01-05"
 description: "Electron 공식문서를 읽고 내용을 정리합니다."
+keywords: [react, javascript, 자바스크립트, electron, 공식문서, tutorial]
 ---
 
 ## Tutorial

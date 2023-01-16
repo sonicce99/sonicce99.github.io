@@ -2,6 +2,7 @@
 title: "React-Toolkit-Query 공식문서 뿌시기 🗿"
 date: "2022-06-20"
 description: "기존의 OMS(주문 관리 시스템)은 Redux-thunk와 RTK-Query가 혼재되어 있었습니다.🥲 하지만 WMS(창고 관리 시스템)을 개발하면서 우리는 RTK-Query로 코드를 작성하기로 했고 추후에 RTK-Query로 완전히 migaration 하기로 결정했습니다. 그래서 좀 더 자세히 RTK-Query를 이해해야만 했기 때문에 공식문서를 읽고 내용을 정리합니다."
+keywords: [react, 자바스크립트, javascript, RTK-query, 공식문서, "tutorial"]
 ---
 
 # Overview
