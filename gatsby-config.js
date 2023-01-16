@@ -15,9 +15,10 @@ module.exports = {
     keywords: [
       "blog",
       "gatsby",
-      "application",
       "react",
-      "Dong-Su",
+      "동수의 로그북",
+      "동수",
+      "이동수",
       "DongSu",
       "Fontend",
       "Developer",
