@@ -385,7 +385,7 @@ a:focus {
   }
 }
 
-@media (max-width: 42rem) {
+@media (max-width: 1450px) {
   .tocContainer {
     display: none;
   }
