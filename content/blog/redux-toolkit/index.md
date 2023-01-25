@@ -1,6 +1,6 @@
 ---
 title: "Redux-toolkit 공식문서 뿌시기"
-date: "2023-01-18"
+date: "2023-01-28"
 description: "Redux-toolkit에 대한 모든 내용을 공식문서를 보고 정리합니다."
 keywords:
   [
@@ -546,3 +546,353 @@ const fetchUsers = () => async dispatch => {
 #### Redux Data Fetching Patterns
 
 Redux의 Data fetching logic는 일반적으로 `predictable pattern`을 따릅니다.
+
+- request가 진행 중임을 나타내기 위해 request 전에 "start" action이 dispatch 됩니다.
+
+  > 이는 로딩 상태를 추적하거나, 중복 request을 건너뛰거나, UI에 로딩 표시기를 표시하는 데 사용할 수 있습니다.
+
+- 비동기 요청이 이루어집니다.
+
+- 요청 결과에 따라 비동기 logic은 결과 데이터가 포함된 "success" or 오류 세부 정보가 포함된 "failure"를 dispatch 합니다. reducer는 두 경우 모두 로딩 상태를 지우고 성공 사례의 결과 데이터를 처리하거나 표시를 위해 오류 값을 저장합니다.
+
+```javascript
+const getRepoDetailsStarted = () => ({
+  type: "repoDetails/fetchStarted",
+})
+const getRepoDetailsSuccess = repoDetails => ({
+  type: "repoDetails/fetchSucceeded",
+  payload: repoDetails,
+})
+const getRepoDetailsFailed = error => ({
+  type: "repoDetails/fetchFailed",
+  error,
+})
+const fetchIssuesCount = (org, repo) => async dispatch => {
+  dispatch(getRepoDetailsStarted())
+  try {
+    const repoDetails = await getRepoDetails(org, repo)
+    dispatch(getRepoDetailsSuccess(repoDetails))
+  } catch (err) {
+    dispatch(getRepoDetailsFailed(err.toString()))
+  }
+}
+```
+
+그러나 이 방법을 사용하여 코드를 작성하는 것은 지루한 작업입니다.
+
+각각의 개별 요청은 유사한 구현을 반복해야 합니다.
+
+하지만 `createAsyncThunk`는 action type 및 action creator를 생성하고 해당 action을 dispatch하는 thunk를 생성하여 이 패턴을 추상화합니다.
+
+#### Async Requests with createAsyncThunk
+
+개발자는 API 요청에 필요한 실제 logic, Redux action history log에 표시되는 action type 이름, reducer가 가져온 데이터를 처리하는 방법에 가장 관심이 있을 것입니다.
+
+여러 action type을 정의하고 작업을 올바른 순서로 dispatch 하는 반복적인 세부 사항은 관심이 없을 것입니다.
+
+`createAsyncThunk`는 이 프로세스를 단순화합니다.
+
+개발자는 오직 action type prefix의 문자열과 실제 비동기 논리를 수행하고 결과와 함께 Promise를 반환하는 payload 생성자 콜백만 제공하면 됩니다.
+
+그 대가로 createAsyncThunk는 사용자가 반환한 Promise와 reducer에서 처리할 수 있는 action type에 따라 올바른 작업을 dispatch하는 thunk를 제공합니다.
+
+```javascript
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { userAPI } from "./userAPI"
+
+// First, create the thunk
+const fetchUserById = createAsyncThunk(
+  "users/fetchByIdStatus",
+  async (userId, thunkAPI) => {
+    const response = await userAPI.fetchById(userId)
+    return response.data
+  }
+)
+
+// Then, handle actions in your reducers:
+const usersSlice = createSlice({
+  name: "users",
+  initialState: { entities: [], loading: "idle" },
+  reducers: {
+    // standard reducer logic, with auto-generated action types per reducer
+  },
+  extraReducers: builder => {
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(fetchUserById.fulfilled, (state, action) => {
+      // Add user to the state array
+      state.entities.push(action.payload)
+    })
+  },
+})
+
+// Later, dispatch the thunk as needed in the app
+dispatch(fetchUserById(123))
+```
+
+thunk action creator는 payload에 대한 첫 번째 인수로 전달될 단일 arg를 허용합니다.
+
+payload creator는 자동 생성된 고유한 무작위 요청 ID 문자열 및 AbortController.signal 객체뿐만 아니라 일반적으로 표준 Redux 썽크 함수에 전달되는 매개변수를 포함하는 thunkAPI 객체도 수신합니다.
+
+```typescript
+interface ThunkAPI {
+  dispatch: Function
+  getState: Function
+  extra?: any
+  requestId: string
+  signal: AbortSignal
+}
+```
+
+### Managing Normalized Data
+
+대부분의 애플리케이션은 일반적으로 깊게 nested 되거나 relational인 데이터를 처리합니다.
+
+데이터 normalizing의 목표는 state에서 데이터를 효율적으로 구성하는 것입니다.
+
+이것은 일반적으로 id의 키가 있는 개체로 저장하고 해당 id의 정렬된 배열을 저장하여 수행됩니다.
+
+#### Normalizing by hand
+
+```javascript
+{
+  users: [
+    {
+      id: 1,
+      first_name: "normalized",
+      last_name: "person",
+    },
+  ]
+}
+```
+
+다음은 데이터를 반환하는 fetchAll API 요청의 응답을 정규화하는 방법에 대한 기본적인 예입니다.
+
+```javascript
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import userAPI from "./userAPI"
+
+export const fetchUsers = createAsyncThunk("users/fetchAll", async () => {
+  const response = await userAPI.fetchAll()
+  return response.data
+})
+
+export const slice = createSlice({
+  name: "users",
+  initialState: {
+    ids: [],
+    entities: {},
+  },
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      // reduce the collection by the id property into a shape of { 1: { ...user }}
+      const byId = action.payload.users.reduce((byId, user) => {
+        byId[user.id] = user
+        return byId
+      }, {})
+      state.entities = byId
+      state.ids = Object.keys(byId)
+    })
+  },
+})
+```
+
+우리는 이 코드를 작성할 수 있지만 특히 여러 유형의 데이터를 처리하는 경우 반복됩니다.
+
+또한 이 예제에서는 항목을 업데이트하지 않고 상태로 로드하는 것만 처리합니다.
+
+#### Normalizing with normalizr
+
+normalizr는 데이터 normalizing를 위한 인기 있는 기존 라이브러리입니다.
+
+Redux 없이도 단독으로 사용할 수 있지만 Redux와 함께 매우 일반적으로 사용됩니다.
+
+일반적인 사용법은 API 응답에서 컬렉션의 형식을 지정한 다음 reducer에서 처리하는 것입니다.
+
+```js
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { normalize, schema } from "normalizr"
+
+import userAPI from "./userAPI"
+
+const userEntity = new schema.Entity("users")
+
+export const fetchUsers = createAsyncThunk("users/fetchAll", async () => {
+  const response = await userAPI.fetchAll()
+  // Normalize the data before passing it to our reducer
+  const normalized = normalize(response.data, [userEntity])
+  return normalized.entities
+})
+
+export const slice = createSlice({
+  name: "users",
+  initialState: {
+    ids: [],
+    entities: {},
+  },
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      state.entities = action.payload.users
+      state.ids = Object.keys(action.payload.users)
+    })
+  },
+})
+```
+
+이 코드는 상태에 추가 항목을 추가하거나 나중에 업데이트하는 것을 처리하지 않습니다.
+
+수신된 모든 항목을 로드하기만 합니다.
+
+#### Normalizing with createEntityAdapter
+
+Redux Toolkit의 `createEntityAdapter` API는 컬렉션을 가져와
+
+```
+{
+  ids: [],
+  entities: {}
+}
+```
+
+형태로 배치하여 슬라이스에 데이터를 저장하는 표준화된 방법을 제공합니다.
+
+이 사전 정의된 상태 모양과 함께 데이터 작업 방법을 알고 있는 reducer 및 selectors를 생성합니다.
+
+```javascript
+import {
+  createSlice,
+  createAsyncThunk,
+  createEntityAdapter,
+} from "@reduxjs/toolkit"
+import userAPI from "./userAPI"
+
+export const fetchUsers = createAsyncThunk("users/fetchAll", async () => {
+  const response = await userAPI.fetchAll()
+  // In this case, `response.data` would be:
+  // [{id: 1, first_name: 'Example', last_name: 'User'}]
+  return response.data
+})
+
+export const updateUser = createAsyncThunk("users/updateOne", async arg => {
+  const response = await userAPI.updateUser(arg)
+  // In this case, `response.data` would be:
+  // { id: 1, first_name: 'Example', last_name: 'UpdatedLastName'}
+  return response.data
+})
+
+export const usersAdapter = createEntityAdapter()
+
+// By default, `createEntityAdapter` gives you `{ ids: [], entities: {} }`.
+// If you want to track 'loading' or other keys, you would initialize them here:
+// `getInitialState({ loading: false, activeRequestId: null })`
+const initialState = usersAdapter.getInitialState()
+
+export const slice = createSlice({
+  name: "users",
+  initialState,
+  reducers: {
+    removeUser: usersAdapter.removeOne,
+  },
+  extraReducers: builder => {
+    builder.addCase(fetchUsers.fulfilled, usersAdapter.upsertMany)
+    builder.addCase(updateUser.fulfilled, (state, { payload }) => {
+      const { id, ...changes } = payload
+      usersAdapter.updateOne(state, { id, changes })
+    })
+  },
+})
+
+const reducer = slice.reducer
+export default reducer
+
+export const { removeUser } = slice.actions
+```
+
+#### Using createEntityAdapter with Normalization Libraries
+
+이미 normalizr 또는 다른 정규화 라이브러리를 사용하고 있다면 createEntityAdapter와 함께 사용하는 것을 고려할 수 있습니다.
+
+위의 예를 확장하기 위해 다음은 normalizr를 사용하여 payload를 포맷한 다음 createEntityAdapter가 제공하는 유틸리티를 활용하는 방법에 대한 데모입니다.
+
+기본적으로 setAll, addMany 및 upsertMany CRUD 메서드에는 엔터티 배열이 필요합니다.
+
+그러나 { 1: { id: 1, ... }} 모양의 개체를 대안으로 전달할 수도 있으므로 사전 정규화된 데이터를 더 쉽게 삽입할 수 있습니다.
+
+```javascript
+// features/articles/articlesSlice.js
+import {
+  createSlice,
+  createEntityAdapter,
+  createAsyncThunk,
+  createSelector,
+} from "@reduxjs/toolkit"
+import fakeAPI from "../../services/fakeAPI"
+import { normalize, schema } from "normalizr"
+
+// Define normalizr entity schemas
+export const userEntity = new schema.Entity("users")
+export const commentEntity = new schema.Entity("comments", {
+  commenter: userEntity,
+})
+export const articleEntity = new schema.Entity("articles", {
+  author: userEntity,
+  comments: [commentEntity],
+})
+
+const articlesAdapter = createEntityAdapter()
+
+export const fetchArticle = createAsyncThunk(
+  "articles/fetchArticle",
+  async id => {
+    const data = await fakeAPI.articles.show(id)
+    // Normalize the data so reducers can load a predictable payload, like:
+    // `action.payload = { users: {}, articles: {}, comments: {} }`
+    const normalized = normalize(data, articleEntity)
+    return normalized.entities
+  }
+)
+
+export const slice = createSlice({
+  name: "articles",
+  initialState: articlesAdapter.getInitialState(),
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(fetchArticle.fulfilled, (state, action) => {
+      // Handle the fetch result by inserting the articles here
+      articlesAdapter.upsertMany(state, action.payload.articles)
+    })
+  },
+})
+
+const reducer = slice.reducer
+export default reducer
+```
+
+```js
+// features/users/usersSlice.js
+
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit"
+import { fetchArticle } from "../articles/articlesSlice"
+
+const usersAdapter = createEntityAdapter()
+
+export const slice = createSlice({
+  name: "users",
+  initialState: usersAdapter.getInitialState(),
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(fetchArticle.fulfilled, (state, action) => {
+      // And handle the same fetch result by inserting the users here
+      usersAdapter.upsertMany(state, action.payload.users)
+    })
+  },
+})
+
+const reducer = slice.reducer
+export default reducer
+```
+
+---
+
+## Usage With TypeScript
