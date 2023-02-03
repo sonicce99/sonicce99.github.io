@@ -92,6 +92,10 @@ const Seo = ({ description, lang, meta, title, keywords }) => {
           name: `google-site-verification`,
           content: "o58UgrrbQhwRiVlCKP8xnL9-fEeJO5sLCFQxuUxrP18",
         },
+        {
+          name: `naver-site-verification`,
+          content: "930be88b7d8b5aa34f4bc40a40e1f6204249d8a3",
+        },
       ].concat(meta)}
     />
   )
