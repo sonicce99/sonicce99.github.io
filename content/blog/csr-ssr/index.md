@@ -9,7 +9,7 @@ keywords: [react, javascript, 자바스크립트, csr, ssr]
 
 근래에 Next.js와 함께 Server-Side-Rendering에 대한 인기가 매우 뜨겁다는걸 느낍니다.
 
-18 버전 이전의 과거의 React는 모두 브라우저에서 렌더링을 했었지만 React 18 이상에서는 reactDOM이 client / server로 분리되었고,
+18 버전 이전의 과거 React는 모두 브라우저에서 렌더링을 했었지만 React 18 이상에서는 reactDOM이 client / server로 분리되었고,
 
 client에서 할 수 있는 rendering과 server에서 할 수 있는 rendering을 분리하고 있습니다.
 
@@ -56,7 +56,7 @@ csr
 
 1. components를 분리하고 모듈화 하기 위해 index.html 내부의 \<script> 태그는 type='module'로 선언합니다.
 
-2. hydration 과정을 보기 위해 css는 css-in-js 방식을 사용합니다.
+2. 추후에 SSR에서 hydration 과정을 보기 위해 CSR에서도 css는 css-in-js 방식을 사용합니다.
 
 #### Code
 
@@ -177,9 +177,9 @@ ssr
 
 #### 제약사항
 
-1. server를 사용해야하기 때문에 npm project로 실행해야하며 express를 설치해야합니다.
+1. server를 사용해야하기 때문에 npm project로 실행해야하며 express를 설치합니다.
 
-2. commonJS에서는 import, export 구문을 사용할 수 없음으로 require, module.exports를 통해 모듈을 가져오고 내보내야합니다.
+2. commonJS에서는 import, export 구문을 사용할 수 없음으로 require, module.exports를 통해 모듈을 가져오고 내보냅니다.
 
 3. server에서 HTML을 만들고 전송하기 때문에 index.html이 필요하지 않습니다.
 
@@ -391,5 +391,7 @@ client는 브라우저에서 javascript 동작 중지를 하고 새로고침을 
 저 역시도 명확하게 그려지지 않았던 부분을 직접 구현해보고 여러 블로그를 찾아보고 블로그를 써보며 더 확실히 개념을 적립할 수 있었던 그런 포스팅이였던 것 같습니다.
 
 또한 지금은 vanilla javascript로 구현했지만 한 단계 더 나아가 추후에 React로도 구현해보면 더 좋은 공부가 될 것 같습니다.
+
+혹시나 내용이 잘못된 부분이 있다면 sonicce99@naver.com 으로 알려주세요.
 
 긴 글을 읽어주셔서 감사합니다.
