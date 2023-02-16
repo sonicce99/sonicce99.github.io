@@ -134,7 +134,7 @@ render()
 
 하지만 만약 javascript를 사용중지 한다면 어떻게 될까요?
 
-javascript 사용중지는 Crome의 경우
+javascript 사용중지는 Chrome의 경우
 
 **개발자 도구 > 설정 > 환경설정 > 디버거**
 
