@@ -394,4 +394,6 @@ client는 브라우저에서 javascript 동작 중지를 하고 새로고침을 
 
 혹시나 내용이 잘못된 부분이 있다면 sonicce99@naver.com 으로 알려주세요.
 
+[해당 블로그의 code repository는 여기를 클릭하셔서 보시면 됩니다.](https://github.com/sonicce99/learn-csr-ssr)
+
 긴 글을 읽어주셔서 감사합니다.
