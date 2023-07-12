@@ -7,7 +7,7 @@ keywords: [react, 자바스크립트, javascript, redux-saga, 공식문서]
 
 ## About Redux-Saga
 
-redux-saga는 앱의 side-effects (data fetching, 브라우저 캐시 접근)을 보다 쉽게 관리하고, 쉽고, 테스트하기 용이하며, 오류를 더 잘 처리하도록 하는 것을 목표로 합니다.
+Redux-saga는 앱의 side-effects (data fetching, 브라우저 캐시 접근)을 보다 쉽게 관리하고, 쉽고, 테스트하기 용이하며, 오류를 더 잘 처리하도록 하는 것을 목표로 합니다.
 
 기본적인 모델은 saga는 앱에서 동작하는 별도의 thread와 같다는 점입니다. redux-saga는 redux의 미들웨어로서, redux actions로 부터 thread를 시작, 중지, 취소 시킬 수 있습니다.
 
