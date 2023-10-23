@@ -54,7 +54,11 @@ const Bio = () => {
           </p>
           <p>기억보단 기록을, 기록보단 공유하는 것을 좋아합니다.</p>
           <p style={{ marginBottom: "1vh" }}>
-            현재는 풀필먼트 서비스 회사에서 웹 프론트 개발을 하고 있습니다. 🎃
+            현재는{" "}
+            <a href="https://camfit.co.kr/" target="_blank">
+              캠핏
+            </a>
+            에서 웹 프론트 개발을 하고 있습니다. 🎃
           </p>
           <div
             style={{
