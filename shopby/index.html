@@ -74,7 +74,39 @@
 <p>그래서 크롬에서 로그인한 뒤에 사파리에서 네이버를 접속하면 로그인이 되어있지 않으며, 서버에서 정한 유효시간이 지나면 다시 로그인을 해야하는 것입니다.</p>
 <h2 id="json-web-token" style="position:relative;">JSON WEB TOKEN<a href="#json-web-token" aria-label="json web token permalink" class="custom-class after"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h2>
 <p>사용자의 로그인 정보를 브라우저에 저장하기 위한 방식으로 <strong><a href="https://jwt.io/" target="_blank">JSON WEB TOKEN</a></strong>을 많이 사용합니다.</p>
-<img width="630px " src="https://github.com/sonicce99/TIL/assets/87749134/df4b8724-b93a-4f48-a4b6-c54ba2fadbad">
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/6801f498ca26c7574b89d86834256637/ab622/jwt.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 46.202531645569614%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAIAAAC9o5sfAAAACXBIWXMAACdeAAAnXgHPwViOAAAB+klEQVR42i3I/U8SYQDA8fuvm5ZhMdJGTnOhNrPpMk0LfEmlfEGdngryYkBH6cEdBxwvB3fP+wMHx9Pc2r4/fPaVsAPI6HPHMAF1IaQAMgC5Ayj4bwYRR5gyBrDH6H2Ov3yKXECoQwiW2sDR2mbJMg27We6YescsWhXNqhl2S7WqxXalCpoGMEz212QPda5WeaGEU81eGSIkQdpsu0VkKVi9QXqaFG+JkaHVLFKvoZbAWhLpSVLJknIOaXdEz6P7W9Ao9N69wfKVBPsuJIgixCDCtvNYx8a8SyhjDiCdzuMBANs2phRTwgFgjJFUGuq6JKJRQQjrdTFGQgw9bzAUQtwkenkFdl3OuBBCDIeeEENFGaTTsN/HhAw8Twgh8bkF1mgZjdaDqlHuDvp9V4j+bhieHRebVcsyB16316OeEN7JMQ2HH3RNLRSoYw84l9avtamN+HwkFQqnptfkcs3OqdGt1HxMWT1KvD+Q5/YuZq/+fHXMamZhdv/Vi+/Pnhz6xy79Y8qnj9Ja9G5kJjK5cjoy/W1y5VSv2QXjaHl77EAObf6c+rz7ev8ilNH2nHrtOjB+6hu5CvjkgO9yfFRZ/iBFYr8WIvGlneTiTnJxO1Gp279LZ4fxJTm7eZ5eP09uxPNbuVLMadQTobfyTPDHhP84OBGfCea/rP4DmH7F/RaNcmcAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="jwt"
+        title=""
+        src="/static/6801f498ca26c7574b89d86834256637/f058b/jwt.png"
+        srcset="/static/6801f498ca26c7574b89d86834256637/c26ae/jwt.png 158w,
+/static/6801f498ca26c7574b89d86834256637/6bdcf/jwt.png 315w,
+/static/6801f498ca26c7574b89d86834256637/f058b/jwt.png 630w,
+/static/6801f498ca26c7574b89d86834256637/40601/jwt.png 945w,
+/static/6801f498ca26c7574b89d86834256637/78612/jwt.png 1260w,
+/static/6801f498ca26c7574b89d86834256637/ab622/jwt.png 2381w"
+        sizes="(max-width: 630px) 100vw, 630px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
 <p>JWT는 3가지 (Header, Payload, Signature)부분으로 구분되어 있으며, 각각은 .(점)으로 구분됩니다.
 (사진을 자세히 보시면 엄청나게 긴 문자열에 2개의 점이 있습니다.)</p>
 <p>JWT에 대한 세부적인 내용은 이 블로그의 목적을 벗어나므로 자세히 소개하지는 않겠습니다.</p>
