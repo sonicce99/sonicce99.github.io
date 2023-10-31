@@ -32,6 +32,13 @@ module.exports = {
     ],
   },
   plugins: [
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-M5W59LM2",
+        includeInDevelopment: true, // 개발 환경에서도 사용할 경우 true로 설정
+      },
+    },
     "gatsby-plugin-sitemap",
     `gatsby-plugin-image`,
     {
