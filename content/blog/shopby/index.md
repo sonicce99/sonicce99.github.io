@@ -40,7 +40,7 @@ keywords:
 
 사용자의 로그인 정보를 브라우저에 저장하기 위한 방식으로 <strong><a href="https://jwt.io/" target="_blank">JSON WEB TOKEN</a></strong>을 많이 사용합니다.
 
-<img width="630px " src="https://github.com/sonicce99/TIL/assets/87749134/df4b8724-b93a-4f48-a4b6-c54ba2fadbad" />
+![jwt](./jwt.png)
 
 JWT는 3가지 (Header, Payload, Signature)부분으로 구분되어 있으며, 각각은 .(점)으로 구분됩니다.
 (사진을 자세히 보시면 엄청나게 긴 문자열에 2개의 점이 있습니다.)
