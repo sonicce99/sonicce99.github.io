@@ -229,9 +229,6 @@ table {
   border-spacing: 0.25rem;
 }
 
-table thead tr th {
-  border-bottom: 1px solid var(--color-accent);
-}
 
 /* Link */
 
@@ -242,6 +239,15 @@ a {
 a:hover,
 a:focus {
   text-decoration: none;
+}
+
+img {
+  object-fit: contain;
+}
+
+em {
+  display: block;
+  text-align: center;
 }
 
 /* Custom classes */
@@ -381,6 +387,12 @@ a:focus {
 ::-webkit-scrollbar-thumb {
   background: #ced0d1;
   border-radius: 100px;
+}
+
+/* gatsby-remark-images에서 box-shadow 없애기 위해  */
+.gatsby-resp-image-image {
+  box-shadow: none !important;
+  background-color: rgba(51, 51, 51, 0.1);
 }
 
 /* Media queries */
