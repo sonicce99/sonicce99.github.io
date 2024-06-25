@@ -265,4 +265,3 @@ polling 방식으로 데이터를 처리하기 위해 공부를 하면서 `비�
 아래는 이 글을 작성하며 참조한 블로그입니다.
 
 - [React에서 setInterval 현명하게 사용하기(feat. useInterval)](https://mingule.tistory.com/65)
-- [useInterval](https://usehooks-ts.com/react-hook/use-interval)
