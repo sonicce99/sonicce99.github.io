@@ -1,5 +1,5 @@
 ---
-title: "React와 setTimeout 그리고 setInterval에 대한 이해. (feat.closure)"
+title: "setTimeout으로 대량 주문 업로드하기"
 date: "2022-06-12"
 description: "사용자가 주문 시스템(OMS)에 업로드한 주문 데이터를 창고관리 시스템(WMS)으로 전송할때 대량의 주문건인 경우(300건 이상), 원활히 전송하지 못하던 기존의 프로세스를 개선하는 과정에서 얻게된 깨달음에 관한 이야기입니다. "
 keywords: [react, 자바스크립트, javascript, closure, setTimeout, setInterval]
@@ -52,10 +52,11 @@ let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
 
 위의 그림처럼 setInterval은 **함수의 실행 시점 부터 시간을 잡기 때문** 에 실제 함수 호출이 종료되고 다음 함수 호출까지의 시간은 우리가 설정한 시간보다 훨씬 짧아지게 됩니다. 반면에 setTimeout은 해당 시간동안 delay 후 callback 함수가 실행되기 때문에 우리가 설정한 시간만큼 확실히 delay를 보장해 줍니다. 아주 당연한 결과이죠.
 
-하지만 setInterval 함수에서 만약 callback 함수의 실행 시간이 우리가 설정해 놓은 시간보다 길어지면 어떻게 될까요?
-엔진은 다행히 묵묵히 그 시간을 기다려 줍니다. 하지만 이건 우리가 원한 결과는 아니죠. 그렇다면 setInterval은 지금 상황에 맞지 않다...🤥 탈락.
+따라서 setInterval 함수에서 만약 callback 함수의 실행 시간이 우리가 설정해 놓은 시간보다 길어지면 우리가 원하는 결과를 얻지 못하는 불확실성이 생길 수 있습니다.
 
-setInterval은 주기적으로 callback을 실행 시킬 수 있으니 장점이 있다고 생각이 드는 순간 setTimeout은 주기적으로 callback 함수를 실행시킬 수 없나? 하는 의문도 들죠. 방법이 있습니다.
+즉 setInterval은 주기적으로 callback을 실행 시킬 수 있으나 정확한 시간 보장이 되지 않고, setTimeout은 주기적으로 callback 함수를 실행시킬 수 없지만 시간 보장이 됩니다. 😂
+
+그러면 방법이 없을까요? 방법이 있습니다. setTimeout을 중첩 시키면 됩니다. 🙌
 
 #### 중첩 setTimeout
 
@@ -77,14 +78,7 @@ let timerId = setTimeout(function request() {
 
 setTimeout을 중첩하여 사용한다면 확실하게 일정기간만큼 시간을 보장 받을 수도 있고, 들어오는 데이터의 양에 따라 delay를 수정 할 수도 있겠다..! 이 방법이 가장 깔끔하겠어! 😽 라는 기쁨이 들며 코드를 작성했는데 문제가 발생했습니다.
 
-### 예기치 못한 Closure
-
-❗️ **Javascript에서 Event Loop와 Call Stack, Callback Queue가 동작하는 방식을 살펴보자.**
-Javascript는 Single thread 언어이기 때문에 엔진은 하나의 task만 작업이 가능합니다. 그렇기 때문에 실행이 긴 함수를 만나면 화면이 멈추게 되죠. 이런 문제점을 해결하기 위해 Web Api를 사용하고, Call Stack에서 비동기 함수가 호출되면 Callback Queue에 쌓이게 되고, 이 Queue는 Call Stack이 비면 실행됩니다.
-
-setTimeout이나 setInterval도 Web Api 중에 하나이기 때문에 호출되면 Callback Queue에 쌓입니다. 그리고 Call Stack이 비면 실행되게 되죠. 그리고 ❗️ _실행된 setTimeout, setInterval은 한번만 호출 후에 바로 종료됩니다. 하지만 callback 함수는 그대로 메모리에 남아있게 되고 주기적으로 실행됩니다._
-
-따라서 setTimeout 외부에서 선언한 변수를 가지고 setTimeout 안에서 실행시킨다면 setTimeout은 종료되었지만 과거의 값을 그대로 참조하게 됩니다.
+### 클로저?
 
 ```javascript
 // 클로져 실행 예시. useEffect 안에서 number를 console로 찍어보면 항상 0이다.
@@ -108,9 +102,23 @@ export default function App() {
 }
 ```
 
-### 어떻게 해결하지..?
+위와 같은 코드를 단편적으로 보면 어떨까요? 필자는 setState는 비동기이기 때문에 number 값이 즉시 변환되지 않지만, 언젠가 10이 되면 setInterval이 멈추겠지라고 생각했었습니다.
 
-아래는 Dan 형님께서 만든 custom Hook 이다.
+하지만 외부에서 선언된 변수를 setInterval, setTimeOut 함수 내에서 사용했을 때, 값이 변경되지 않았습니다.
+
+numberOuter 콘솔은 1초마다 계속 1씩 증가했는데, numberInner는 0으로 값이 고정되어 setInterval이 멈추지 않았죠,,
+
+이 문제에 대해 계속 찾아보게 되었고 이게 **Closure** 라는 것을 알게되었습니다.
+
+자바스크립트는 함수를 실행하기 위해 실행컨택스트를 구성합니다.
+
+이 실행컨택스트에는 렉시컬 환경(LexicalEnvironment) 이 구성되어 있는데 함수에서 특정 변수에 대한 참조를 가지고 있습니다.
+
+(LexicalEnvironment에 대한 자세한 내용은 [여기](https://sonicce99.github.io/execution-context/)를 참조해주세요)
+
+따라서 setTimeout 외부에서 선언한 변수를 가지고 setTimeout 안에서 실행시킨다면 setTimeout은 종료되었지만 outerEnvironmentReference의 스코프체인으로 인해 과거의 값을 먼저 참조하게 됩니다.
+
+### useRef를 활용해 문제 해결하기
 
 ```javascript
 import { useState, useEffect, useRef } from "react"
@@ -135,7 +143,7 @@ function useInterval(callback, delay) {
 }
 ```
 
-Closure에 의해 새롭게 렌더링된 값에 접근 할 수 없으므로 useRef를 통해 문제를 해결하는 방법을 보고 해결 방법을 알아냈습니다.
+Closure에 의해 새롭게 렌더링된 값에 접근 할 수 없으므로 React에서는 useRef를 통해 리렌더링을 일으키지 않고 새로운 값을 즉시 참조할 수 있습니다.
 
 useEffect를 통해 callback함수가 update될 경우 해당 값을 current로 유지시키고 아래 useEffect에서 current 값에 접근 함으로서 원하는 결과를 이끌어 낼 수 있습니다.
 
@@ -252,3 +260,10 @@ console.log를 통해 privateCounter에 접근하고 싶습니다. 그런데 방
 ### 마치며.
 
 polling 방식으로 데이터를 처리하기 위해 공부를 하면서 `비동기 데이터 처리방식`에 대해서 많이 공부할 수 있었던 계기가 되었다. 더 열심히 해서 우아한 코드를 작성할 수 있는, 더 좋은 동료가 되기 위해 노력해야겠다. 그리고 항상 좋은 advice를 해주시는 조수관 기술 이사님께 감사함을 느낀다. 🙏🏻
+
+#### 참조
+
+아래는 이 글을 작성하며 참조한 블로그입니다.
+
+- [React에서 setInterval 현명하게 사용하기(feat. useInterval)](https://mingule.tistory.com/65)
+- [useInterval](https://usehooks-ts.com/react-hook/use-interval)
