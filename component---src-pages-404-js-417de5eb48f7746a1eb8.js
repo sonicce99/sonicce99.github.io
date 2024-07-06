@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkdongsu_blog=self.webpackChunkdongsu_blog||[]).push([[883],{429:function(e,t,l){l.r(t);var n=l(7294),a=l(8678),o=l(8183);t.default=e=>{let{data:t,location:l}=e;const u=t.site.siteMetadata.title;return n.createElement(a.Z,{location:l,title:u},n.createElement(o.Z,{title:"404: Not Found"}),n.createElement("h1",null,"404: Not Found"),n.createElement("p",null,"삭제한 게시글이거나 더 이상 존재하지 않는 게시글입니다.😢"))}}}]);
+//# sourceMappingURL=component---src-pages-404-js-417de5eb48f7746a1eb8.js.map
